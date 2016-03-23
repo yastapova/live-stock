@@ -192,7 +192,7 @@ CREATE TRIGGER DeleteOnZeroShares
 CREATE TRIGGER Stops 
 	BEFORE INSERT ON Portfolio FOR EACH ROW
 		SET NEW.Stop_ = IF
-			(NEW.Stop_ IN ('Trailing', 'Hidden'),
+			(NEW.Stop_ IN ('Trailing', 'Hidden', 'None'),
 			NEW.Stop_,
             NULL);
             
@@ -271,3 +271,8 @@ CREATE TABLE StockPriceHistory (
 		ON UPDATE CASCADE
 );
 
+CREATE TRIGGER AddToStockPriceHistory
+	AFTER UPDATE ON Stock FOR EACH ROW
+		INSERT INTO StockPriceHistory(StockSymbol, SharePrice)
+        SELECT NEW.StockSymbol, NEW.SharePrice
+        
