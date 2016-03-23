@@ -190,7 +190,7 @@ CREATE TRIGGER DeleteOnZeroShares
 
 -- Check that the stop is in the allowed domain.
 CREATE TRIGGER Stops 
-	BEFORE INSERT ON Porfolio FOR EACH ROW
+	BEFORE INSERT ON Portfolio FOR EACH ROW
 		SET NEW.Stop_ = IF
 			(NEW.Stop_ IN ('Trailing', 'Hidden'),
 			NEW.Stop_,
