@@ -85,15 +85,15 @@ CREATE TABLE Account_ (
 
 CREATE TABLE Order_ (
 	OrderId			INTEGER AUTO_INCREMENT,
-	StockSymbol		VARCHAR(5) NOT NULL,
+	StockSymbol		VARCHAR(5),
 	OrderType		VARCHAR(4) NOT NULL,
 	NumShares		INTEGER NOT NULL,
-	CusAccNum		INTEGER DEFAULT 0 NOT NULL,
+	CusAccNum		INTEGER DEFAULT 0,
 	Timestamp_		DATETIME DEFAULT NOW() NOT NULL,
 	PriceType		VARCHAR(15) NOT NULL,
 	StopPrice		FLOAT(2) DEFAULT 0,
 	CurSharePrice	FLOAT(2),
-	EmpId			INTEGER DEFAULT 0 NOT NULL,
+	EmpId			INTEGER DEFAULT 0,
 	Recorded		BOOLEAN DEFAULT 0,
 	PRIMARY KEY (OrderId),
 	UNIQUE (StockSymbol, Timestamp_, CusAccNum, EmpId),
@@ -150,11 +150,20 @@ CREATE TABLE Transact (
 		ON UPDATE CASCADE
  );
 
+delimiter |
 -- Set price and fee in Transact table.
 CREATE TRIGGER GetPrices2
 	BEFORE INSERT ON Transact FOR EACH ROW
-		SET NEW.PricePerShare = (SELECT S.SharePrice FROM Stock S WHERE S.StockSymbol = NEW.StockSymbol);
+    BEGIN 
+		SET NEW.PricePerShare = (SELECT S.SharePrice
+								 FROM Stock S, Order_ O
+								 WHERE S.StockSymbol = O.StockSymbol
+										AND O.OrderId = NEW.OrderId);
 		SET NEW.TransFee = NEW.PricePerShare * (SELECT O.NumShares FROM Order_ O WHERE O.OrderId = NEW.OrderId) * 0.05;
+	END;
+|
+delimiter ;    
+    
             
 CREATE TABLE Portfolio (
 	AccNum			INTEGER,
@@ -204,41 +213,53 @@ CREATE TABLE ConditionalPriceHistory (
 	Timestamp_		DATETIME DEFAULT NOW(),
 	PRIMARY KEY(OrderId, PriceType, Timestamp_),
 	FOREIGN KEY(OrderId) REFERENCES Order_ (OrderId)
-		ON DELETE SET NULL
+		ON DELETE CASCADE	-- fix
 		ON UPDATE CASCADE
 );
 
 -- Make sure that the price type is allowed.
-CREATE TRIGGER PriceTypes 
+CREATE TRIGGER PriceTypes2
 	BEFORE INSERT ON ConditionalPriceHistory FOR EACH ROW
 		SET NEW.PriceType = IF
 			(NEW.PriceType IN ('Market', 'Market on Close', 'Trailing Stop', 'Hidden Stop'),
 			NEW.PriceType,
             NULL);
-
+            
+delimiter |
 CREATE TRIGGER SellOrder
 	AFTER UPDATE ON ConditionalPriceHistory FOR EACH ROW
-		IF (NEW.CurSharePrice <= NEW.StopPrice,
-		INSERT INTO Transact (OrderId, PricePerShare)
-		VALUES (NEW.OrderId, NEW.CurSharePrice),
-		NULL);
+    BEGIN
+		IF (NEW.CurSharePrice <= NEW.StopPrice)
+		THEN INSERT INTO Transact (OrderId, PricePerShare)
+			VALUES (NEW.OrderId, NEW.CurSharePrice);
+		END IF;
+	END;
+|
+delimiter ;
 
+delimiter |
 CREATE TRIGGER AddToConditionalPriceHistoryShare
 	AFTER UPDATE ON Order_ FOR EACH ROW
-	IF(OLD.PriceTypes IN ('Trailing Stop', 'Hidden Stop'),
-	INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
-		VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW()),
-	NULL
-    );
+    BEGIN
+		IF (OLD.PriceType IN ('Trailing Stop', 'Hidden Stop'))
+		THEN INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
+			VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW());
+		END IF;
+	END;
+|
+delimiter ;
 
+delimiter |
 CREATE TRIGGER AddToConditionalPriceHistoryStop
 	AFTER UPDATE ON Order_ FOR EACH ROW
-	IF(OLD.PriceTypes IN ('Trailing Stop', 'Hidden Stop'),
-	INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
-		VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW()),
-	NULL
-    );
-
+    BEGIN
+		IF (OLD.PriceType IN ('Trailing Stop', 'Hidden Stop'))
+		THEN INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
+			VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW());
+		END IF;
+	END;
+|
+delimiter ;
 
 CREATE TABLE StockPriceHistory (
 	StockSymbol		VARCHAR(5),
@@ -246,7 +267,7 @@ CREATE TABLE StockPriceHistory (
 	Timestamp_		DATETIME DEFAULT NOW(),
 	PRIMARY KEY(StockSymbol, Timestamp_),
 	FOREIGN KEY(StockSymbol) REFERENCES Stock (StockSymbol)
-		ON DELETE SET NULL
+		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
