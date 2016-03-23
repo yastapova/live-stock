@@ -20,7 +20,7 @@ INSERT INTO Stock (StockSymbol, StockName, StockType, SharePrice, NumAvailShares
 VALUES ('GM', 'General Motors', 'automotive', 34.23, 1000);
 
 INSERT INTO Stock (StockSymbol, StockName, StockType, SharePrice, NumAvailShares)
-VALUES ('IBM', 'IBM', 'computer', 91.41, 500);
+VALUES ('IBM', 'IBM', 'computer', 91.43, 500);
 
 INSERT INTO Stock (StockSymbol, StockName, StockType, SharePrice, NumAvailShares)
 VALUES ('F', 'Ford', 'automotive', 9.0, 750);
@@ -44,13 +44,20 @@ INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, Pr
 VALUES ('GM', 'Buy', 75, 1, NOW(), 'Market', NULL, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('IBM', 'Sell', 10, 2, NOW(), 'Trailing Stop', 10, 1, 0);
+VALUES ('IBM', 'Sell', 10, 2, NOW(), 'Trailing Stop', 90, 1, 0);
 
-UPDATE Stock SET SharePrice = 91.41
+UPDATE Stock SET SharePrice = 90
 	WHERE StockSymbol = 'IBM';
 
 INSERT INTO Transact (OrderId, PricePerShare)
 VALUES (1, 34.23);
 
-INSERT INTO Transact (OrderId)
-VALUES (3);
+INSERT INTO Transact (OrderId, PricePerShare)
+VALUES (2, 90.0);
+
+UPDATE Transact SET PricePerShare = 90
+	WHERE Id = 2;
+
+DROP VIEW Suggest;
+DROP TRIGGER AddToConditionalPriceHistoryStockShare;
+DROP TRIGGER AddToStockPriceHistory;
