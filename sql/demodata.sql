@@ -41,23 +41,38 @@ INSERT INTO Employee (SSN, LastName, FirstName, Address, City, State, ZipCode, T
 VALUES ('789123456', 'Warren', 'David', '456 Sunken Street', 'Stony Brook', 'NY', '11794', '6316329987', '2006-02-02 00:00:00', 50, 'Manager');
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('GM', 'Buy', 75, 1, NOW(), 'Market', NULL, 1, 0);
+VALUES ('GM', 'Sell', 355, 1, NOW(), 'Market', NULL, 1, 0);
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Order_ O
+	SET Recorded = 1
+	WHERE O.OrderId = 11;
+SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('IBM', 'Sell', 10, 2, NOW(), 'Trailing Stop', 90, 1, 0);
+VALUES ('IBM', 'Sell', 155, 2, NOW(), 'Trailing Stop', 90, 1, 0);
 
-UPDATE Stock SET SharePrice = 90
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Stock SET SharePrice = 100
 	WHERE StockSymbol = 'IBM';
+SET SQL_SAFE_UPDATES = 1;
 
-INSERT INTO Transact (OrderId, PricePerShare)
-VALUES (1, 34.23);
-
-INSERT INTO Transact (OrderId, PricePerShare)
-VALUES (2, 90.0);
-
-UPDATE Transact SET PricePerShare = 90
-	WHERE Id = 2;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Stock SET SharePrice = 95
+	WHERE StockSymbol = 'IBM';
+SET SQL_SAFE_UPDATES = 1;
 
 DROP VIEW Suggest;
-DROP TRIGGER AddToConditionalPriceHistoryStockShare;
-DROP TRIGGER AddToStockPriceHistory;
+DROP TRIGGER InitalAddToConditionalPriceHistoryShare;
+DROP TRIGGER SellOrder;
+DROP TRIGGER UpdatePortfolio;
+
+DROP TABLE StockPriceHistory;
+DROP TABLE ConditionalPriceHistory;
+DROP TABLE Transact;
+DROP TABLE Order_;
+DROP TABLE Portfolio;
+DROP TABLE Account_;
+DROP TABLE Stock;
+DROP TABLE Customer;
+DROP TABLE Employee;

@@ -92,9 +92,11 @@ CREATE TABLE Order_ (
 	Timestamp_		DATETIME DEFAULT NOW() NOT NULL,
 	PriceType		VARCHAR(15) NOT NULL,
 	StopPrice		FLOAT(2) DEFAULT 0,
+    StopDiff		FLOAT(2),
 	CurSharePrice	FLOAT(2),
 	EmpId			INTEGER DEFAULT 0,
 	Recorded		BOOLEAN DEFAULT 0,
+    Completed		BOOLEAN DEFAULT 0,
 	PRIMARY KEY (OrderId),
 	UNIQUE (StockSymbol, Timestamp_, CusAccNum, EmpId),
 	FOREIGN KEY (StockSymbol) REFERENCES Stock (StockSymbol)
@@ -137,6 +139,13 @@ CREATE TRIGGER PriceTypes
 			(NEW.PriceType IN ('Market', 'Market on Close', 'Trailing Stop', 'Hidden Stop'),
 			NEW.PriceType,
             NULL);
+            
+CREATE TRIGGER CalcStopDiff
+	BEFORE INSERT ON Order_ FOR EACH ROW
+		SET NEW.StopDiff = IF
+			(NEW.PriceType IN ('Trailing Stop', 'Hidden Stop'),
+            NEW.CurSharePrice - NEW.StopPrice,
+            NULL);
 
 CREATE TABLE Transact (
 	Id 				INTEGER AUTO_INCREMENT, 
@@ -162,8 +171,18 @@ CREATE TRIGGER GetPrices2
 		SET NEW.TransFee = NEW.PricePerShare * (SELECT O.NumShares FROM Order_ O WHERE O.OrderId = NEW.OrderId) * 0.05;
 	END;
 |
-delimiter ;    
-    
+delimiter ;
+
+delimiter |
+CREATE TRIGGER DoTransact
+	BEFORE UPDATE ON Order_ FOR EACH ROW
+		IF(NEW.Recorded <> OLD.Recorded)
+			THEN INSERT INTO Transact(OrderId)
+				VALUES(NEW.OrderId);
+			SET NEW.Completed = 1;
+        END IF;
+|
+delimiter ;
             
 CREATE TABLE Portfolio (
 	AccNum			INTEGER,
@@ -180,13 +199,6 @@ CREATE TABLE Portfolio (
 		ON UPDATE CASCADE
 );
 
--- If NumbShares is set to 0, the Portfolio entry should be deleted.
-CREATE TRIGGER DeleteOnZeroShares
-	AFTER UPDATE ON Portfolio
-	FOR EACH ROW
-		DELETE FROM Portfolio
-			WHERE
-            EXISTS (SELECT * FROM Portfolio P WHERE P.NumShares = 0);
 
 -- Check that the stop is in the allowed domain.
 CREATE TRIGGER Stops 
@@ -203,7 +215,25 @@ CREATE TRIGGER NumSharesValid2
 		(NEW.NumShares > -1,
         NEW.NumShares,
         NULL);
-            
+
+delimiter |
+CREATE TRIGGER UpdatePortfolio
+	BEFORE INSERT ON Transact FOR EACH ROW
+    BEGIN
+		UPDATE (Portfolio P
+        INNER JOIN Account_ C ON (P.AccNum = C.AccNum)) AS J
+        INNER JOIN Order_ Q ON (Q.CusAccNum = J.AccNum)
+		SET NumShares = NumShares + 
+			(SELECT O.NumShares * POW(-1, O.OrderType = 'Sell')
+				FROM Order_ O, Account_ A
+				WHERE NEW.OrderId = O.OrderId
+				AND O.CusAccNum = A.AccNum
+				AND O.StockSymbol = P.StockSymbol
+                AND P.AccNum = A.AccNum
+				LIMIT 1);
+	END;
+|
+delimiter ;
 
 CREATE TABLE ConditionalPriceHistory (
 	OrderId			INTEGER,
@@ -227,7 +257,7 @@ CREATE TRIGGER PriceTypes2
             
 delimiter |
 CREATE TRIGGER SellOrder
-	AFTER UPDATE ON ConditionalPriceHistory FOR EACH ROW
+	AFTER INSERT ON ConditionalPriceHistory FOR EACH ROW
     BEGIN
 		IF (NEW.CurSharePrice <= NEW.StopPrice)
 		THEN INSERT INTO Transact (OrderId, PricePerShare)
@@ -238,24 +268,57 @@ CREATE TRIGGER SellOrder
 delimiter ;
 
 delimiter |
-CREATE TRIGGER AddToConditionalPriceHistoryShare
-	AFTER UPDATE ON Order_ FOR EACH ROW
-    BEGIN
-		IF (OLD.PriceType IN ('Trailing Stop', 'Hidden Stop'))
-		THEN INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
-			VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW());
-		END IF;
+CREATE TRIGGER InitalAddToConditionalPriceHistoryShare
+	AFTER INSERT ON Order_ FOR EACH ROW
+	BEGIN
+		IF (NEW.PriceType IN ('Trailing Stop', 'Hidden Stop'))
+		THEN INSERT INTO ConditionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice)
+			VALUES(NEW.OrderId, NEW.CurSharePrice, NEW. PriceType, NEW.StopPrice);
+        END IF;
 	END;
 |
 delimiter ;
 
 delimiter |
-CREATE TRIGGER AddToConditionalPriceHistoryStop
-	AFTER UPDATE ON Order_ FOR EACH ROW
-    BEGIN
-		IF (OLD.PriceType IN ('Trailing Stop', 'Hidden Stop'))
-		THEN INSERT INTO CondtionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice,  Timestamp)
-			VALUES(OLD.OrderId, OLD.CurSharePrice, OLD.PriceType, OLD.StopPrice, NOW());
+CREATE TRIGGER AddToConditionalPriceHistoryShare
+	AFTER UPDATE ON Stock FOR EACH ROW
+    IF (NEW.SharePrice <> OLD.SharePrice)
+		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+			SELECT O.OrderId, O.PriceType, O.StopPrice, NEW.SharePrice, NOW()
+            FROM Order_ O
+            WHERE NEW.StockSymbol = O.StockSymbol
+            AND O.PriceType IN ('Hidden Stop')
+            AND O.Completed = 0;
+	END IF;
+|
+delimiter ;
+
+delimiter |
+CREATE TRIGGER UpdateTrailingStop
+	AFTER UPDATE ON Stock FOR EACH ROW
+	BEGIN
+		IF (NEW.SharePrice > OLD.SharePrice)
+        THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
+			(SELECT O.OrderId, O.PriceType, NEW.SharePrice - O.StopDiff, NEW.SharePrice
+			FROM Order_ O, ConditionalPriceHistory C
+			WHERE NEW.StockSymbol = O.StockSymbol
+            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+							  FROM ConditionalPriceHistory H
+							  WHERE O.OrderId = H.OrderId)
+            AND O.PriceType = 'Trailing Stop'
+            AND O.StopDiff < NEW.SharePrice - C.StopPrice
+            AND O.Completed = 0);
+        END IF;
+        IF (NEW.SharePrice < OLD.SharePrice)
+		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+			SELECT O.OrderId, O.PriceType, C.StopPrice, NEW.SharePrice, NOW()
+            FROM Order_ O, ConditionalPriceHistory C
+            WHERE NEW.StockSymbol = O.StockSymbol
+            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+							  FROM ConditionalPriceHistory H
+							  WHERE O.OrderId = H.OrderId)
+            AND O.PriceType IN ('Trailing Stop')
+            AND O.Completed = 0;
 		END IF;
 	END;
 |
@@ -271,8 +334,20 @@ CREATE TABLE StockPriceHistory (
 		ON UPDATE CASCADE
 );
 
+CREATE TRIGGER InitialAddToStockPriceHistory
+	AFTER INSERT ON Stock FOR EACH ROW
+		INSERT INTO StockPriceHistory(StockSymbol, SharePrice)
+        VALUES(NEW.StockSymbol, NEW.SharePrice);
+
+delimiter |
 CREATE TRIGGER AddToStockPriceHistory
 	AFTER UPDATE ON Stock FOR EACH ROW
-		INSERT INTO StockPriceHistory(StockSymbol, SharePrice)
-        SELECT NEW.StockSymbol, NEW.SharePrice
+    BEGIN
+		IF (NEW.SharePrice <> OLD.SharePrice)
+		THEN INSERT INTO StockPriceHistory(StockSymbol, SharePrice)
+			VALUES(NEW.StockSymbol, NEW.SharePrice);
+		END IF;
+	END;
+|
+delimiter ;
         
