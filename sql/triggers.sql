@@ -83,6 +83,8 @@ delimiter ;
 
 delimiter |
 -- Executes a transaction for an order.
+-- Checks to make sure that the number of shares being
+-- bought or sold is correct.
 CREATE TRIGGER DoTransact
 	BEFORE UPDATE ON Order_ FOR EACH ROW
 		IF(NEW.Recorded <> OLD.Recorded)
@@ -253,6 +255,8 @@ CREATE TRIGGER AddToStockPriceHistory
 delimiter ;
 
 delimiter |
+-- Updates the number of available shares of a stock
+-- after an order is executed.
 CREATE TRIGGER UpdateStockQuantity
 	BEFORE INSERT ON Transact FOR EACH ROW
     BEGIN
