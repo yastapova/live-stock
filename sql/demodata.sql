@@ -41,12 +41,12 @@ INSERT INTO Employee (SSN, LastName, FirstName, Address, City, State, ZipCode, T
 VALUES ('789123456', 'Warren', 'David', '456 Sunken Street', 'Stony Brook', 'NY', '11794', '6316329987', '2006-02-02 00:00:00', 50, 'Manager');
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('IBM', 'Sell', 250, 1, NOW(), 'Market', NULL, 1, 0);
+VALUES ('F', 'Sell', 30, 1, NOW(), 'Market', NULL, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 1
-	WHERE O.OrderId = 4;
+	WHERE O.OrderId = 10;
 SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
@@ -63,8 +63,8 @@ UPDATE Stock SET SharePrice = 95
 SET SQL_SAFE_UPDATES = 1;
 
 DROP VIEW Suggest;
-DROP TRIGGER InitalAddToConditionalPriceHistoryShare;
-DROP TRIGGER SellOrder;
+DROP TRIGGER NumSharesValid;
+DROP TRIGGER DoTransact;
 DROP TRIGGER UpdatePortfolio;
 
 DROP TABLE StockPriceHistory;

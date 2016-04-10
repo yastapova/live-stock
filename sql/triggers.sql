@@ -34,8 +34,7 @@ CREATE TRIGGER Ratings
 CREATE TRIGGER NumSharesValid
 	BEFORE INSERT ON Order_ FOR EACH ROW
 		SET NEW.NumShares = IF
-			(NEW.NumShares <= (SELECT S.NumAvailShares FROM Stock S WHERE S.StockSymbol = NEW.StockSymbol)
-            AND NEW.NumShares > 0,
+			(NEW.NumShares > 0,
             NEW.NumShares,
             NULL);
 
@@ -87,9 +86,27 @@ delimiter |
 CREATE TRIGGER DoTransact
 	BEFORE UPDATE ON Order_ FOR EACH ROW
 		IF(NEW.Recorded <> OLD.Recorded)
-			THEN INSERT INTO Transact(OrderId)
-				VALUES(NEW.OrderId);
-			SET NEW.Completed = 1;
+			THEN IF(NEW.OrderType = 'Sell')
+				THEN IF(NEW.NumShares <= 
+						(SELECT P.NumShares
+						FROM Portfolio P
+						WHERE NEW.CusAccNum = P.AccNum
+						AND NEW.StockSymbol = P.StockSymbol))
+					THEN INSERT INTO Transact(OrderId)
+						VALUES(NEW.OrderId);
+					SET NEW.Completed = 1;
+				END IF;
+			END IF;
+            IF(NEW.OrderType = 'Buy')
+				THEN IF(NEW.NumShares <= 
+						(SELECT S.NumAvailShares
+						FROM Stock S
+						WHERE NEW.StockSymbol = S.StockSymbol))
+					THEN INSERT INTO Transact(OrderId)
+						VALUES(NEW.OrderId);
+					SET NEW.Completed = 1;
+				END IF;
+			END IF;
         END IF;
 |
 delimiter ;
@@ -234,4 +251,21 @@ CREATE TRIGGER AddToStockPriceHistory
 	END;
 |
 delimiter ;
-        
+
+delimiter |
+CREATE TRIGGER UpdateStockQuantity
+	BEFORE INSERT ON Transact FOR EACH ROW
+    BEGIN
+		UPDATE Stock S
+		SET S.NumAvailShares = S.NumAvailShares - 
+			(SELECT O.NumShares * POW(-1, O.OrderType = 'Sell')
+			FROM Order_ O
+			WHERE NEW.OrderId = O.OrderId)
+		WHERE S.StockSymbol = 
+			(SELECT O.StockSymbol
+			FROM Order_ O
+			WHERE NEW.OrderId = O.OrderId);
+	END;
+|
+delimiter ;
+
