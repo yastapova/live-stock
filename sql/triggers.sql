@@ -164,11 +164,15 @@ delimiter |
 CREATE TRIGGER SellOrder
 	AFTER INSERT ON ConditionalPriceHistory FOR EACH ROW
     BEGIN
-		IF (NEW.CurSharePrice <= NEW.StopPrice)
+		IF (NEW.CurSharePrice <= NEW.StopPrice 
+			AND 1 = (SELECT O.Recorded
+					FROM ORDER_ O
+					WHERE NEW.OrderId = O.OrderId))
 		THEN INSERT INTO Transact (OrderId, PricePerShare)
 			VALUES (NEW.OrderId, NEW.CurSharePrice);
 		END IF;
 	END;
+    
 |
 delimiter ;
 
