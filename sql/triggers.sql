@@ -115,17 +115,21 @@ delimiter |
 CREATE TRIGGER UpdatePortfolio
 	BEFORE INSERT ON Transact FOR EACH ROW
     BEGIN
-		UPDATE (Portfolio P
-        INNER JOIN Account_ C ON (P.AccNum = C.AccNum)) AS J
-        INNER JOIN Order_ Q ON (Q.CusAccNum = J.AccNum)
-		SET NumShares = NumShares + 
+		UPDATE Portfolio P
+		SET P.NumShares = P.NumShares + 
 			(SELECT O.NumShares * POW(-1, O.OrderType = 'Sell')
 				FROM Order_ O, Account_ A
 				WHERE NEW.OrderId = O.OrderId
 				AND O.CusAccNum = A.AccNum
 				AND O.StockSymbol = P.StockSymbol
                 AND P.AccNum = A.AccNum
-				LIMIT 1);
+				LIMIT 1)
+		WHERE P.AccNum = 
+			(SELECT A.AccNum
+            FROM Account_ A, Order_ O
+            WHERE NEW.OrderID = O.OrderId
+			AND O.CusAccNum = A.AccNum
+            AND O.StockSymbol = P.StockSymbol);
 	END;
 |
 delimiter ;

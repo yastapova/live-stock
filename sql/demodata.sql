@@ -41,12 +41,12 @@ INSERT INTO Employee (SSN, LastName, FirstName, Address, City, State, ZipCode, T
 VALUES ('789123456', 'Warren', 'David', '456 Sunken Street', 'Stony Brook', 'NY', '11794', '6316329987', '2006-02-02 00:00:00', 50, 'Manager');
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('GM', 'Sell', 355, 1, NOW(), 'Market', NULL, 1, 0);
+VALUES ('IBM', 'Sell', 250, 1, NOW(), 'Market', NULL, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 1
-	WHERE O.OrderId = 11;
+	WHERE O.OrderId = 4;
 SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
