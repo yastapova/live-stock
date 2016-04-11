@@ -45,27 +45,27 @@ VALUES ('F', 'Sell', 30, 1, NOW(), 'Market', NULL, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
-	SET Recorded = 1
-	WHERE O.OrderId = 10;
+	SET Recorded = 0
+	WHERE O.OrderId = 12;
 SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('IBM', 'Sell', 155, 2, NOW(), 'Trailing Stop', 90, 1, 0);
+VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
-UPDATE Stock SET SharePrice = 100
-	WHERE StockSymbol = 'IBM';
+UPDATE Stock SET SharePrice = 10
+	WHERE StockSymbol = 'F';
 SET SQL_SAFE_UPDATES = 1;
 
 SET SQL_SAFE_UPDATES = 0;
-UPDATE Stock SET SharePrice = 95
+UPDATE Stock SET SharePrice = 85
 	WHERE StockSymbol = 'IBM';
 SET SQL_SAFE_UPDATES = 1;
 
 DROP VIEW Suggest;
 DROP TRIGGER NumSharesValid;
+DROP TRIGGER SellOrder;
 DROP TRIGGER DoTransact;
-DROP TRIGGER UpdatePortfolio;
 
 DROP TABLE StockPriceHistory;
 DROP TABLE ConditionalPriceHistory;

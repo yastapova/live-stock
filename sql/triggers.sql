@@ -89,15 +89,35 @@ CREATE TRIGGER DoTransact
 	BEFORE UPDATE ON Order_ FOR EACH ROW
 		IF(NEW.Recorded <> OLD.Recorded)
 			THEN IF(NEW.OrderType = 'Sell')
-				THEN IF(NEW.NumShares <= 
-						(SELECT P.NumShares
-						FROM Portfolio P
-						WHERE NEW.CusAccNum = P.AccNum
-						AND NEW.StockSymbol = P.StockSymbol))
-					THEN INSERT INTO Transact(OrderId)
-						VALUES(NEW.OrderId);
-					SET NEW.Completed = 1;
+				THEN IF(NEW.PriceType = 'Market')
+					THEN IF(NEW.NumShares <= 
+							(SELECT P.NumShares
+							FROM Portfolio P
+							WHERE NEW.CusAccNum = P.AccNum
+							AND NEW.StockSymbol = P.StockSymbol))
+						THEN INSERT INTO Transact(OrderId)
+							VALUES(NEW.OrderId);
+						SET NEW.Completed = 1;
+					END IF;
 				END IF;
+                IF(NEW.PriceType <> 'Market')
+					THEN IF(NEW.NumShares <= 
+							(SELECT P.NumShares
+							FROM Portfolio P
+							WHERE NEW.CusAccNum = P.AccNum
+							AND NEW.StockSymbol = P.StockSymbol)
+                            AND EXISTS(SELECT *
+										FROM ConditionalPriceHistory C
+                                        WHERE C.CurSharePrice <= C.StopPrice
+                                        AND C.OrderId = NEW.OrderId)
+                                        AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+															FROM ConditionalPriceHistory H
+															WHERE O.OrderId = H.OrderId))
+						THEN INSERT INTO Transact(OrderId)
+							VALUES(NEW.OrderId);
+						SET NEW.Completed = 1;
+					END IF;
+                END IF;
 			END IF;
             IF(NEW.OrderType = 'Buy')
 				THEN IF(NEW.NumShares <= 
@@ -174,7 +194,6 @@ CREATE TRIGGER SellOrder
 			VALUES (NEW.OrderId, NEW.CurSharePrice);
 		END IF;
 	END;
-    
 |
 delimiter ;
 
