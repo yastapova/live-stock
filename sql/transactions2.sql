@@ -32,7 +32,7 @@ CREATE PROCEDURE getSharePriceHistory(IN month_past INT)
 	BEGIN
 		SELECT P.SharePrice, P.TimeStamp
 		FROM STOCKPRICEHISTORY P
-		WHERE P.StockSymbol = :stock_symbol 
+		WHERE P.StockSymbol = stock_symbol 
 		AND MONTH(TIMEDIFF(NOW(), P.TimeStamp)) < month_past;
     END
 | delimiter ;

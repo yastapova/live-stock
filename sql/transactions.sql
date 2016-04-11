@@ -1,3 +1,5 @@
+-- ----- MANAGER LEVEL TRANSACTIONS ----- --
+
 delimiter |
 CREATE PROCEDURE setSharePrice(IN stock_sym VARCHAR(5), IN share_price FLOAT(2))
 	BEGIN
@@ -92,3 +94,196 @@ CREATE PROCEDURE listOrdersBy(IN field CHAR(5))
     END
 | delimiter ;
 
+delimiter |
+CREATE PROCEDURE showStockRevenue()
+	BEGIN
+		SELECT S.StockSymbol, S.TotalRevenue
+		FROM StockRevenue S;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE showStockTypeRevenue()
+	BEGIN
+		SELECT S.StockType, S.TotalRevenue
+		FROM StockTypeRevenue S;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE showCustomerRevenue()
+	BEGIN
+		SELECT C.CusAccNum, S.TotalRevenue
+		FROM CustomerRevenue C;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE showMaxEmployeeRevenue()
+	BEGIN
+		SELECT E.EmpId, E.TotalRevenue
+		FROM EmployeeRevenue E
+		WHERE E.TotalRevenue =
+			(SELECT MAX(E.TotalRevenue)
+			FROM EmployeeRevenue E);
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE showMaxCustomerRevenue()
+	BEGIN
+		SELECT C.CusAccNum, C.TotalRevenue
+		FROM CustomerRevenue C
+		WHERE C.TotalRevenue =
+			(SELECT MAX(C.TotalRevenue)
+			FROM CustomerRevenue C);
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE showMostTradedStocks()
+	BEGIN
+		SELECT M.StockSymbol, M.NumOrders
+		FROM MostTraded M
+		ORDER BY NumOrders ASC
+		LIMIT 25;
+    END
+| delimiter ;
+
+-- ----- CUSTOMER REPRESENTATIVE LEVEL TRANSACTIONS ----- --
+delimiter |
+CREATE PROCEDURE recordOrder(IN order_id INT)
+	BEGIN
+		UPDATE Order_ O
+		SET Recorded = 1
+		WHERE O.OrderId = order_id;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE addCustomer(IN last_name VARCHAR(20), IN first_name VARCHAR(20),
+							 IN address VARCHAR(50), IN city VARCHAR(20),
+                             IN state VARCHAR(20), IN zipcode CHAR(5),
+                             IN telephone CHAR(10), IN email VARCHAR(50),
+							 IN rating INT)
+	BEGIN
+		INSERT INTO Customer(LastName, FirstName, Address, City, State, ZipCode, Telephone, Email, Rating)
+		VALUES (last_name, first_name, address, city, state, zipcode, telephone, email, rating);
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE updateCustomer(IN field VARCHAR(10), IN val VARCHAR(50), IN cus_id INT)
+	BEGIN
+		UPDATE Customer C
+		SET field = val
+		WHERE CusId = cus_id;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE deleteCustomer(IN cus_id INT)
+	BEGIN
+		DELETE FROM Customer
+        WHERE CusId = cus_id;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE createCustomerMailingList()
+	BEGIN
+		SELECT LastName, FirstName, Email, Address, City, State, ZipCode
+		FROM Customer;
+    END
+| delimiter ;
+
+
+-- ----- CUSTOMER LEVEL TRANSACTIONS ----- --
+delimiter |
+CREATE PROCEDURE getCustomerStockHoldings(IN customer_id INT)
+	BEGIN
+		SELECT P.AccNum, P.StockSymbol, P.NumShares, P.Stop, P.StopPrice
+		FROM Portfolio P, Account A, Customer C
+		WHERE P.AccNum = A.AccNum
+			AND A.CusId = C.CusId
+			AND C.CusId = customer_id;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getConditonalOrderTrailingStop(IN orderid INT)
+	BEGIN
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp
+		FROM CONDITIONALPRICEHISTORY P, ORDER_ O
+		WHERE P.OrderId = orderid  AND P.PriceType = 'Trailing Stop' AND P.StopPrice > 0;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
+	BEGIN
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp
+		FROM CONDITIONALPRICEHISTORY P, ORDER_ O
+		WHERE P.OrderId = orderid  AND P.PriceType = 'Hidden Stop' AND P.StopPrice > 0;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getSharePriceHistory(IN month_past INT)
+	BEGIN
+		SELECT P.SharePrice, P.TimeStamp
+		FROM STOCKPRICEHISTORY P
+		WHERE P.StockSymbol = stock_symbol 
+		AND MONTH(TIMEDIFF(NOW(), P.TimeStamp)) < month_past;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getCustomerOrdersHistory(IN customer_id INT)
+	BEGIN
+		SELECT O.Timestamp, O.CusAccNum, O.OrderType, O.StockSymbol, O.NumShares, O.CurSharePrice, 	O.PriceType
+		FROM Order_ O, Customer C, Account A
+		WHERE O.CusAccNum = A.AccNum
+		AND A.CusId = C.CusId AND C.CusId = customer_id;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getStockUsingType(IN stocktype CHAR(5)) 
+	BEGIN
+		SELECT O.*
+		FROM STOCK S, Order_ O
+		WHERE S.StockType LIKE '%stocktype%' AND O.StockSymbol = S.StockSymbol;
+
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getMostRecentOrderInfo()
+	BEGIN
+		SELECT O.*
+	FROM ORDER_ O, CUSTOMER C, ACCOUNT_ A
+	WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId AND C.CusId = 4
+	AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
+
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getStockUsingKeyword(IN stocksymbol CHAR(5)) 
+	BEGIN
+		SELECT O.*
+		FROM STOCK S, Order_ O
+		WHERE S.StockSymbol LIKE '%stocksymbol%' AND O.StockSymbol = S.StockSymbol;
+    END
+| delimiter ;
+
+delimiter |
+CREATE PROCEDURE getBestSellers() 
+	BEGIN
+		SELECT B.StockSymbol, B.TotalShares
+		FROM BestSellers B
+		ORDER BY TotalShares desc 
+		LIMIT 25;
+    END
+| delimiter ;
