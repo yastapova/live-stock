@@ -172,6 +172,7 @@ CREATE PROCEDURE addCustomer(IN last_name VARCHAR(20), IN first_name VARCHAR(20)
     END
 | delimiter ;
 
+-- Update customer in db
 delimiter |
 CREATE PROCEDURE updateCustomer(IN field VARCHAR(10), IN val VARCHAR(50), IN cus_id INT)
 	BEGIN
@@ -181,6 +182,7 @@ CREATE PROCEDURE updateCustomer(IN field VARCHAR(10), IN val VARCHAR(50), IN cus
     END
 | delimiter ;
 
+-- Delete a customer from db
 delimiter |
 CREATE PROCEDURE deleteCustomer(IN cus_id INT)
 	BEGIN
@@ -188,7 +190,7 @@ CREATE PROCEDURE deleteCustomer(IN cus_id INT)
         WHERE CusId = cus_id;
     END
 | delimiter ;
-
+-- Create the customer mailing list
 delimiter |
 CREATE PROCEDURE createCustomerMailingList()
 	BEGIN
@@ -199,6 +201,7 @@ CREATE PROCEDURE createCustomerMailingList()
 
 
 -- ----- CUSTOMER LEVEL TRANSACTIONS ----- --
+-- Get customers current stock holdings
 delimiter |
 CREATE PROCEDURE getCustomerStockHoldings(IN customer_id INT)
 	BEGIN
@@ -210,6 +213,7 @@ CREATE PROCEDURE getCustomerStockHoldings(IN customer_id INT)
     END
 | delimiter ;
 
+-- The share-price and trailing-stop history for a given conditional order
 delimiter |
 CREATE PROCEDURE getConditonalOrderTrailingStop(IN orderid INT)
 	BEGIN
@@ -219,6 +223,7 @@ CREATE PROCEDURE getConditonalOrderTrailingStop(IN orderid INT)
     END
 | delimiter ;
 
+-- The share-price and hidden-stop history for a given conditional order
 delimiter |
 CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
 	BEGIN
@@ -228,6 +233,7 @@ CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
     END
 | delimiter ;
 
+-- The share-price history of a given stock over a certain period of time (e.g., past six months
 delimiter |
 CREATE PROCEDURE getSharePriceHistory(IN month_past INT)
 	BEGIN
@@ -238,6 +244,7 @@ CREATE PROCEDURE getSharePriceHistory(IN month_past INT)
     END
 | delimiter ;
 
+-- A history of all current and past orders a customer has placed.
 delimiter |
 CREATE PROCEDURE getCustomerOrdersHistory(IN customer_id INT)
 	BEGIN
@@ -248,6 +255,7 @@ CREATE PROCEDURE getCustomerOrdersHistory(IN customer_id INT)
     END
 | delimiter ;
 
+-- Stocks available of a particular type 
 delimiter |
 CREATE PROCEDURE getStockUsingType(IN stocktype CHAR(5)) 
 	BEGIN
@@ -258,6 +266,7 @@ CREATE PROCEDURE getStockUsingType(IN stocktype CHAR(5))
     END
 | delimiter ;
 
+-- Most-recent order info of a customer
 delimiter |
 CREATE PROCEDURE getMostRecentOrderInfo()
 	BEGIN
@@ -269,6 +278,7 @@ CREATE PROCEDURE getMostRecentOrderInfo()
     END
 | delimiter ;
 
+-- Stocks available with a particular keyword or set of keywords in the stock name, and most-recent order info.
 delimiter |
 CREATE PROCEDURE getStockUsingKeyword(IN stocksymbol CHAR(5)) 
 	BEGIN
@@ -278,6 +288,7 @@ CREATE PROCEDURE getStockUsingKeyword(IN stocksymbol CHAR(5))
     END
 | delimiter ;
 
+-- Get the list of best selling stocks
 delimiter |
 CREATE PROCEDURE getBestSellers() 
 	BEGIN
