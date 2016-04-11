@@ -1,6 +1,7 @@
 -- ----- MANAGER LEVEL TRANSACTIONS ----- --
 
 delimiter |
+-- Sets the share price of a stock.
 CREATE PROCEDURE setSharePrice(IN stock_sym VARCHAR(5), IN share_price FLOAT(2))
 	BEGIN
 		UPDATE Stock
@@ -10,6 +11,7 @@ CREATE PROCEDURE setSharePrice(IN stock_sym VARCHAR(5), IN share_price FLOAT(2))
 | delimiter ;
 
 delimiter |
+-- Adds an employee to the database.
 CREATE PROCEDURE addEmployee(IN ssn CHAR(9), IN last_name VARCHAR(20),
 							 IN first_name VARCHAR(20), IN address VARCHAR(50),
 							 IN city VARCHAR(20), IN state VARCHAR(20),
@@ -23,6 +25,8 @@ CREATE PROCEDURE addEmployee(IN ssn CHAR(9), IN last_name VARCHAR(20),
 | delimiter ;
 
 delimiter |
+-- Updates info for a given employee.
+-- Only does the char attributes.
 CREATE PROCEDURE updateEmployee(IN field CHAR(10), IN val CHAR(50), IN emp_id INT)
 	BEGIN
 		UPDATE Employee
@@ -32,6 +36,8 @@ CREATE PROCEDURE updateEmployee(IN field CHAR(10), IN val CHAR(50), IN emp_id IN
 | delimiter ;
 
 delimiter |
+-- Updates info for a given employee.
+-- Only does the Timestamp_ attribute.
 CREATE PROCEDURE updateEmployee2(IN val DATETIME, IN emp_id INT)
 	BEGIN
 		UPDATE Employee
@@ -41,6 +47,8 @@ CREATE PROCEDURE updateEmployee2(IN val DATETIME, IN emp_id INT)
 | delimiter ;
 
 delimiter |
+-- Updates info for a given employee.
+-- Only does the HourlyRate attribute.
 CREATE PROCEDURE updateEmployee3(IN val FLOAT(2), IN emp_id INT)
 	BEGIN
 		UPDATE Employee
@@ -50,6 +58,7 @@ CREATE PROCEDURE updateEmployee3(IN val FLOAT(2), IN emp_id INT)
 | delimiter ;
 
 delimiter |
+-- Deletes a given employee from the database.
 CREATE PROCEDURE deleteEmployee(IN emp_id INT)
 	BEGIN
 		DELETE FROM Employee
@@ -58,7 +67,8 @@ CREATE PROCEDURE deleteEmployee(IN emp_id INT)
 | delimiter ;
 
 delimiter |
-CREATE PROCEDURE getSalesReport(IN yr INT, IN mon INT) -- check mon and yr type
+-- Gets a sales report for a particular month and year.
+CREATE PROCEDURE getSalesReport(IN yr INT, IN mon INT)
 	BEGIN
 		SELECT T.Transfee, T.OrderId
 		FROM Transact T
@@ -68,6 +78,8 @@ CREATE PROCEDURE getSalesReport(IN yr INT, IN mon INT) -- check mon and yr type
 | delimiter ;
 
 delimiter |
+-- Produces a list of all stocks and how many orders are
+-- placed for each one.
 CREATE PROCEDURE listAllStocks()
 	BEGIN
 		SELECT S.*, COUNT (O.StockSymbol) AS OrdersPlaced
@@ -78,6 +90,8 @@ CREATE PROCEDURE listAllStocks()
 | delimiter ;
 
 delimiter |
+-- Creates a list of orders that are ordered by stock symbol
+-- or customer name.
 CREATE PROCEDURE listOrdersBy(IN field CHAR(5))
 	BEGIN
 		IF(field = 'order')
@@ -95,6 +109,7 @@ CREATE PROCEDURE listOrdersBy(IN field CHAR(5))
 | delimiter ;
 
 delimiter |
+-- Shows the total revenue produced by each stock.
 CREATE PROCEDURE showStockRevenue()
 	BEGIN
 		SELECT S.StockSymbol, S.TotalRevenue
@@ -103,6 +118,7 @@ CREATE PROCEDURE showStockRevenue()
 | delimiter ;
 
 delimiter |
+-- Shows the total revenue produced by each stock type. 
 CREATE PROCEDURE showStockTypeRevenue()
 	BEGIN
 		SELECT S.StockType, S.TotalRevenue
@@ -111,6 +127,7 @@ CREATE PROCEDURE showStockTypeRevenue()
 | delimiter ;
 
 delimiter |
+-- Shows the total revenue produced by each customer.
 CREATE PROCEDURE showCustomerRevenue()
 	BEGIN
 		SELECT C.CusAccNum, S.TotalRevenue
@@ -119,6 +136,8 @@ CREATE PROCEDURE showCustomerRevenue()
 | delimiter ;
 
 delimiter |
+-- Shows the customer rep that generated the most
+-- total revenue.
 CREATE PROCEDURE showMaxEmployeeRevenue()
 	BEGIN
 		SELECT E.EmpId, E.TotalRevenue
@@ -130,6 +149,8 @@ CREATE PROCEDURE showMaxEmployeeRevenue()
 | delimiter ;
 
 delimiter |
+-- Shows the customer that generated the most total
+-- revenue.
 CREATE PROCEDURE showMaxCustomerRevenue()
 	BEGIN
 		SELECT C.CusAccNum, C.TotalRevenue
@@ -141,17 +162,19 @@ CREATE PROCEDURE showMaxCustomerRevenue()
 | delimiter ;
 
 delimiter |
-CREATE PROCEDURE showMostTradedStocks()
+-- Shows a list of the top n most actively traded stocks.
+CREATE PROCEDURE showMostTradedStocks(IN n INT)
 	BEGIN
 		SELECT M.StockSymbol, M.NumOrders
 		FROM MostTraded M
 		ORDER BY NumOrders ASC
-		LIMIT 25;
+		LIMIT n;
     END
 | delimiter ;
 
 -- ----- CUSTOMER REPRESENTATIVE LEVEL TRANSACTIONS ----- --
 delimiter |
+-- Records an order, meaning it is ready to be executed.
 CREATE PROCEDURE recordOrder(IN order_id INT)
 	BEGIN
 		UPDATE Order_ O
@@ -161,6 +184,7 @@ CREATE PROCEDURE recordOrder(IN order_id INT)
 | delimiter ;
 
 delimiter |
+-- Adds a customer to the database.
 CREATE PROCEDURE addCustomer(IN last_name VARCHAR(20), IN first_name VARCHAR(20),
 							 IN address VARCHAR(50), IN city VARCHAR(20),
                              IN state VARCHAR(20), IN zipcode CHAR(5),

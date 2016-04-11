@@ -37,17 +37,17 @@ GROUP BY O.StockSymbol;
 
 -- Produce a list of stock suggestions for a given customer (based on that customer's past orders)
 
-CREATE FUNCTION func() RETURNS int(11)
-  RETURN @var;
+CREATE FUNCTION suggestHelper() RETURNS int(11)
+  RETURN @cusacc;
 
 CREATE VIEW Suggest(StockSymbol, SharePrice, NumAvailShares, StockType) AS
 SELECT S.StockSymbol, S.SharePrice, S.NumAvailShares, S.StockType
 FROM Stock S, Order_ O
-WHERE (O.CusAccNum = func() AND O.StockSymbol = S.StockSymbol);
+WHERE (O.CusAccNum = suggestHelper() AND O.StockSymbol = S.StockSymbol);
 
 
 -- Example to run
--- SET @var = 1;
+-- SET @cusacc = 1;
 -- SELECT * FROM Suggest;
 
 -- Best-Seller list of stocks generated based on what stocks have been sold the most.
