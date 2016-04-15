@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+
+body {
+		background-color: lightblue;
+		font-family: Tahoma;
+}
+.formlabel {
+	font-size: 10pt;
+}
+.footer {
+	text-align: center;
+	padding-top: 50px;
+}
+.footer p {
+	font-size: 8pt;
+}
+a {
+	font-size: 10pt;
+}

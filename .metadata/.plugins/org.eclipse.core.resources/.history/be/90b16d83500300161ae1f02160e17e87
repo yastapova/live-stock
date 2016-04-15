@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>LiveStock Trading</title>
+</head>
+<body>
+	<div id="header">
+	<table>
+		<tr>
+			<td width='300px'><h1>LiveStock</h1></td>
+			<td width='300px'><h2>Pig Out on Our Stocks</h2></td>
+		</tr>
+	</table>
+	</div>
+	
+	<div id="body">
+	</div>
+	
+	<div id="footer">
+	</div>
+</body>
+</html>

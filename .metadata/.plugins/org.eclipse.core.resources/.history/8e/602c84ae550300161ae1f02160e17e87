@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="header">
+	<table>
+		<tr>
+			<td width='300px'><h1>LiveStock</h1></td>
+			<td width='300px'><p>Pig Out on Our Stocks</p></td>
+		</tr>
+	</table>
+	</div>
+	
+	<div class="body" align="center">
+		<h2>Register</h2>
+		<form>
+			<table>
+				<tr>
+					<td><span class="formlabel">Username:</span></td>
+					<td><input id="usrn" name="username" type="text" /></td>
+				</tr>
+				<tr>
+					<td><span class="formlabel">Password:</span></td>
+					<td><input id="pw" name="password" type="password" /></td>
+				</tr>
+			</table>
+			<input type="submit" value="Register">
+		</form>
+	</div>
+	
+	<div class="footer">
+	</div>
+</body>
+</html>

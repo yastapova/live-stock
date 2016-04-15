@@ -1,0 +1,15 @@
+
+public class UserAccount
+{
+	private String fname;
+	private String lname;
+	private String usrname;
+	private String pwd;
+	private String address;
+	private String city;
+	private String state;
+	private String zip;
+	private String phone;
+	private int id;
+	
+}

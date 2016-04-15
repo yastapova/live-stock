@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>LiveStock Trading</title>
+	<style>
+		body {
+			background-color: lightblue;
+		}
+		.formlabel {
+			font-size: 10pt;
+			font-color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+	<table>
+		<tr>
+			<td width='300px'><h1>LiveStock</h1></td>
+			<td width='300px'><p>Pig Out on Our Stocks</p></td>
+		</tr>
+	</table>
+	</div>
+	
+	<div class="body" align="center">
+		<h2>Login</h2>
+		<form>
+			<span class="formlabel">Username:</span>
+			<input id="usrn" name="username" type="text" />
+			<br />
+			<span class="formlabel">Password:</span>
+			<input id="pw" name="password" type="password" />
+		</form>
+	</div>
+	
+	<div class="footer">
+	</div>
+</body>
+</html>
