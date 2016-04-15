@@ -1,0 +1,25 @@
+Website Structure:
+
+Main Page: Register or Log-in
+
+Register: Fill out required fields and submit
+
+Customer: 	Portfolio
+			Account Info
+			Orders -> Track conditional orders
+			Stocks -> Filters, Place order
+			Help
+
+Cust-Rep:	Orders -> Record order
+			Customers -> Add, edit, delete info, Mailing list, Stock suggestions
+			Help
+
+Manager:	Stock -> Set Price, Most actively traded
+			Employee -> Add, edit, delete info
+			Finances -> Sales report, Various revenues, CustRep/Customer with highest revenue
+			Orders -> Filter by stock symbol or customer
+			Backup files
+			Help
+
+Notes:
+Each Help page is different for each user level. Only shows things they can do.
