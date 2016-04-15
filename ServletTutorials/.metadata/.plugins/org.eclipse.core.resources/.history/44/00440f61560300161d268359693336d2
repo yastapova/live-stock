@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  	<display-name>ServletTutorial</display-name>
+  	<welcome-file-list>
+    	<welcome-file>index.html</welcome-file>
+    	<welcome-file>index.htm</welcome-file>
+    	<welcome-file>index.jsp</welcome-file>
+    	<welcome-file>default.html</welcome-file>
+    	<welcome-file>default.htm</welcome-file>
+    	<welcome-file>default.jsp</welcome-file>
+  	</welcome-file-list>
+  	
+  	<!-- Define servlet, named helloServlet -->
+  	<servlet>
+   		<servlet-name>helloServlet</servlet-name>
+   		<servlet-class>org.o7planning.tutorial.servlet.HelloServlet</servlet-class>
+  	</servlet>
+ 
+	<!-- Defines the path to access this Servlet -->
+	<servlet-mapping>
+   		<servlet-name>helloServlet</servlet-name>
+   		<url-pattern>/nameofservlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<servlet-name>initParamServlet</servlet-name>
+    	<servlet-class>org.o7planning.tutorial.servlet.InitParamServlet</servlet-class>
+    	<init-param>
+       		<param-name>emailSupport1</param-name>
+        	<param-value>abc@example.com</param-value>
+    	</init-param>
+    	<init-param>
+        	<param-name>emailSupport2</param-name>
+        	<param-value>tom@example.com</param-value>
+    	</init-param>
+	</servlet>    
+
+	<servlet-mapping>
+    	<servlet-name>initParamServlet</servlet-name>
+    	<url-pattern>/initParam</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<servlet-name>ExampleInfoServlet</servlet-name>
+    	<servlet-class>org.o7planning.tutorial.servlet.InitParamServlet</servlet-class>
+    	<init-param>
+       		<param-name>text1</param-name>
+        	<param-value>abc@example.com</param-value>
+    	</init-param>
+    	<init-param>
+        	<param-name>text2</param-name>
+        	<param-value>tom@example.com</param-value>
+    	</init-param>
+	</servlet>    
+
+	<servlet-mapping>
+    	<servlet-name>ExampleInfoServlet</servlet-name>
+    	<url-pattern>/initParam</url-pattern>
+	</servlet-mapping>
+</web-app>
