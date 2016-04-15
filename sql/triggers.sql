@@ -296,3 +296,16 @@ CREATE TRIGGER UpdateStockQuantity
 |
 delimiter ;
 
+delimiter |
+-- Updates rating for customer after an order is placed.
+CREATE TRIGGER UpdateRating
+	BEFORE INSERT ON Order_ FOR EACH ROW
+    BEGIN
+		UPDATE Customer C
+        SET C.Rating = MAX(C.Rating+1, 10)
+		WHERE C.CusId = (SELECT A.CusId
+						FROM Account A
+                        WHERE NEW.CusAccNum=A.AccNum)
+    END;
+
+delimiter ;
