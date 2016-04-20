@@ -1,0 +1,74 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: #67829F;
+	font-family: Tahoma;
+}
+a {
+	font-size: 10pt;
+}
+.body a:link {
+	color: #D6C9E2;
+}
+.body a:visited {
+	color: #896AA4;
+}
+.body a:hover {
+	color: #D6C9E2;
+}
+.formlabel {
+	font-size: 10pt;
+}
+.accinfo {
+	font-size: 10pt;
+	font-family: "Times New Roman";
+}
+.header {
+	border-bottom-style: groove;
+	border-bottom-width: 20px;
+	border-bottom-color: lightgrey;
+	margin-bottom: 15px;
+}
+.body {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	background-color: #234467;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #95AAC0;
+	color: #C8D4E0;
+}
+.footer {
+	text-align: center;
+	margin-top: 50px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: #234467;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #95AAC0;
+	color: #C8D4E0;
+}
+.footer p {
+	font-size: 8pt;
+}
+.menu a, a:visited {
+	background-color: #95AAC0;
+	color: #234467;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+.menu a:hover {
+	background-color: #234467;
+	color: #C8D3E0;
+}
+.menu a.active {
+	background-color: #234467;
+	color: #C8D3E0;
+}
+.body table {
+	padding: 10px;
+}
