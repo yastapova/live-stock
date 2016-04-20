@@ -1,7 +1,6 @@
-INDEX VERSION 1.3+C:\Users\Wendy\Documents\CSE305\Final\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-4272208927.index
-512576405.index
-3538284366.index
-2730032265.index
+INDEX VERSION 1.3+C:\Users\Wendy\Documents\CSE305\live-stock\ServletTutorials\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1168676648.index
+2921956538.index
 2683685353.index
-417285385.index
+72623830.index
+3818272173.index
