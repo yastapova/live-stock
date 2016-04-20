@@ -1,8 +1,7 @@
-INDEX VERSION 1.3+C:\Users\Yuliya\Google Drive\College\Semester 6\CSE 305\live-stock\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3203833269.index
-1586110311.index
-3089840901.index
-2262123905.index
-2361119058.index
-3082243339.index
+INDEX VERSION 1.3+C:\Users\Wendy\Documents\CSE305\live-stock\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3285660392.index
 4183594625.index
+3202319774.index
+4105716190.index
+3313037939.index
+3867610548.index
