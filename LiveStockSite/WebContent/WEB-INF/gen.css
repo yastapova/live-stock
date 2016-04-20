@@ -17,7 +17,7 @@ a {
 	color: #D6C9E2;
 }
 .formlabel {
-	font-size: 10pt;
+	font-size: 15pt;
 }
 .accinfo {
 	font-size: 10pt;
@@ -42,7 +42,7 @@ a {
 }
 .body dt {
 	font-style: oblique;
-	font-size: 11pt;
+	font-size: 15pt;
 }
 .body dd {
 	padding-bottom: 5px;
@@ -68,6 +68,7 @@ a {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
+	font-weight: bold;
 }
 .menu a:hover {
 	background-color: #234467;
@@ -76,4 +77,44 @@ a {
 .menu a.active {
 	background-color: #234467;
 	color: #C8D3E0;
+}
+
+/* Button css for main buttons*/
+.btn-main {
+  background-color: #3366cc;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 1.3px;
+  padding: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+/* Button css for default/regular buttons*/
+.btn-default {
+    border: 1px solid #333;
+    color: #333;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.3px;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.form-class{
+	padding: 20px;
+	margin-bottom: 10px;
 }
