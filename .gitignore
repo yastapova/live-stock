@@ -1,6 +1,6 @@
 *.pydevproject
 .project
-.metadata
+.metadata/*
 bin/**
 tmp/**
 tmp/**/*
@@ -10,5 +10,6 @@ tmp/**/*
 *~.nib
 local.properties
 .classpath
-.settings/
+*/.settings/
 .loadpath
+Servers/*
