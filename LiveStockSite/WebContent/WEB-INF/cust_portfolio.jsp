@@ -2,26 +2,12 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>LiveStock Trading | Customer Account</title>
+	<title>LiveStock Trading | Portfolio</title>
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>
-	<div class="header">
-	<table>
-		<tr>
-			<td width='300px'><h1>LiveStock</h1></td>
-			<td width='300px'><p>Raise the Steaks</p></td>
-		</tr>
-	</table>
-	</div>
-	<div class="menu" align="right">
-	<a href="cust_acc_info.html">Account Info</a>
-	<a href="cust_portfolio.html" class="active">Portfolio</a>
-	<a href="cust_orders.html">Orders</a>
-	<a href="cust_stocks.html">Stocks</a>
-	<a href="cust_help.html">Help</a>
-	<a href="">Logout</a>
-	</div>
+	<jsp:include page="_header.jsp"></jsp:include>
+	<jsp:include page="_cust_menu.jsp"></jsp:include>
 	<div class="body" align="center">
 		<h2>Login</h2>
 		<a href="register_cus.html" class = "btn-default">Register: Customer</a>
@@ -41,9 +27,6 @@
 		</form>
 	</div>
 	
-	<div class="footer">
-	<p>We herd you loud and clear. You are ready to take the stock market by the horns.</p>
-	<p>That's udderly brilliant! Don't make a misteak, trade with LiveStock&copy;!</p>
-	</div>
+	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

@@ -6,19 +6,12 @@
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>
-	<div class="header">
-	<table>
-		<tr>
-			<td width='300px'><h1>LiveStock</h1></td>
-			<td width='300px'><p>Raise the Steaks</p></td>
-		</tr>
-	</table>
-	</div>
+	<jsp:include page="_header.jsp"></jsp:include>
 	
 	<div class="body" align="center">
 		<h1>Login</h1>
-		<a href="register_cus.html" class="btn-default">Register: Customer</a>
-		<a href="register_emp.html" class="btn-default">Register: Employee</a>
+		<a href="register_cus.jsp" class="btn-default">Register: Customer</a>
+		<a href="register_emp.jsp" class="btn-default">Register: Employee</a>
 		<div class="clear-fix"></div>
 		<div class = "form-class">
 		<form>
@@ -37,9 +30,6 @@
 		</div>
 	</div>
 	
-	<div class="footer">
-	<p>We herd you loud and clear. You are ready to take the stock market by the horns.</p>
-	<p>That's udderly brilliant! Don't make a misteak, trade with LiveStock&copy;!</p>
-	</div>
+	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

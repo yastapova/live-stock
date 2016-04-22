@@ -17,16 +17,16 @@ a {
 	color: #D6C9E2;
 }
 .formlabel {
-	font-size: 15pt;
+	font-size: 12pt;
 }
 .accinfo {
-	font-size: 10pt;
+	font-size: 12pt;
 	font-family: "Times New Roman";
 }
 .header {
 	border-bottom-style: groove;
 	border-bottom-width: 20px;
-	border-bottom-color: lightgrey;
+	border-bottom-color: #d3d3d3;
 	margin-bottom: 15px;
 }
 .body {

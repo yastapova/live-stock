@@ -6,14 +6,7 @@
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>
-	<div class="header">
-	<table>
-		<tr>
-			<td width='300px'><h1>LiveStock</h1></td>
-			<td width='300px'><p>Raise the Steaks</p></td>
-		</tr>
-	</table>
-	</div>
+	<jsp:include page="_header.jsp"></jsp:include>
 	
 	<div class="body" align="center">
 		<h2>Register</h2>
@@ -36,10 +29,6 @@
 					<td><input id="lname" name="last_name" type="text" /></td>
 				</tr>
 				<tr>
-					<td><span class="formlabel">SSN:</span></td>
-					<td><input id="ssn" name="ssn" type="text" /></td>
-				</tr>
-				<tr>
 					<td><span class="formlabel">Address:</span></td>
 					<td><input id="addr" name="address" type="text" /></td>
 				</tr>
@@ -60,18 +49,14 @@
 					<td><input id="phone" name="phone" type="text" /></td>
 				</tr>
 				<tr>
-					<td><span class="formlabel">Position:</span></td>
-					<td><input id="pos_man" name="position" type="radio" value="manager"/><span class="formlabel">Manager</span><br />
-					<input id="pos_rep" name="position" type="radio" value="cust_rep"/><span class="formlabel">Customer Rep</span></td>
+					<td><span class="formlabel">Email:</span></td>
+					<td><input id="email" name="email" type="text" /></td>
 				</tr>
 			</table>
-			<input type="submit" value="Register" class = "btn-main">
+			<input type="submit" value="Register" class = "btn-main"/>
 		</form>
 	</div>
 	
-	<div class="footer">
-	<p>We herd you loud and clear. You are ready to take the stock market by the horns.</p>
-	<p>That's udderly brilliant! Don't make a misteak, trade with LiveStock&copy;!</p>
-	</div>
+	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>
