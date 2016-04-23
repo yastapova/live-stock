@@ -19,6 +19,9 @@ a {
 .formlabel {
 	font-size: 12pt;
 }
+.forminput{
+	width: 175px;
+}
 .accinfo {
 	font-size: 12pt;
 	font-family: "Times New Roman", Times, serif;

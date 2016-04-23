@@ -14,43 +14,43 @@
 			<table>
 				<tr>
 					<td><span class="formlabel">Username:</span></td>
-					<td><input id="usrn" name="username" type="text" /></td>
+					<td><input class="forminput" id="usrn" name="username" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Password:</span></td>
-					<td><input id="pw" name="password" type="password" /></td>
+					<td><input class="forminput" id="pw" name="password" type="password" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">First Name:</span></td>
-					<td><input id="fname" name="first_name" type="text" /></td>
+					<td><input class="forminput" id="fname" name="first_name" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Last Name:</span></td>
-					<td><input id="lname" name="last_name" type="text" /></td>
+					<td><input class="forminput" id="lname" name="last_name" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">SSN:</span></td>
-					<td><input id="ssn" name="ssn" type="text" /></td>
+					<td><input class="forminput" id="ssn" name="ssn" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Address:</span></td>
-					<td><input id="addr" name="address" type="text" /></td>
+					<td><input class="forminput" id="addr" name="address" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">City:</span></td>
-					<td><input id="city" name="city" type="text" /></td>
+					<td><input class="forminput" id="city" name="city" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">State:</span></td>
-					<td><input id="state" name="state" type="text" /></td>
+					<td><input class="forminput" id="state" name="state" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">ZipCode:</span></td>
-					<td><input id="zip" name="zipcode" type="text" /></td>
+					<td><input class="forminput" id="zip" name="zipcode" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Telephone:</span></td>
-					<td><input id="phone" name="phone" type="text" /></td>
+					<td><input class="forminput" id="phone" name="phone" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Position:</span></td>

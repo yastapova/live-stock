@@ -18,11 +18,11 @@
 			<table>
 				<tr>
 					<td><span class="formlabel">Username:</span></td>
-					<td><input id="usrn" name="username" type="text" /></td>
+					<td><input class="forminput" id="usrn" name="username" type="text" /></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Password:</span></td>
-					<td><input id="pw" name="password" type="password" /></td>
+					<td><input class="forminput" id="pw" name="password" type="password" /></td>
 				</tr>
 			</table>
 			<input type="submit" value="Login" class = "btn-main">
