@@ -92,7 +92,7 @@ public class JDBCFilter implements Filter {
            try {
                // Create connection
                conn = ConnectionUtils.getConnection();
- 
+               System.out.println("Connected to database!");
                // Set Auto commit to false
                conn.setAutoCommit(false);
  
