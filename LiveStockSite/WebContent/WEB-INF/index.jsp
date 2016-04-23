@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>
-	<jsp:include page="_header.jsp"></jsp:include>
+	<jsp:include page="WEB-INF/views/_header.jsp"></jsp:include>
 	
 	<div class="body" align="center">
 		<h1>Login</h1>
@@ -30,6 +30,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="_footer.jsp"></jsp:include>
+	<jsp:include page="WEB-INF/views/_footer.jsp"></jsp:include>
 </body>
 </html>

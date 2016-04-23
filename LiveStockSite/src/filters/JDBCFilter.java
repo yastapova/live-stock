@@ -15,8 +15,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
  
-import connection.ConnectionUtils;
-import connection.MyUtils;
+import conn.ConnectionUtils;
+import utils.MyUtils;
  
 @WebFilter(filterName = "jdbcFilter", urlPatterns = { "/*" })
 public class JDBCFilter implements Filter {
