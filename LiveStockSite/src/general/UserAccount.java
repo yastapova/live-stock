@@ -13,6 +13,11 @@ public class UserAccount
 	private String phone;
 	private int id;
 	
+	public UserAccount()
+	{
+		
+	}
+	
 	public UserAccount(int id, String fname, String lname, String usrname,
 						String pwd, String address, String city,
 						String state, String zip, String phone)
