@@ -3,7 +3,7 @@
 <div class="header">
 	<table>
 		<tr>
-			<td><img src="LivestockLogoName.png" width='300px'></td>
+			<td width='315px'><img src="LivestockLogoName.png" width='300px'></td>
 			<td width='300px'><p>Raise the Steaks</p></td>
 		</tr>
 	</table>
