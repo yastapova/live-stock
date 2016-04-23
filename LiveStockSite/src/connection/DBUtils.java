@@ -59,22 +59,44 @@ public class DBUtils {
 					UserAccount user = new CustomerAccount(cusId, first,
 										last, usr, pwd, addr, city, state,
 										zip, phone, email, rating);
+					return user;
 				}
 			}
-			else if(accType == REP)
+			else if(accType == REP || accType == MANAGER)
 			{
-
-			}
-			else if(accType == MANAGER)
-			{
-
+				String sql2 = "SELECT E.SSN, E.FirstName, E.LastName,"
+						+ "E.Address, E.City, E.State,"
+						+ "E.ZipCode, E.Telephone, E.HourlyRate,"
+						+ "E.StartDate, E.EmpId, E.Position_ FROM Employee E"
+						+ "WHERE E.EmpId = ?";
+				PreparedStatement pstm2 = conn.prepareStatement(sql2);
+				pstm2.setInt(1, id);
+				ResultSet rs2 = pstm.executeQuery();
+				
+				if(rs2.next())
+				{
+					UserAccount user = new EmployeeAccount();
+					
+					user.setId(rs.getInt("EmpId"));
+					user.setFname(rs.getString("FirstName"));
+					user.setLname(rs.getString("LastName"));
+					user.setAddress(rs.getString("Address"));
+					user.setCity(rs.getString("City"));
+					user.setState(rs.getString("State"));
+					user.setZip(rs.getString("ZipCode"));
+					user.setPhone(rs.getString("Telephone"));
+					((EmployeeAccount)user).setPos(rs.getString("Position_"));
+					((EmployeeAccount)user).setHourly(rs.getInt("HourlyRate"));
+					((EmployeeAccount)user).setSsn(rs.getString("SSN"));
+					((EmployeeAccount)user).setStart(rs.getDate("StartDate"));
+					
+					return user;
+				}
 			}
 			else
 			{
 				return null;
 			}
-
-			return user;
 		}
 		return null;
 	}
