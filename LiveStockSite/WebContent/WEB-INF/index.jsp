@@ -15,7 +15,7 @@
 		<div class="clear-fix"></div>
 		<div class = "form-class">
 		<form>
-			<table>
+			<table name="loginForm" action="login" method="get">
 				<tr>
 					<td><span class="formlabel">Username:</span></td>
 					<td><input class="forminput" id="usrn" name="username" type="text" /></td>
