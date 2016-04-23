@@ -59,6 +59,7 @@ public class DBUtils {
 					UserAccount user = new CustomerAccount(cusId, first,
 										last, usr, pwd, addr, city, state,
 										zip, phone, email, rating);
+					System.out.println("Retrieved Customer Account");
 					return user;
 				}
 			}
@@ -90,6 +91,7 @@ public class DBUtils {
 					((EmployeeAccount)user).setSsn(rs.getString("SSN"));
 					((EmployeeAccount)user).setStart(rs.getDate("StartDate"));
 					
+					System.out.println("Retrieved Employee Account");
 					return user;
 				}
 			}
