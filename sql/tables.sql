@@ -40,6 +40,14 @@ CREATE TABLE Customer (
 	PRIMARY KEY (CusId)
 );
 
+-- AccType: 1 for customer, 2 for employee, 3 for manager
+CREATE TABLE Login (
+	Usr				VARCHAR(20) NOT NULL,
+	Pwd				VARCHAR(20) NOT NULL,
+	AccType			INTEGER NOT NULL,
+	Id				INTEGER NOT NULL,
+	PRIMARY KEY (Usr)
+);
 
 CREATE TABLE Account_ (
 	AccNum			INTEGER AUTO_INCREMENT NOT NULL,
@@ -128,4 +136,3 @@ CREATE TABLE StockPriceHistory (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
-        

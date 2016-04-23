@@ -43,6 +43,24 @@ VALUES ('789123456', 'Warren', 'David', '456 Sunken Street', 'Stony Brook', 'NY'
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('F', 'Sell', 30, 1, NOW(), 'Market', NULL, 1, 0);
 
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('CoolPerson', '2cool4school', 1, 1);
+
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('DuVic', 'horse', 1, 2);
+
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('Wordsmith', 'pen>sword', 1, 3);
+
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('Clark', 'adventure', 1, 4);
+
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('Dsmith', '12345', 2, 1);
+
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('Boss', 'password', 3, 2);
+
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 0

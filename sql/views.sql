@@ -56,8 +56,3 @@ CREATE VIEW BestSellers(StockSymbol, TotalShares) AS
 SELECT O.StockSymbol, SUM(O.NumShares) AS TotalShares
 FROM Order_ O
 GROUP BY O.StockSymbol;
-
-
-
-
-
