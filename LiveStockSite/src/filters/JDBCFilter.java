@@ -43,8 +43,10 @@ public class JDBCFilter implements Filter {
        //
        // => /spath
        String servletPath = request.getServletPath();
+       System.out.println("Servlet Path: " + servletPath);
        // => /abc/mnp
        String pathInfo = request.getPathInfo();
+       System.out.println("Servlet Path Info: " + pathInfo);
  
        String urlPattern = servletPath;
  
@@ -52,7 +54,7 @@ public class JDBCFilter implements Filter {
            // => /spath/*
            urlPattern = servletPath + "/*";
        }
- 
+       System.out.println("Url Pattern: " + urlPattern);
        // Key: servletName.
        // Value: ServletRegistration
        Map<String, ? extends ServletRegistration> servletRegistrations = request.getServletContext()
@@ -67,6 +69,7 @@ public class JDBCFilter implements Filter {
                return true;
            }
        }
+       System.out.println("Failed something!");
        return false;
    }
  

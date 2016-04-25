@@ -6,12 +6,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import general.UserAccount;
  
 public class MyUtils {
  
    public static final String ATT_NAME_CONNECTION = "ATTRIBUTE_FOR_CONNECTION";
- 
-   private static final String ATT_NAME_USER_NAME = "ATTRIBUTE_FOR_STORE_USER_NAME_IN_COOKIE";
  
     
    // Store Connection in request attribute.
@@ -25,7 +25,7 @@ public class MyUtils {
        Connection conn = (Connection) request.getAttribute(ATT_NAME_CONNECTION);
        return conn;
    }
-   /*
+   
    // Store user info in Session.
    public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
  
@@ -40,11 +40,11 @@ public class MyUtils {
        return loginedUser;
    }
  
- 
+   /*
    // Store info in Cookie
    public static void storeUserCookie(HttpServletResponse response, UserAccount user) {
        System.out.println("Store user cookie");
-       Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getUserName());
+       Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getUsrname());
  
        // 1 day (Convert to seconds)
        cookieUserName.setMaxAge(24 * 60 * 60);

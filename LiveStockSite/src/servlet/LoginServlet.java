@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+    	System.out.println("Login Servlet do get!");
          
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access directly into JSP pages placed in WEB-INF)        
@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	System.out.println("Login Servlet do post and do get!");
         doGet(request, response);
     }
  
