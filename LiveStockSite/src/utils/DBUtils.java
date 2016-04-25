@@ -32,27 +32,27 @@ public class DBUtils {
 
 			if(accType == CUSTOMER)
 			{
-				String sql2 = "SELECT C.FirstName, C.LastName,"
-							+ "C.Address, C.City, C.State,"
-							+ "C.ZipCode, C.Telephone, C.Email,"
-							+ "C.Rating, C.CusId FROM Customer C"
+				String sql2 = "SELECT C.FirstName, C.LastName, "
+							+ "C.Address, C.City, C.State, "
+							+ "C.ZipCode, C.Telephone, C.Email, "
+							+ "C.Rating, C.CusId FROM Customer C "
 							+ "WHERE C.CusId = ?";
 				PreparedStatement pstm2 = conn.prepareStatement(sql2);
 				pstm2.setInt(1, id);
-				ResultSet rs2 = pstm.executeQuery();
+				ResultSet rs2 = pstm2.executeQuery();
 				
 				if(rs2.next())
 				{
-					String first = rs.getString("FirstName");
-					String last = rs.getString("LastName");
-					String addr = rs.getString("Address");
-					String city = rs.getString("City");
-					String state = rs.getString("State");
-					String zip = rs.getString("ZipCode");
-					String phone = rs.getString("Telephone");
-					String email = rs.getString("Email");
-					int rating = rs.getInt("Rating");
-					int cusId = rs.getInt("CusId");
+					String first = rs2.getString("FirstName");
+					String last = rs2.getString("LastName");
+					String addr = rs2.getString("Address");
+					String city = rs2.getString("City");
+					String state = rs2.getString("State");
+					String zip = rs2.getString("ZipCode");
+					String phone = rs2.getString("Telephone");
+					String email = rs2.getString("Email");
+					int rating = rs2.getInt("Rating");
+					int cusId = rs2.getInt("CusId");
 					
 					UserAccount user = new CustomerAccount(cusId, first,
 										last, usr, pwd, addr, city, state,
@@ -63,31 +63,31 @@ public class DBUtils {
 			}
 			else if(accType == REP || accType == MANAGER)
 			{
-				String sql2 = "SELECT E.SSN, E.FirstName, E.LastName,"
-						+ "E.Address, E.City, E.State,"
-						+ "E.ZipCode, E.Telephone, E.HourlyRate,"
-						+ "E.StartDate, E.EmpId, E.Position_ FROM Employee E"
+				String sql2 = "SELECT E.SSN, E.FirstName, E.LastName, "
+						+ "E.Address, E.City, E.State, "
+						+ "E.ZipCode, E.Telephone, E.HourlyRate, "
+						+ "E.StartDate, E.EmpId, E.Position_ FROM Employee E "
 						+ "WHERE E.EmpId = ?";
 				PreparedStatement pstm2 = conn.prepareStatement(sql2);
 				pstm2.setInt(1, id);
-				ResultSet rs2 = pstm.executeQuery();
+				ResultSet rs2 = pstm2.executeQuery();
 				
 				if(rs2.next())
 				{
 					UserAccount user = new EmployeeAccount();
-					
-					user.setId(rs.getInt("EmpId"));
-					user.setFname(rs.getString("FirstName"));
-					user.setLname(rs.getString("LastName"));
-					user.setAddress(rs.getString("Address"));
-					user.setCity(rs.getString("City"));
-					user.setState(rs.getString("State"));
-					user.setZip(rs.getString("ZipCode"));
-					user.setPhone(rs.getString("Telephone"));
-					((EmployeeAccount)user).setPos(rs.getString("Position_"));
-					((EmployeeAccount)user).setHourly(rs.getInt("HourlyRate"));
-					((EmployeeAccount)user).setSsn(rs.getString("SSN"));
-					((EmployeeAccount)user).setStart(rs.getDate("StartDate"));
+
+					((EmployeeAccount)user).setSsn(rs2.getString("SSN"));
+					user.setLname(rs2.getString("LastName"));
+					user.setFname(rs2.getString("FirstName"));
+					user.setAddress(rs2.getString("Address"));
+					user.setCity(rs2.getString("City"));
+					user.setState(rs2.getString("State"));
+					user.setZip(rs2.getString("ZipCode"));
+					user.setPhone(rs2.getString("Telephone"));
+					((EmployeeAccount)user).setStart(rs2.getDate("StartDate"));
+					((EmployeeAccount)user).setHourly(rs2.getInt("HourlyRate"));
+					user.setId(rs2.getInt("EmpId"));
+					((EmployeeAccount)user).setPos(rs2.getString("Position_"));
 					
 					System.out.println("Retrieved Employee Account");
 					return user;
