@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
  
-import general.UserAccount;
+import general.CustomerAccount;
 import utils.DBUtils;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/doLogin" })
-public class DoLoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/doRegisterCustomer" })
+public class DoRegisterCustomerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public DoLoginServlet() {
+    public DoRegisterCustomerServlet() {
         super();
     }
  
@@ -30,25 +30,44 @@ public class DoLoginServlet extends HttpServlet {
  
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        String firstName = request.getParameter("first_name");        
+        String lastName = request.getParameter("last_name");
+        String address = request.getParameter("address");
+        String city = request.getParameter("city");
+        String state = request.getParameter("state");
+        String zipcode = request.getParameter("zipcode");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
         
         System.out.println("Username is: " + userName);
         System.out.println("Password is: " + password);
+        System.out.println("FirstName is: " + firstName);
+        System.out.println("LastName is: " + lastName);
+        System.out.println("Address is: " + address);
+        System.out.println("City is: " + city);
+        System.out.println("State is: " + state);
+        System.out.println("Zipcode is: " + zipcode);
+        System.out.println("Phone is: " + phone);
+        System.out.println("Email is: " + email);
          
-        UserAccount user = null;
+        CustomerAccount customer = null;
         boolean hasError = false;
         String errorString = null;
  
-        if (userName == null || password == null
-                 || userName.length() == 0 || password.length() == 0) {
+        if (userName == null || password == null || firstName == null || lastName == null || address == null || city == null
+        		|| state == null || zipcode == null || phone == null || email == null
+                 || userName.length() == 0 || password.length() == 0 || firstName.length() == 0 || lastName.length() == 0 || address.length() == 0 
+                 || city.length() == 0 || state.length() == 0 || zipcode.length() == 0 || phone.length() == 0 || email.length() == 0 ) {
             hasError = true;
-            errorString = "Required username and password!";
+            errorString = "Required information missing!";
         } else {
+        	/*
             Connection conn = MyUtils.getStoredConnection(request);
             try {
             	System.out.println("Trying connection in DoLogin!");
-                user = DBUtils.findUser(conn, userName, password);
+                customer = DBUtils.findUser(conn, userName, password);
                  
-                if (user == null) {
+                if (customer == null) {
                     hasError = true;
                     errorString = "User Name or password invalid";
                 }
@@ -57,24 +76,26 @@ public class DoLoginServlet extends HttpServlet {
                 hasError = true;
                 errorString = e.getMessage();
             }
+            */
         }
         
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
-        	System.out.println("Error occured during login!");
-            user = new UserAccount();
-            user.setUsername(userName);
-            user.setPassword(password);
+        	System.out.println("Error occured during registration!");
+            customer = new CustomerAccount();
+            customer.setUsername(userName);
+            customer.setPassword(password);
+            
              
         
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
-            request.setAttribute("user", user);
+            request.setAttribute("customer", customer);
  
        
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-            = this.getServletContext().getRequestDispatcher("/login");
+            = this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp");
  
             dispatcher.forward(request, response);
         }
@@ -83,8 +104,9 @@ public class DoLoginServlet extends HttpServlet {
         // Store user information in Session
         // And redirect to userInfo page.
         else {
+        	/*
             HttpSession session = request.getSession();
-            MyUtils.storeLoginedUser(session, user);
+            //MyUtils.storeLoginedUser(session, user);
              /*
              // If user checked "Remember me".
             if(remember)  {
@@ -95,9 +117,9 @@ public class DoLoginServlet extends HttpServlet {
             else  {
                 MyUtils.deleteUserCookie(response);
             }                       
-            */
+            
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            response.sendRedirect(request.getContextPath() + "/userInfo");*/
         }
     }
  

@@ -4,8 +4,8 @@ public class UserAccount
 {
 	private String fname;
 	private String lname;
-	private String usrname;
-	private String pwd;
+	private String username;
+	private String password;
 	private String address;
 	private String city;
 	private String state;
@@ -19,14 +19,14 @@ public class UserAccount
 	}
 	
 	public UserAccount(int id, String fname, String lname, String usrname,
-						String pwd, String address, String city,
+						String password, String address, String city,
 						String state, String zip, String phone)
 	{
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
-		this.usrname = usrname;
-		this.pwd = pwd;
+		this.username = usrname;
+		this.password = password;
 		this.address = address;
 		this.city = city;
 		this.state = state;
@@ -46,17 +46,17 @@ public class UserAccount
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getUsrname() {
-		return usrname;
+	public String getUsername() {
+		return username;
 	}
-	public void setUsrname(String usrname) {
-		this.usrname = usrname;
+	public void setUsername(String usrname) {
+		this.username = usrname;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getPassword() {
+		return password;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getAddress() {
 		return address;

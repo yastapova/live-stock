@@ -15,7 +15,7 @@ public class DBUtils {
 	private static final int MANAGER = 3;
 
 	public static UserAccount findUser(Connection conn, String userName, String password) throws SQLException {
-
+		System.out.println("Loooking for user: " + userName);
 		String sql = "SELECT L.Usr, L.Pwd, L.AccType, L.Id FROM Login L "
 				+ " WHERE L.Usr = ? AND L.Pwd = ?";
 
@@ -100,7 +100,30 @@ public class DBUtils {
 		}
 		return null;
 	}
+	/** TO DO
+	public static void insertCustomer(Connection conn, CustomerAccount customer) throws SQLException {
+		String sql = "Insert into Customer(Code, Name,Price) values (?,?,?)";
 
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		pstm.setString(1, product.getCode());
+		pstm.setString(2, product.getName());
+		pstm.setFloat(3, product.getPrice());
+
+		pstm.executeUpdate();
+	}
+	*/
+	/*
+	public static void deleteProduct(Connection conn, String code) throws SQLException {
+		String sql = "Delete Product where Code= ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		pstm.setString(1, code);
+
+		pstm.executeUpdate();
+	}
+*/
 /*
 	public static List<Product> queryProduct(Connection conn) throws SQLException {
 		String sql = "Select a.Code, a.Name, a.Price from Product a ";
