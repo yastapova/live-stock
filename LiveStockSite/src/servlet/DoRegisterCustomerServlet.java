@@ -64,10 +64,19 @@ public class DoRegisterCustomerServlet extends HttpServlet {
         	// TO DO
         	customer = new CustomerAccount();
         	customer.setUsername(userName);
+        	customer.setFname(firstName);
+        	customer.setLname(lastName);
+        	customer.setAddress(address);
+        	customer.setCity(city);
+        	customer.setState(state);
+        	customer.setZip(zipcode);
+        	customer.setPhone(phone);
+        	customer.setEmail(email);
+        	customer.setRating(0);
         	/*
             Connection conn = MyUtils.getStoredConnection(request);
             try {
-            	System.out.println("Trying connection in DoLogin!");
+            	System.out.println("Trying connection in DoRegisterCustomer!");
                 customer = DBUtils.findUser(conn, userName, password);
                  
                 if (customer == null) {

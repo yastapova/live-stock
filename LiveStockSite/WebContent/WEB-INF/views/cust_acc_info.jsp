@@ -20,42 +20,42 @@
 			</tr>
 			<tr>
 				<td><span class="formlabel">First Name</span></td>
-				<td><span class="accinfo">Danaerys</span></td>
+				<td><span class="accinfo">${user.fname}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">Last Name</span></td>
-				<td><span class="accinfo">Targararara</span></td>
+				<td><span class="accinfo">${user.lname}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">Address</span></td>
-				<td><span class="accinfo">123 Fara Way</span></td>
+				<td><span class="accinfo">${user.address}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">City</span></td>
-				<td><span class="accinfo">Something</span></td>
+				<td><span class="accinfo">${user.city}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">State</span></td>
-				<td><span class="accinfo">WE</span></td>
+				<td><span class="accinfo">${user.state}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">ZipCode</span></td>
-				<td><span class="accinfo">11111</span></td>
+				<td><span class="accinfo">${user.zip}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">Telephone</span></td>
-				<td><span class="accinfo">(123)123-1234</span></td>
+				<td><span class="accinfo">${user.phone}</span></td>
 				
 			</tr>
 			<tr>
 				<td><span class="formlabel">Email</span></td>
-				<td><span class="accinfo">mother_of_dragons@queen.gov</span></td>
+				<td><span class="accinfo">${user.email}</span></td>
 				
 			</tr>
 			<!--

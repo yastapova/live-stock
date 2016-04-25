@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.UserAccount;
 import utils.DBUtils;
 import utils.MyUtils;
@@ -19,6 +21,9 @@ import utils.MyUtils;
 @WebServlet(urlPatterns = { "/doLogin" })
 public class DoLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
+    private static final String MANAGER = "Manager";
+    private static final String CUSREP = "CusRep";
  
     public DoLoginServlet() {
         super();
@@ -30,13 +35,9 @@ public class DoLoginServlet extends HttpServlet {
  
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        String position = request.getParameter("position");
-        boolean customer = "customer".equals(position);
-        boolean manager = "manager".equals(position);
         
         System.out.println("Username is: " + userName);
         System.out.println("Password is: " + password);
-        System.out.printf("Position manager is %d customer rep is %d", manager, customer);
          
         UserAccount user = null;
         boolean hasError = false;
@@ -89,14 +90,24 @@ public class DoLoginServlet extends HttpServlet {
         else {
         	HttpSession session = request.getSession();
             MyUtils.storeLoginedUser(session, user);
-        	if(customer){
+            System.out.println("Class: " + user.getClass());
+        	if(user instanceof CustomerAccount){
         		// Redirect to userInfo page.
                 response.sendRedirect(request.getContextPath() + "/customerAccInfo");
         	}
-        	if(manager){
-        		// Redirect to userInfo page.
-                response.sendRedirect(request.getContextPath() + "/managerAccInfo");
+        	else
+        	{
+        		if(MANAGER.equals(((EmployeeAccount) user).getPos()))
+        		{
+	        		// Redirect to userInfo page.
+	                response.sendRedirect(request.getContextPath() + "/managerAccInfo");
+        		}
+        		else
+        		{
+        			response.sendRedirect(request.getContextPath() + "/repAccInfo");
+        		}
         	}
+        	System.out.println("Something weird in redirect");
              /*
              // If user checked "Remember me".
             if(remember)  {
@@ -109,7 +120,7 @@ public class DoLoginServlet extends HttpServlet {
             }                       
             */
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/customerRepAccInfo");
+            //response.sendRedirect(request.getContextPath() + "/customerRepAccInfo");
         }
     }
  
