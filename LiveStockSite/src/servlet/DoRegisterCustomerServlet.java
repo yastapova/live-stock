@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
  
 import javax.servlet.RequestDispatcher;
@@ -73,22 +75,71 @@ public class DoRegisterCustomerServlet extends HttpServlet {
         	customer.setPhone(phone);
         	customer.setEmail(email);
         	customer.setRating(0);
-        	/*
+        	
             Connection conn = MyUtils.getStoredConnection(request);
             try {
             	System.out.println("Trying connection in DoRegisterCustomer!");
-                customer = DBUtils.findUser(conn, userName, password);
-                 
-                if (customer == null) {
-                    hasError = true;
-                    errorString = "User Name or password invalid";
-                }
+                
+            	String sql1 = "INSERT INTO Customer(LastName, FirstName, Address, City, State, "
+            				+ "ZipCode, Telephone, Email, Rating) "
+            				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            	PreparedStatement pstm1 = conn.prepareStatement(sql1);
+            	pstm1.setString(1, lastName);
+            	pstm1.setString(2, firstName);
+            	pstm1.setString(3, address);
+            	pstm1.setString(4, city);
+            	pstm1.setString(5, state);
+            	pstm1.setString(6, zipcode);
+            	pstm1.setString(7, phone);
+            	pstm1.setString(8, email);
+            	pstm1.setInt(9, 0);
+            	pstm1.executeUpdate();
+            	
+            	System.out.println("Inserted into Customer table");
+            	
+            	String sql2 = "SELECT C.CusId FROM Customer C "
+            			+ "WHERE C.LastName = ? AND C.FirstName = ? AND "
+						+ "C.Address = ? AND C.City = ? AND C.State = ? AND "
+						+ "C.ZipCode = ? AND C.Telephone = ? AND C.Email = ? AND "
+						+ "C.Rating = ?;";
+            	PreparedStatement pstm2 = conn.prepareStatement(sql2);
+            	pstm2.setString(1, lastName);
+            	pstm2.setString(2, firstName);
+            	pstm2.setString(3, address);
+            	pstm2.setString(4, city);
+            	pstm2.setString(5, state);
+            	pstm2.setString(6, zipcode);
+            	pstm2.setString(7, phone);
+            	pstm2.setString(8, email);
+            	pstm2.setInt(9, 0);
+            	ResultSet rs = pstm2.executeQuery();
+            	
+            	int id = -1;
+            	if(rs.next())
+            	{
+            		id = rs.getInt("CusId");
+            		customer.setId(id);
+            	}
+            	System.out.println("Updated id");
+            	
+            	String sql = "INSERT INTO Login(Usr, Pwd, AccType, Id)"
+        				+ " VALUES (?, ?, ?, ?);";
+
+        		PreparedStatement pstm = conn.prepareStatement(sql);
+        		pstm.setString(1, userName);
+        		pstm.setString(2, password);
+        		pstm.setInt(3, 1);
+        		pstm.setInt(4, id);
+        		pstm.executeUpdate();
+        		
+        		System.out.println("Inserted into Login table");
+        		
             } catch (SQLException e) {
                 e.printStackTrace();
                 hasError = true;
                 errorString = e.getMessage();
             }
-            */
+            
         }
         
         // If error, forward to /WEB-INF/views/login.jsp
