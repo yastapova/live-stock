@@ -4,6 +4,62 @@
 <meta charset="ISO-8859-1">
 	<title>LiveStock Trading - Register Employee</title>
 	<link rel="stylesheet" href="gen.css" />
+		   <script type="text/javascript">
+// <!CDATA[
+
+function register_onclick() {
+	console.log("register");
+	if(document.myForm.username.value == ""){
+	    alert("Username Can Not Be Null!");
+	    return;
+	}
+	if(document.myForm.password.value == ""){
+		alert("Password Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.first_name.value == ""){
+		alert("First name Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.last_name.value == ""){
+		alert("Last name Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.ssn.value == ""){
+		alert("SSN Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.address.value == ""){
+		alert("Address Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.city.value == ""){
+		alert("City Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.state.value == ""){
+		alert("State Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.zipcode.value == ""){
+		alert("ZipCode Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.phone.value == ""){
+		alert("Phone Can Not Be Null!");
+		return;
+	}
+	console.log("register end");
+	javascript:myForm.submit();
+}
+
+function cancel_onclick() {
+	console.log("cancel!");
+	window.open("home", "_self");
+}
+
+// ]]>
+</script>
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
@@ -54,12 +110,13 @@
 				</tr>
 				<tr>
 					<td><span class="formlabel">Position:</span></td>
-					<td><input id="pos_man" name="position" type="radio" value="manager"/><span class="formlabel">Manager</span><br />
-					<input id="pos_rep" name="position" type="radio" value="cust_rep"/><span class="formlabel">Customer Rep</span></td>
+					<td><input id="pos_man" name="position" type="radio" value="manager" group="position"/><span class="formlabel">Manager</span><br />
+					<input id="pos_rep" name="position" type="radio" value="cust_rep" checked="checked" group="position" /><span class="formlabel">Customer Rep</span></td>
 				</tr>
 			</table>
-			<input type="submit" value="Register" class = "btn-main">
 		</form>
+		<button value="Register" class="btn-main" id="register" onclick="return register_onclick()">Register</button>
+		<button class="btn-main" onclick="return cancel_onclick()">Cancel</button>
 	</div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>

@@ -49,7 +49,7 @@ function register_onclick() {
 		alert("Email Can Not Be Null!");
 		return;
 	}
-	console.log("login end");
+	console.log("register end");
 	javascript:myForm.submit();
 }
 
