@@ -3,7 +3,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Orders</title>
-	<link rel="stylesheet" href="gen.css" />
+	<link rel="stylesheet" href="../gen.css" />
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>

@@ -6,6 +6,7 @@ body {
 }
 a {
 	font-size: 10pt;
+	text-decoration: none;
 }
 .body a:link {
 	color: #D6C9E2;

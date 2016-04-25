@@ -2,15 +2,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-	<title>LiveStock Trading - Register</title>
+	<title>LiveStock Trading - Register Employee</title>
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	
 	<div class="body" align="center">
-		<h2>Register</h2>
-		<form>
+		<h2>Employee - Register</h2>
+		<form id="myForm" name="myForm" action="doRegisterEmployee" method="post">
 			<table>
 				<tr>
 					<td><span class="formlabel">Username:</span></td>

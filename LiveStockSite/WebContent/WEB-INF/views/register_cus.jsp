@@ -2,15 +2,72 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-	<title>LiveStock Trading - Register</title>
+	<title>LiveStock Trading - Register Customer</title>
 	<link rel="stylesheet" href="gen.css" />
+	   <script type="text/javascript">
+// <!CDATA[
+
+function register_onclick() {
+	console.log("register");
+	if(document.myForm.username.value == ""){
+	    alert("Username Can Not Be Null!");
+	    return;
+	}
+	if(document.myForm.password.value == ""){
+		alert("Password Can Not Be Null!");
+		return;
+	}
+	if(documentFi.myForm.first_name.value == ""){
+		alert("First name Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.last_name.value == ""){
+		alert("Last name Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.address.value == ""){
+		alert("Address Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.city.value == ""){
+		alert("City Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.state.value == ""){
+		alert("State Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.zipcode.value == ""){
+		alert("ZipCode Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.phone.value == ""){
+		alert("Phone Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.email.value == ""){
+		alert("Email Can Not Be Null!");
+		return;
+	}
+	console.log("login end");
+	javascript:myForm.submit();
+}
+
+function cancel_onclick() {
+	console.log("cancel!");
+	window.open("home", "_self");
+}
+
+// ]]>
+</script>
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	
 	<div class="body" align="center">
-		<h2>Register</h2>
-		<form>
+		<h2>Customer - Register</h2>
+		<form id="myForm" name="myForm" action="doRegisterCustomer" method="post">
+			<table>
 			<table>
 				<tr>
 					<td><span class="formlabel">Username:</span></td>
@@ -53,8 +110,9 @@
 					<td><input class="forminput" id="email" name="email" type="text" /></td>
 				</tr>
 			</table>
-			<input type="submit" value="Register" class = "btn-main"/>
 		</form>
+		<button value="register" class="btn-main" id="register" onclick="return register_onclick()">Register</button>
+		<button class="btn-main" onclick="return cancel_onclick()">Cancel</button>
 	</div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>
