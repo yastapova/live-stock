@@ -38,7 +38,8 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
         String state = request.getParameter("state");
         String zipcode = request.getParameter("zipcode");
         String phone = request.getParameter("phone");
-        //String email = request.getParameter("position");
+        String positionStr = request.getParameter("position");
+        boolean position = "manager".equals(positionStr);
         
         System.out.println("Username is: " + userName);
         System.out.println("Password is: " + password);
@@ -50,12 +51,12 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
         System.out.println("State is: " + state);
         System.out.println("Zipcode is: " + zipcode);
         System.out.println("Phone is: " + phone);
-        //System.out.println("Position is: " + position);
+        System.out.println("Position is: " + position + " KEY: false = cust_rep / true = manager");
          
         EmployeeAccount employee = null;
         boolean hasError = false;
         String errorString = null;
-        // update this
+
         if (userName == null || password == null || firstName == null || lastName == null || address == null || city == null
         		|| ssn == null || state == null || zipcode == null || phone == null || userName.length() == 0 || password.length() == 0 || firstName.length() == 0 || lastName.length() == 0 || address.length() == 0 
                  || city.length() == 0 || state.length() == 0 || zipcode.length() == 0 || phone.length() == 0 || ssn.length() == 0 ) {
