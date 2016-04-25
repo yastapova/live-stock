@@ -56,6 +56,12 @@ function register_employee_onclick() {
 					<td><span class="formlabel">Password:</span></td>
 					<td><input class="forminput" id="pw" name="password" type="password" value="${user.password}"/></td>
 				</tr>
+				<tr>
+					<td><span class="formlabel">I am a:</span></td>
+					<td><input id="pos_man" name="position" type="radio" value="customer" group="position" checked="checked"/><span class="formlabel">Customer</span><br />
+					<input id="pos_rep" name="position" type="radio" value="customer_rep" group="position" /><span class="formlabel">Customer Representative</span>
+					<input id="pos_man" name="position" type="radio" value="manager" group="position"/><span class="formlabel">Manager</span><br /></td>
+				</tr>
 			</table>
 			<button value="Login" class="btn-main" id="login" onclick="return login_onclick()">Login</button>
 			<button class="btn-main" onclick="return cancel_onclick()">Cancel</button>

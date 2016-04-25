@@ -61,6 +61,9 @@ public class DoRegisterCustomerServlet extends HttpServlet {
             hasError = true;
             errorString = "Required information missing!";
         } else {
+        	// TO DO
+        	customer = new CustomerAccount();
+        	customer.setUsername(userName);
         	/*
             Connection conn = MyUtils.getStoredConnection(request);
             try {
@@ -104,9 +107,9 @@ public class DoRegisterCustomerServlet extends HttpServlet {
         // Store user information in Session
         // And redirect to userInfo page.
         else {
-        	/*
+        	System.out.println("Trying to get session for customer!");
             HttpSession session = request.getSession();
-            //MyUtils.storeLoginedUser(session, user);
+            MyUtils.storeLoginedUser(session, customer);
              /*
              // If user checked "Remember me".
             if(remember)  {
@@ -117,9 +120,9 @@ public class DoRegisterCustomerServlet extends HttpServlet {
             else  {
                 MyUtils.deleteUserCookie(response);
             }                       
-            
+            */
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/userInfo");*/
+            response.sendRedirect(request.getContextPath() + "/customerAccInfo");
         }
     }
  

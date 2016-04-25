@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import general.CustomerAccount;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/userInfo" })
-public class UserInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/customerAccInfo" })
+public class CustomerAccInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public UserInfoServlet() {
+    public CustomerAccInfoServlet() {
         super();
     }
  
@@ -28,8 +29,8 @@ public class UserInfoServlet extends HttpServlet {
  
  
         // Check User has logged on
-        UserAccount loginedUser = MyUtils.getLoginedUser(session);
- 
+        CustomerAccount loginedUser = (CustomerAccount)(MyUtils.getLoginedCustomer(session));
+        System.out.println("Logged in user is " + loginedUser);
   
         // Not logged in
         if (loginedUser == null) {
@@ -44,7 +45,7 @@ public class UserInfoServlet extends HttpServlet {
  
   
         // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_acc_info.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
         dispatcher.forward(request, response);
  
     }

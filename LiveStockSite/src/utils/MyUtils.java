@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.UserAccount;
  
 public class MyUtils {
@@ -28,15 +30,19 @@ public class MyUtils {
    
    // Store user info in Session.
    public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
- 
        // On the JSP can access ${loginedUser}
        session.setAttribute("loginedUser", loginedUser);
    }
  
  
    // Get the user information stored in the session.
-   public static UserAccount getLoginedUser(HttpSession session) {
-       UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
+   public static CustomerAccount getLoginedCustomer(HttpSession session) {
+       CustomerAccount loginedUser = (CustomerAccount)session.getAttribute("loginedUser");
+       return loginedUser;
+   }
+// Get the user information stored in the session.
+   public static EmployeeAccount getLoginedEmployee(HttpSession session) {
+       EmployeeAccount loginedUser = (EmployeeAccount)session.getAttribute("loginedUser");
        return loginedUser;
    }
  

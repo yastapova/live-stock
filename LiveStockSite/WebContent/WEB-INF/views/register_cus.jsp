@@ -17,7 +17,7 @@ function register_onclick() {
 		alert("Password Can Not Be Null!");
 		return;
 	}
-	if(documentFi.myForm.first_name.value == ""){
+	if(document.myForm.first_name.value == ""){
 		alert("First name Can Not Be Null!");
 		return;
 	}

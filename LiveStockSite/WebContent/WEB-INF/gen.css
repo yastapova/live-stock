@@ -125,3 +125,10 @@ a {
 	padding: 20px;
 	margin-bottom: 10px;
 }
+
+.accinfo{
+	color: white;
+    font-size: 20px;
+    font-family: 'Calibri', sans-serif;
+    padding: 20px;
+}

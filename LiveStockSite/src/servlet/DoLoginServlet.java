@@ -30,9 +30,13 @@ public class DoLoginServlet extends HttpServlet {
  
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        String position = request.getParameter("position");
+        boolean customer = "customer".equals(position);
+        boolean manager = "manager".equals(position);
         
         System.out.println("Username is: " + userName);
         System.out.println("Password is: " + password);
+        System.out.printf("Position manager is %d customer rep is %d", manager, customer);
          
         UserAccount user = null;
         boolean hasError = false;
@@ -83,8 +87,16 @@ public class DoLoginServlet extends HttpServlet {
         // Store user information in Session
         // And redirect to userInfo page.
         else {
-            HttpSession session = request.getSession();
+        	HttpSession session = request.getSession();
             MyUtils.storeLoginedUser(session, user);
+        	if(customer){
+        		// Redirect to userInfo page.
+                response.sendRedirect(request.getContextPath() + "/customerAccInfo");
+        	}
+        	if(manager){
+        		// Redirect to userInfo page.
+                response.sendRedirect(request.getContextPath() + "/managerAccInfo");
+        	}
              /*
              // If user checked "Remember me".
             if(remember)  {
@@ -97,7 +109,7 @@ public class DoLoginServlet extends HttpServlet {
             }                       
             */
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            response.sendRedirect(request.getContextPath() + "/customerRepAccInfo");
         }
     }
  
