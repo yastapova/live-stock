@@ -95,4 +95,9 @@ public class UserAccount
 		this.id = id;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return username + ": " + fname + " " + lname;
+	}
 }

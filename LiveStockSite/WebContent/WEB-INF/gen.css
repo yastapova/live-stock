@@ -20,6 +20,9 @@ a {
 .formlabel {
 	font-size: 12pt;
 }
+.formhint {
+	font-size: 10pt;
+}
 .forminput{
 	width: 175px;
 }

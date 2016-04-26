@@ -49,6 +49,19 @@ function register_onclick() {
 		alert("Phone Can Not Be Null!");
 		return;
 	}
+	if(document.myForm.hourly.value == ""){
+		alert("Hourly Rate Can Not Be Null!");
+		return;
+	}
+	if(document.myForm.start.value == ""){
+		alert("Start Date Can Not Be Null!");
+		return;
+	}
+	if(!(+document.myForm.hourly.value === parseInt(document.myForm.hourly.value, 10))){
+		alert("Hourly Rate Must Be Integer!");
+		return;
+	}
+	// TODO: check date format is yyyy-mm-dd
 	console.log("register end");
 	javascript:myForm.submit();
 }
@@ -109,9 +122,18 @@ function cancel_onclick() {
 					<td><input class="forminput" id="phone" name="phone" type="text" /></td>
 				</tr>
 				<tr>
+					<td><span class="formlabel">Start Date:</span><br />
+						<span class="formhint">yyyy-mm-dd</span></td>
+					<td><input class="forminput" id="start" name="start" type="text" /></td>
+				</tr>
+				<tr>
+					<td><span class="formlabel">Hourly Rate:</span></td>
+					<td><input class="forminput" id="hourly" name="hourly" type="text" /></td>
+				</tr>
+				<tr>
 					<td><span class="formlabel">Position:</span></td>
-					<td><input id="pos_man" name="position" type="radio" value="manager" group="position"/><span class="formlabel">Manager</span><br />
-					<input id="pos_rep" name="position" type="radio" value="cust_rep" checked="checked" group="position" /><span class="formlabel">Customer Rep</span></td>
+					<td><input id="pos_man" name="position" type="radio" value="Manager" group="position"/><span class="formlabel">Manager</span><br />
+					<input id="pos_rep" name="position" type="radio" value="CusRep" checked="checked" group="position" /><span class="formlabel">Customer Rep</span></td>
 				</tr>
 			</table>
 		</form>

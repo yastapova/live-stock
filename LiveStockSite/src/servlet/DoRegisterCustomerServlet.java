@@ -63,7 +63,6 @@ public class DoRegisterCustomerServlet extends HttpServlet {
             hasError = true;
             errorString = "Required information missing!";
         } else {
-        	// TO DO
         	customer = new CustomerAccount();
         	customer.setUsername(userName);
         	customer.setFname(firstName);

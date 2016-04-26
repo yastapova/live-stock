@@ -76,6 +76,8 @@ public class DBUtils {
 				{
 					UserAccount user = new EmployeeAccount();
 
+					user.setUsername(usr);
+					user.setPassword(pwd);
 					((EmployeeAccount)user).setSsn(rs2.getString("SSN"));
 					user.setLname(rs2.getString("LastName"));
 					user.setFname(rs2.getString("FirstName"));
