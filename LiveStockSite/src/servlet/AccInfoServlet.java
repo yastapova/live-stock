@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.UserAccount;
 import utils.MyUtils;
-
-@WebServlet(urlPatterns = { "/help" })
-public class CustomerHelpServlet extends HttpServlet
-{
-	private static final long serialVersionUID = 1L;
-	
-	public CustomerHelpServlet()
-	{
-		super();
-	}
-
-	@Override
+ 
+@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo" })
+public class AccInfoServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+ 
+    public AccInfoServlet() {
+        super();
+    }
+ 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -48,13 +47,21 @@ public class CustomerHelpServlet extends HttpServlet
         if(loginedUser instanceof CustomerAccount)
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_help.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
 	        dispatcher.forward(request, response);
         }
         else
         {
-        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_help.jsp");
-	        dispatcher.forward(request, response);
+        	if(((EmployeeAccount)loginedUser).isManager())
+        	{
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_acc_info.jsp");
+    	        dispatcher.forward(request, response);
+        	}
+        	else
+        	{
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_acc_info.jsp");
+    	        dispatcher.forward(request, response);
+        	}
         }
  
     }
@@ -64,4 +71,5 @@ public class CustomerHelpServlet extends HttpServlet
             throws ServletException, IOException {
         doGet(request, response);
     }
+ 
 }
