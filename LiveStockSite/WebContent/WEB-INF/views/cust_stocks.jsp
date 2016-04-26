@@ -9,24 +9,31 @@
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_cust_menu.jsp"></jsp:include>
 	<div class="body" align="center">
-		<h2>Login</h2>
-		<a href="register_cus.html" class="btn-default">Register: Customer</a>
-		<a href="register_emp.html"class="btn-default">Register: Employee</a>
-		<form>
-			<table>
-				<tr>
-					<td><span class="formlabel">Username:</span></td>
-					<td><input class="forminput" id="usrn" name="username" type="text" /></td>
-				</tr>
-				<tr>
-					<td><span class="formlabel">Password:</span></td>
-					<td><input class="forminput" id="pw" name="password" type="password" /></td>
-				</tr>
-			</table>
-			<input type="submit" value="Login" class = "btn-main">
-		</form>
+		<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+	    	<tr>
+            	<td style="vertical-align: top; width: 10000px; text-align: center; height: 500px;">
+                    <span style="font-size: 10pt">Current Stock Listings</span></td>
+				<table border="4" id="STOCK" onclick="return STOCK_onclick()">
+                    <tr>
+                      <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
+                      <th style="width: 100px"><span style="font-size: 10pt">Stock Name</span></th>
+                      <th style="width: 100px"><span style="font-size: 10pt">Stock Type</span></th>
+                      <th style="width: 50px"><span style="font-size: 10pt">Share Price</span></th>
+                      <th style="width: 50px"><span style="font-size: 10pt">Number of Available Shares</span></th>
+                    </tr>
+	 				<c:forEach items="${list}" var="stock">
+	        			<tr>
+	                      <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
+	                      <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
+	                      <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
+	                      <td style="width: 50px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
+	                      <td style="width: 50px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
+	                    </tr>
+	    			</c:forEach>
+	    		</table> 
+	    	</tr>
+	    </table>
 	</div>
-	
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>
