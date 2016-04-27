@@ -69,7 +69,7 @@ public class StockServlet extends HttpServlet {
 		}
 			
         request.setAttribute("stocks", list);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         
     }

@@ -47,14 +47,14 @@ public class AccInfoServlet extends HttpServlet {
         if(loginedUser instanceof CustomerAccount)
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_acc_info.jsp");
 	        dispatcher.forward(request, response);
         }
         else
         {
         	if(((EmployeeAccount)loginedUser).isManager())
         	{
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_acc_info.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_acc_info.jsp");
     	        dispatcher.forward(request, response);
         	}
         	else

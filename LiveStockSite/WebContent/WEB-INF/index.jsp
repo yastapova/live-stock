@@ -63,7 +63,7 @@ function register_employee_onclick() {
 		</div>
 	</div>
 	
-	<jsp:include page="WEB-INF/views/_footer.jsp"></jsp:include>
-	<!-- SOMETIMES THIS IS NEEDED <jsp:include page="WEB-INF/views/_footer.jsp"></jsp:include>-->
+	<!-- SOMETIMES THIS IS NEEDED or the bottom one is needed <jsp:include page="/views/_footer.jsp"></jsp:include> -->
+	<jsp:include page="/views/_footer.jsp"></jsp:include>
 </body>
 </html>

@@ -6,6 +6,29 @@
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Stocks</title>
 	<link rel="stylesheet" href="gen.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+
+// <!CDATA[
+$(document).ready(function(){
+	console.log("stocks!");
+	var link = document.getElementById("stocks");
+	$("#stocks").addClass('active');
+});
+
+function cancel_onclick() {
+	console.log("cancel!");
+	window.open("home", "_self");
+}
+function stock_onclick(){
+	console.log("stock!");
+	window.open("stocks", "_self");
+}
+
+// ]]>
+</script>
+
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>

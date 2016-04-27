@@ -24,7 +24,7 @@ public class RegisterEmployeeServlet extends HttpServlet{
          
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access directly into JSP pages placed in WEB-INF)        
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/register_emp.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/register_emp.jsp");
          
         dispatcher.forward(request, response);
          
