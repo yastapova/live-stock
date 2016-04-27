@@ -78,10 +78,7 @@ public class DoRegisterCustomerServlet extends HttpServlet {
             Connection conn = MyUtils.getStoredConnection(request);
             try {
             	System.out.println("Trying connection in DoRegisterCustomer!");
-                
-            	String sql1 = "INSERT INTO Customer(LastName, FirstName, Address, City, State, "
-            				+ "ZipCode, Telephone, Email, Rating) "
-            				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            	String sql1 = "CALL addCustomer(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             	PreparedStatement pstm1 = conn.prepareStatement(sql1);
             	pstm1.setString(1, lastName);
             	pstm1.setString(2, firstName);

@@ -36,9 +36,7 @@ public class MailingListServlet extends HttpServlet
         try {
             java.sql.Statement stmt = conn.createStatement();
             java.sql.ResultSet rs;
-            rs = stmt.executeQuery("SELECT C.FirstName, C.LastName, "
-            					 + "C.Address, C.City, C.State, C.ZipCode, "
-            					 + "C.Email FROM Customer C");
+            rs = stmt.executeQuery("CALL createCustomerMailingList()");
             
             while (rs.next())
             {

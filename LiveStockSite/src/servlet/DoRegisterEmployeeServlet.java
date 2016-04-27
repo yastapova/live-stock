@@ -89,11 +89,7 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
             try
             {
             	System.out.println("Trying connection in DoRegisterEmployee!");
-                
-            	String sql1 = "INSERT INTO Employee (SSN, LastName, FirstName, Address, "
-            				+ " City, State, ZipCode, Telephone, StartDate, HourlyRate, "
-            				+ " Position_) "
-            				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            	String sql1 = "CALL addEmployee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             	PreparedStatement pstm1 = conn.prepareStatement(sql1);
             	pstm1.setString(1, ssn);
             	pstm1.setString(2, lastName);
