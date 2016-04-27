@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,23 +16,27 @@
         	<tr>
 				<th width="100px"><span style="font-size: 10pt">Time</span></th>
         		<th width="80px"><span style="font-size: 10pt">Order Type</span></th>
+        		<th width="80px"><span style="font-size: 10pt">Account</span></th>
 				<th width="80px"><span style="font-size: 10pt">Stock</span></th>
-				<th width="200px"><span style="font-size: 10pt"># of Shares</span></th>
-				<th width="25px"><span style="font-size: 10pt">Price Type</span></th>
-				<th width="50px"><span style="font-size: 10pt">Stop Price</span></th>
-				<th width="200px"><span style="font-size: 10pt">Recorded</span></th>
-				<th width="200px"><span style="font-size: 10pt">Completed</span></th>
+				<th width="100px"><span style="font-size: 10pt">NumShares</span></th>
+				<th width="80px"><span style="font-size: 10pt">Price Type</span></th>
+				<th width="80px"><span style="font-size: 10pt">Stop Price</span></th>
+				<th width="80px"><span style="font-size: 10pt">Recorded</span></th>
+				<th width="80px"><span style="font-size: 10pt">Completed</span></th>
             </tr>
-			<c:forEach var="order" items="${list}">
+			<c:forEach var="order" items="${orders}">
 				<tr>
 					<td><span style="font-size: 10pt"><c:out value="${order.timestamp}" /></span></td>
 					<td><span style="font-size: 10pt"><c:out value="${order.orderType}" /></span></td>
+					<td><span style="font-size: 10pt"><c:out value="${order.cusAccNum}" /></span></td>
 					<td><span style="font-size: 10pt"><c:out value="${order.stockSymbol}" /></span></td>
 					<td><span style="font-size: 10pt"><c:out value="${order.numShares}" /></span></td>
 					<td><span style="font-size: 10pt"><c:out value="${order.priceType}" /></span></td>
 					<td><span style="font-size: 10pt">$<c:out value="${order.stopPrice}" /></span></td>
-					<td><span style="font-size: 10pt"><c:out value="${order.recorded}" /></span></td>
-					<td><span style="font-size: 10pt"><c:out value="${order.completed}" /></span></td>
+					<td><span style="font-size: 10pt"><c:if test="${order.recorded==true}">Yes</c:if>
+													  <c:if test="${order.recorded==false}">No</c:if></span></td>
+					<td><span style="font-size: 10pt"><c:if test="${order.completed==true}">Yes</c:if>
+													  <c:if test="${order.completed==false}">No</c:if></span></td>
 				</tr>
 			</c:forEach>
 		</table>
