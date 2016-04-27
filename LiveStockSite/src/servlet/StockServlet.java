@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import general.Stock;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/stock" })
+@WebServlet(urlPatterns = { "/stocks" })
 public class StockServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -68,7 +68,7 @@ public class StockServlet extends HttpServlet {
 			} catch (Exception ee) {};*/
 		}
 			
-        request.setAttribute("stock", list);
+        request.setAttribute("stocks", list);
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         

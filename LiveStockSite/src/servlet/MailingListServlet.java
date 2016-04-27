@@ -47,6 +47,7 @@ public class MailingListServlet extends HttpServlet
             	customer.setLname(rs.getString("LastName"));
             	customer.setAddress(rs.getString("Address"));
             	customer.setCity(rs.getString("City"));
+            	customer.setState(rs.getString("State"));
             	customer.setZip(rs.getString("ZipCode"));
             	customer.setEmail(rs.getString("Email"));
                 list.add(customer);
