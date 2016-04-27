@@ -3,6 +3,18 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Help</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+
+	// <!CDATA[
+	$(document).ready(function(){
+		console.log("help!");	
+		$("#help").addClass('active');
+	});
+
+	// ]]>
+	</script>
 	<link rel="stylesheet" href="gen.css" />
 </head>
 <body>

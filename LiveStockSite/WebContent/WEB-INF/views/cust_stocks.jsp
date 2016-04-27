@@ -12,15 +12,10 @@
 
 // <!CDATA[
 $(document).ready(function(){
-	console.log("stocks!");
-	var link = document.getElementById("stocks");
+	console.log("stocks!");	
 	$("#stocks").addClass('active');
 });
 
-function cancel_onclick() {
-	console.log("cancel!");
-	window.open("home", "_self");
-}
 function stock_onclick(){
 	console.log("stock!");
 	window.open("stocks", "_self");

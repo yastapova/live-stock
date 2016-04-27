@@ -57,7 +57,8 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
         System.out.println("State is: " + state);
         System.out.println("Zipcode is: " + zipcode);
         System.out.println("Phone is: " + phone);
-        //System.out.println("Position is: " + position + " KEY: false = cust_rep / true = manager");
+        System.out.println("Hourly is: " + hourly);
+        System.out.println("Start is: " + start);
          
         EmployeeAccount employee = null;
         boolean hasError = false;

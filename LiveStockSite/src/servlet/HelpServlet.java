@@ -48,12 +48,12 @@ public class HelpServlet extends HttpServlet
         if(loginedUser instanceof CustomerAccount)
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_help.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_help.jsp");
 	        dispatcher.forward(request, response);
         }
         else
         {
-        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_help.jsp");
+        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_help.jsp");
 	        dispatcher.forward(request, response);
         }
  

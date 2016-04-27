@@ -6,8 +6,14 @@
     <meta charset="UTF-8">
     <title>LiveStockTrading Login</title>
     <link rel="stylesheet" href="gen.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+	</script>
     <script type="text/javascript">
 // <!CDATA[
+$(document).ready(function(){
+	console.log("stocks!");	
+	$("#stocks").addClass('active');
+});
 
 function login_onclick() {
 	console.log("login");

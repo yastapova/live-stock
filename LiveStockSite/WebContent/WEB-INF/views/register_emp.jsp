@@ -49,10 +49,6 @@ function register_onclick() {
 		alert("Phone Can Not Be Null!");
 		return;
 	}
-	if(document.myForm.hourly.value == ""){
-		alert("Hourly Rate Can Not Be Null!");
-		return;
-	}
 	if(document.myForm.start.value == ""){
 		alert("Start Date Can Not Be Null!");
 		return;

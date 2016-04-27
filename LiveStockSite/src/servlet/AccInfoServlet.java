@@ -59,7 +59,7 @@ public class AccInfoServlet extends HttpServlet {
         	}
         	else
         	{
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_acc_info.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_acc_info.jsp");
     	        dispatcher.forward(request, response);
         	}
         }

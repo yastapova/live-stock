@@ -138,6 +138,9 @@ public class DoRegisterCustomerServlet extends HttpServlet {
                 hasError = true;
                 errorString = e.getMessage();
             }
+            catch(Exception e){
+            	System.out.println(e.getMessage());
+            }
             
         }
         
