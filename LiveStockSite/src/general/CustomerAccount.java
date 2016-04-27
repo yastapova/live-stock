@@ -15,6 +15,7 @@ public class CustomerAccount extends UserAccount {
 	public CustomerAccount()
 	{
 		super();
+		this.setUserType("C");
 	}
 	
 	public CustomerAccount(String email, int rating)
@@ -22,6 +23,7 @@ public class CustomerAccount extends UserAccount {
 		super();
 		this.email = email;
 		this.rating = rating;
+		this.setUserType("C");
 	}
 	
 	/**
@@ -43,6 +45,7 @@ public class CustomerAccount extends UserAccount {
 		super(id, fname, lname, usrname, pwd, address, city, state, zip, phone);
 		this.email = email;
 		this.rating = rating;
+		this.setUserType("C");
 	}
 	
 	/**

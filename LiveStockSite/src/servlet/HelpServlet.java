@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.UserAccount;
 import utils.MyUtils;
 
@@ -53,8 +54,16 @@ public class HelpServlet extends HttpServlet
         }
         else
         {
-        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_help.jsp");
-	        dispatcher.forward(request, response);
+        	if(((EmployeeAccount)loginedUser).isManager())
+        	{
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_help.jsp");
+		        dispatcher.forward(request, response);
+        	}
+        	else
+        	{
+	        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_help.jsp");
+		        dispatcher.forward(request, response);
+        	}
         }
  
     }

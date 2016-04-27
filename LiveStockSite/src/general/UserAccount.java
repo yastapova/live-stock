@@ -12,6 +12,7 @@ public class UserAccount
 	private String zip;
 	private String phone;
 	private int id;
+	private String userType;
 	
 	public UserAccount()
 	{
@@ -32,6 +33,12 @@ public class UserAccount
 		this.state = state;
 		this.zip = zip;
 		this.phone = phone;
+		this.userType = "U";
+	}
+	
+	public void setUserType(String type)
+	{
+		this.userType = type;
 	}
 	
 	public String getFname() {

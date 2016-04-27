@@ -19,9 +19,10 @@ public class EmployeeAccount extends UserAccount {
 	/**
 	 * 
 	 */
-	public EmployeeAccount() {
-		// TODO Auto-generated constructor stub
+	public EmployeeAccount()
+	{
 		super();
+		setUserType("E");
 	}
 	
 	public EmployeeAccount(String ssn, String pos,
@@ -32,6 +33,14 @@ public class EmployeeAccount extends UserAccount {
 		this.pos = pos;
 		this.hourly = hourly;
 		this.start = start;
+		if("Manager".equals(this.pos))
+		{
+			setUserType("M");
+		}
+		else
+		{
+			setUserType("R");
+		}
 	}
 
 	/**
@@ -56,6 +65,14 @@ public class EmployeeAccount extends UserAccount {
 		this.pos = pos;
 		this.hourly = hourly;
 		this.start = start;
+		if("Manager".equals(this.pos))
+		{
+			setUserType("M");
+		}
+		else
+		{
+			setUserType("R");
+		}
 	}
 
 	/**
@@ -97,6 +114,14 @@ public class EmployeeAccount extends UserAccount {
 	 */
 	public void setPos(String pos) {
 		this.pos = pos;
+		if("Manager".equals(this.pos))
+		{
+			setUserType("M");
+		}
+		else
+		{
+			setUserType("R");
+		}
 	}
 	
 	/**
