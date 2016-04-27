@@ -12,7 +12,7 @@ public class UserAccount
 	private String zip;
 	private String phone;
 	private int id;
-	private String userType;
+	protected String userType;
 	
 	public UserAccount()
 	{
@@ -40,7 +40,10 @@ public class UserAccount
 	{
 		this.userType = type;
 	}
-	
+	public String getUserType()
+	{
+		return this.userType;
+	}
 	public String getFname() {
 		return fname;
 	}

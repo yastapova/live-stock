@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import general.Stock;
+import general.UserAccount;
 import utils.MyUtils;
  
 @WebServlet(urlPatterns = { "/stocks" })
@@ -29,6 +30,10 @@ public class StockServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
+        // Check User has logged on
+        UserAccount loginedUser = MyUtils.getLoginedUser(session);
+        System.out.println("Logged in user is " + loginedUser);
         
         List<Stock> list = new ArrayList<Stock>();
         Connection conn = MyUtils.getStoredConnection(request);
@@ -69,6 +74,7 @@ public class StockServlet extends HttpServlet {
 		}
 			
         request.setAttribute("stocks", list);
+        request.setAttribute("userType", loginedUser.getUserType());
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         

@@ -33,13 +33,13 @@ function stock_onclick(){
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<div id="include"></div>
-	<c:if test="${user.userType}=='C'">
+	<c:if test="${userType=='C'}">
 		<jsp:include page="_cust_menu.jsp"></jsp:include>
 	</c:if>
-	<c:if test="${user.userType}=='R'">
+	<c:if test="${userType=='R'}">
 		<jsp:include page="_rep_menu.jsp"></jsp:include>
 	</c:if>
-	<c:if test="${user.userType}=='M'">
+	<c:if test="${userType=='M'}">
 		<jsp:include page="_man_menu.jsp"></jsp:include>
 	</c:if>
 	<div class="body" align="center">
