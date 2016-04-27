@@ -22,7 +22,6 @@ function customer_mailing_list() {
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_rep_menu.jsp"></jsp:include>
 	<div class="body" align="center">
-		<br />
 		<button class="btn-default" onclick="return customer_mailing_list()">Mailing List</button>
 		<table border="4">
         	<tr>
@@ -46,7 +45,6 @@ function customer_mailing_list() {
 				</tr>
 			</c:forEach>
 		</table>
-		<br />
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>

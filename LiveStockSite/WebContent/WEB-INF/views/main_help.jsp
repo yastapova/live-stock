@@ -23,7 +23,7 @@
 		<h2>Help</h2>
 		<div></div>
 		<div>
-			<p>CUSTOMER REPRESENTATIVE</p>
+			<h3>CUSTOMER REPRESENTATIVE</h3>
 			<dl>
 				<dt>Account Info</dt>
 				<dd>View and update your account information.</dd>
@@ -40,7 +40,7 @@
 			</dl>
 		</div>
 		<div>
-			<p>CUSTOMER</p>
+			<h3>CUSTOMER</h3>
 			<dl>
 				<dt>Account Info</dt>
 				<dd>View and update your account information.</dd>

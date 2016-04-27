@@ -42,8 +42,8 @@ a {
 .body {
 	padding-left: 5px;
 	padding-right: 5px;
-	padding-bottom: 5px;
-	margin-top: 5px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 	margin-bottom: 5px;
 	background-color: #234467;
 	border-style: solid;
@@ -54,10 +54,14 @@ a {
 }
 .body dt {
 	font-style: oblique;
-	font-size: 15pt;
+	font-size: 12pt;
 }
 .body dd {
 	padding-bottom: 5px;
+}
+h3 {
+	font-variant: small-caps;
+	font-family: Georgia, serif;
 }
 .footer {
 	text-align: center;

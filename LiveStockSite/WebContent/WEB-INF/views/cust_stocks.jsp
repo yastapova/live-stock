@@ -43,9 +43,8 @@ function stock_onclick(){
 		<jsp:include page="_man_menu.jsp"></jsp:include>
 	</c:if>
 	<div class="body" align="center">
-		<br />
+		<h2>Current Stock Listings</h2>
 		<table border="4" id="stock" onclick="return stock_onclick()">
-			<caption style="font-size: 20pt">Current Stock Listings</caption>
 	        <tr>
 	          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
 	          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
@@ -62,8 +61,7 @@ function stock_onclick(){
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
 	        	</tr>
 			</c:forEach>
-  		</table> 
-  		<br />
+  		</table>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
