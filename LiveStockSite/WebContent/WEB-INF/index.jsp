@@ -10,10 +10,6 @@
 	</script>
     <script type="text/javascript">
 // <!CDATA[
-$(document).ready(function(){
-	console.log("stocks!");	
-	$("#stocks").addClass('active');
-});
 
 function login_onclick() {
 	console.log("login");

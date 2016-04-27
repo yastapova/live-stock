@@ -143,7 +143,11 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
         		PreparedStatement pstm = conn.prepareStatement(sql);
         		pstm.setString(1, userName);
         		pstm.setString(2, password);
-        		pstm.setInt(3, 1);
+        		if(positionStr.equals("CusRep")){
+        			pstm.setInt(3, 2);
+        		}else{
+        			pstm.setInt(3, 3);
+        		}
         		pstm.setInt(4, id);
         		pstm.executeUpdate();
         		

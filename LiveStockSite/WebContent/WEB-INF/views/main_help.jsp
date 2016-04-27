@@ -21,7 +21,26 @@
 	</div>
 	<div class="body" align="Left">
 		<h2>Help</h2>
-		<div></div>
+		<div>
+			<h3>Manager</h3>
+			<dt>Account Info</dt>
+			<dd>View and update your account information.</dd>
+			<dt>Stocks</dt>
+			<dd>Search for stocks and place orders.</dd>
+			<dt>Employees</dt>
+			<dd>View and manage your employees.</dd>
+			<dt>Finances</dt>
+			<dd>View and manage your employees.</dd>
+			<dt>Orders</dt>
+			<dd>View and sort orders based on stock symbols or by customer name.</dd>
+			<dt>Back Up</dt>
+			<dd>Back up the database.</dd>
+			<dt>Help</dt>
+			<dd>Read the help page of the Manager.</dd>
+			<dt>Logout</dt>
+			<dd>Logout of this account and end the session.</dd>
+		</dl>
+		</div>
 		<div>
 			<h3>CUSTOMER REPRESENTATIVE</h3>
 			<dl>
@@ -34,7 +53,7 @@
 				<dt>Stocks</dt>
 				<dd>Search for stocks and place orders.</dd>
 				<dt>Help</dt>
-				<dd>Read this help page.</dd>
+				<dd>Read the help page of the manager.</dd>
 				<dt>Logout</dt>
 				<dd>Logout of this account and end the session.</dd>
 			</dl>
@@ -51,7 +70,7 @@
 				<dt>Stocks</dt>
 				<dd>Search for stocks and place orders.</dd>
 				<dt>Help</dt>
-				<dd>Read this help page.</dd>
+				<dd>Read the help page of the Customer.</dd>
 				<dt>Logout</dt>
 				<dd>Logout of this account and end the session.</dd>
 			</dl>
