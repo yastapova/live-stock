@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,22 @@ public class StockServlet extends HttpServlet {
         List<Stock> list = new ArrayList<Stock>();
         Connection conn = MyUtils.getStoredConnection(request);
         try{
-            java.sql.Statement stmt = conn.createStatement();
+        	String sql1 = "SELECT * FROM Stock";
+            PreparedStatement pstm1 = conn.prepareStatement(sql1);
             java.sql.ResultSet rs;
-            rs = stmt.executeQuery("SELECT * FROM Stock");
+            rs = pstm1.executeQuery();
+            
+            /*System.out.println("Doing stock query");
+            String sql2 = "INSERT INTO STOCK VALUES(?,?,?,?,?)";
+            PreparedStatement pstm2 = conn.prepareStatement(sql2);
+            pstm2.setString(1, "Q");
+            pstm2.setString(2, "Quail");
+            pstm2.setString(3, "Bird");
+            pstm2.setFloat(4, (float) 50.0);
+            pstm2.setInt(5, 1000);
+            pstm2.executeUpdate();*/
+            
+            //rs = stmt.executeQuery("SELECT * FROM Stock");
             
             while (rs.next()) {
                 String sksym = rs.getString("StockSymbol");
@@ -44,16 +58,17 @@ public class StockServlet extends HttpServlet {
                 int numsh = rs.getInt("NumAvailShares");
                 Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
                 list.add(data);
+                System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
             }
         } catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		/*} finally {
 			try {
-				conn.close();
-			} catch (Exception ee) {};
+				//conn.close();
+			} catch (Exception ee) {};*/
 		}
-
-        session.setAttribute("list", list);
+			
+        request.setAttribute("stock", list);
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         
