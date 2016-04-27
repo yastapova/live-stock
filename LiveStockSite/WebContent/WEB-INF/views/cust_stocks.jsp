@@ -22,12 +22,26 @@ function stock_onclick(){
 }
 
 // ]]>
+
+/*if(true) {
+	document.getElementById('include').innerHTML = "CATS";
+}*/
+
 </script>
 
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
-	<jsp:include page="_cust_menu.jsp"></jsp:include>
+	<div id="include"></div>
+	<c:if test="${user.userType}=='C'">
+		<jsp:include page="_cust_menu.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${user.userType}=='R'">
+		<jsp:include page="_rep_menu.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${user.userType}=='M'">
+		<jsp:include page="_man_menu.jsp"></jsp:include>
+	</c:if>
 	<div class="body" align="center">
 		<br />
 		<table border="4" id="stock" onclick="return stock_onclick()">
