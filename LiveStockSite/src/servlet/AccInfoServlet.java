@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/customerAccInfo" })
-public class CustomerAccInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo" })
+public class AccInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public CustomerAccInfoServlet() {
+    public AccInfoServlet() {
         super();
     }
  
@@ -29,7 +30,7 @@ public class CustomerAccInfoServlet extends HttpServlet {
  
  
         // Check User has logged on
-        CustomerAccount loginedUser = (CustomerAccount)(MyUtils.getLoginedCustomer(session));
+        UserAccount loginedUser = MyUtils.getLoginedUser(session);
         System.out.println("Logged in user is " + loginedUser);
   
         // Not logged in
@@ -43,10 +44,25 @@ public class CustomerAccInfoServlet extends HttpServlet {
         // Store info in request attribute
         request.setAttribute("user", loginedUser);
  
-  
-        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
-        dispatcher.forward(request, response);
+        if(loginedUser instanceof CustomerAccount)
+        {
+	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
+	        dispatcher.forward(request, response);
+        }
+        else
+        {
+        	if(((EmployeeAccount)loginedUser).isManager())
+        	{
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_acc_info.jsp");
+    	        dispatcher.forward(request, response);
+        	}
+        	else
+        	{
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_acc_info.jsp");
+    	        dispatcher.forward(request, response);
+        	}
+        }
  
     }
  

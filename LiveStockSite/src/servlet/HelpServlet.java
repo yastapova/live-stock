@@ -10,27 +10,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import general.EmployeeAccount;
+import general.CustomerAccount;
+import general.UserAccount;
 import utils.MyUtils;
 
-@WebServlet(urlPatterns = { "/repAccInfo" })
-public class RepAccInfoServlet extends HttpServlet
+@WebServlet(urlPatterns = { "/help" })
+public class HelpServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
-	public RepAccInfoServlet() {
+	public HelpServlet()
+	{
 		super();
 	}
 
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-	{
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
  
  
         // Check User has logged on
-        EmployeeAccount loginedUser = (EmployeeAccount)(MyUtils.getLoginedEmployee(session));
+        UserAccount loginedUser = MyUtils.getLoginedUser(session);
         System.out.println("Logged in user is " + loginedUser);
   
         // Not logged in
@@ -44,16 +45,23 @@ public class RepAccInfoServlet extends HttpServlet
         // Store info in request attribute
         request.setAttribute("user", loginedUser);
  
-  
-        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_acc_info.jsp");
-        dispatcher.forward(request, response);
+        if(loginedUser instanceof CustomerAccount)
+        {
+	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_help.jsp");
+	        dispatcher.forward(request, response);
+        }
+        else
+        {
+        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_help.jsp");
+	        dispatcher.forward(request, response);
+        }
+ 
     }
-	
-	@Override
+ 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-	{
+            throws ServletException, IOException {
         doGet(request, response);
     }
 }
