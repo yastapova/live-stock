@@ -49,18 +49,21 @@ public class HelpServlet extends HttpServlet
         if(loginedUser instanceof CustomerAccount)
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
+        	System.out.println("I am a customer!");
 	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_help.jsp");
 	        dispatcher.forward(request, response);
         }
         else
         {
         	if(((EmployeeAccount)loginedUser).isManager())
-        	{
+        	{	
+        		System.out.println("I am a manager!");
         		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_help.jsp");
 		        dispatcher.forward(request, response);
         	}
         	else
-        	{
+        	{	
+        		System.out.println("I am a customer rep!");
 	        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_help.jsp");
 		        dispatcher.forward(request, response);
         	}
