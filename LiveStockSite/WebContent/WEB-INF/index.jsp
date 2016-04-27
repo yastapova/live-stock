@@ -39,6 +39,11 @@ function register_employee_onclick() {
 
 }
 
+function help_onclick() {
+    window.open("main_help","_self");
+
+}
+
 // ]]>
 </script>
  </head>
@@ -67,6 +72,7 @@ function register_employee_onclick() {
 			<button class="btn-main" onclick="return cancel_onclick()">Cancel</button>
 		</form>
 		</div>
+		<button class="btn-default" onclick="return help_onclick()">Help</button>
 	</div>
 	
 	<!-- SOMETIMES THIS IS NEEDED or the bottom one is needed <jsp:include page="/views/_footer.jsp"></jsp:include> -->

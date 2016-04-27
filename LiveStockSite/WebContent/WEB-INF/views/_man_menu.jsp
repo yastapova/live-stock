@@ -3,7 +3,7 @@
 <div class="menu" align="right">
 	<a href="manAccInfo" id="manAccInfo">Account Info</a>
 	<a href="stocks" id="stock">Stocks</a>
-	<a href="manEmp.jsp" id="repAccInfo">Employee</a>
+	<a href="manEmp.jsp" id="repAccInfo">Employees</a>
 	<a href="finances.jsp" id="repAccInfo">Finances</a>
 	<a href="orders.jsp" id="orders">Orders</a>
 	<a href="Backup" id="backup">Back Up</a>
