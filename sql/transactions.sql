@@ -281,11 +281,11 @@ CREATE PROCEDURE getCustomerOrdersHistory(IN customer_id INT)
 
 -- Stocks available of a particular type 
 delimiter |
-CREATE PROCEDURE getStockUsingType(IN stocktype CHAR(5)) 
+CREATE PROCEDURE getStockUsingType(IN stocktype CHAR(20)) 
 	BEGIN
-		SELECT O.*
-		FROM STOCK S, Order_ O
-		WHERE S.StockType LIKE '%stocktype%' AND O.StockSymbol = S.StockSymbol;
+		SELECT S.*
+		FROM STOCK S
+		WHERE S.StockType LIKE CONCAT('%', stocktype, '%');
 
     END
 | delimiter ;
@@ -302,13 +302,13 @@ CREATE PROCEDURE getMostRecentOrderInfo()
     END
 | delimiter ;
 
--- Stocks available with a particular keyword or set of keywords in the stock name, and most-recent order info.
+-- Stocks available with a particular keyword or set of keywords in the stock name
 delimiter |
-CREATE PROCEDURE getStockUsingKeyword(IN stocksymbol CHAR(5)) 
+CREATE PROCEDURE getStockUsingKeyword(IN stockkeyword CHAR(20)) 
 	BEGIN
-		SELECT O.*
-		FROM STOCK S, Order_ O
-		WHERE S.StockSymbol LIKE '%stocksymbol%' AND O.StockSymbol = S.StockSymbol;
+		SELECT S.*
+		FROM STOCK S
+		WHERE S.StockName LIKE CONCAT('%', stockkeyword, '%');
     END
 | delimiter ;
 
