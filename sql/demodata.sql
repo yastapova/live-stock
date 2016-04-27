@@ -85,6 +85,12 @@ DROP TRIGGER NumSharesValid;
 DROP TRIGGER SellOrder;
 DROP TRIGGER DoTransact;
 
+DROP PROCEDURE getStockUsingType;
+DROP PROCEDURE getStockUsingKeyword;
+
+call getStockUsingType('r');
+call getStockUsingKeyword('i');
+
 DROP TABLE StockPriceHistory;
 DROP TABLE ConditionalPriceHistory;
 DROP TABLE Transact;
