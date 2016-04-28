@@ -18,11 +18,11 @@ import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/current_stocks", "/stocks" })
-public class StockServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/search_stocks" })
+public class SearchStockServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public StockServlet() {
+    public SearchStockServlet() {
         super();
     }
  
@@ -38,24 +38,45 @@ public class StockServlet extends HttpServlet {
         List<Stock> list = new ArrayList<Stock>();
         Connection conn = MyUtils.getStoredConnection(request);
         int id = loginedUser.getId();
-        String table = "Current Stock Listings";
+        String table = "Search Results";
         System.out.println(table);
-        System.out.println(id);
+        System.out.println("Userid: "+id);
+        String stockType = request.getParameter("stocktype");
+        System.out.println("Type: "+stockType);
+        String stockKeyword = request.getParameter("stockkeyword");
+        System.out.println("Keyword: "+stockKeyword);
         try{
-        	String sql1 = "SELECT * FROM Stock";
-        	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        	java.sql.ResultSet rs = pstm1.executeQuery();
-            
-            while (rs.next()) {
-                String sksym = rs.getString("StockSymbol");
-                String sknm = rs.getString("StockName");
-                String sktp = rs.getString("StockType");
-                float shpr = rs.getFloat("SharePrice");
-                int numsh = rs.getInt("NumAvailShares");
-                Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
-                list.add(data);
-                System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
+        	
+        	String sql1;
+        	PreparedStatement pstm1 = null;
+        	java.sql.ResultSet rs = null;
+            if(stockType!=null) {
+            	sql1 = "CALL getStockUsingType(?)";
+            	pstm1 = conn.prepareStatement(sql1);
+            	pstm1.setString(1,stockType);
+                rs = pstm1.executeQuery();
             }
+            else if (stockKeyword!=null) {
+            	sql1 = "CALL getStockUsingKeyword(?)";
+            	pstm1 = conn.prepareStatement(sql1);
+            	pstm1.setString(1,stockKeyword);
+                rs = pstm1.executeQuery();
+            }
+
+            if (rs!=null) {
+                while (rs.next()) {
+                    String sksym = rs.getString("StockSymbol");
+                    String sknm = rs.getString("StockName");
+                    String sktp = rs.getString("StockType");
+                    float shpr = rs.getFloat("SharePrice");
+                    int numsh = rs.getInt("NumAvailShares");
+                    Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
+                    list.add(data);
+                    System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
+                }
+            }
+
+            System.out.println("After while");
         } catch (Exception e) {
 			e.printStackTrace();
 		}

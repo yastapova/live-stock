@@ -70,6 +70,13 @@ SET SQL_SAFE_UPDATES = 1;
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
 
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
+
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('IBM', 'Buy', 100, 1, NOW(), 'Market', null, 1, 0);
+
+
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Stock SET SharePrice = 10
 	WHERE StockSymbol = 'F';
@@ -87,10 +94,14 @@ DROP TRIGGER DoTransact;
 
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
+DROP PROCEDURE getBestSellers2;
 
+call getBestSellers2;
 call getStockUsingType('r');
 call getStockUsingKeyword('i');
+call Suggest(4);
 SELECT * FROM BestSellers;
+
 
 DROP TABLE StockPriceHistory;
 DROP TABLE ConditionalPriceHistory;

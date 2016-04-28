@@ -56,3 +56,10 @@ CREATE VIEW BestSellers(StockSymbol, TotalShares) AS
 SELECT O.StockSymbol, SUM(O.NumShares) AS TotalShares
 FROM Order_ O
 GROUP BY O.StockSymbol;
+
+-- Best-Seller list of stocks generated based on what stocks have been sold the most, with all Stock info
+CREATE VIEW BestSellers2(StockSymbol, StockName, StockType, SharePrice, NumAvailShares, TotalShares) AS
+SELECT S.StockSymbol, S.StockName, S.StockType, S.SharePrice, S.NumAvailShares, SUM(O.NumShares) AS TotalShares
+FROM Order_ O, Stock S
+WHERE O.StockSymbol = S.StockSymbol
+GROUP BY O.StockSymbol;
