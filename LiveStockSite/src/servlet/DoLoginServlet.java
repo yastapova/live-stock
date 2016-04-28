@@ -93,6 +93,7 @@ public class DoLoginServlet extends HttpServlet {
             System.out.println("Class: " + user.getClass());
         	if(user instanceof CustomerAccount){
         		// Redirect to userInfo page.
+        		System.out.println("I am a customer!");
                 response.sendRedirect(request.getContextPath() + "/customerAccInfo");
         	}
         	else
@@ -100,10 +101,12 @@ public class DoLoginServlet extends HttpServlet {
         		if(MANAGER.equals(((EmployeeAccount) user).getPos()))
         		{
 	        		// Redirect to userInfo page.
+        			System.out.println("I am a manager!");
 	                response.sendRedirect(request.getContextPath() + "/managerAccInfo");
         		}
         		else
         		{
+        			System.out.println("I am a customer rep!");
         			response.sendRedirect(request.getContextPath() + "/repAccInfo");
         		}
         	}

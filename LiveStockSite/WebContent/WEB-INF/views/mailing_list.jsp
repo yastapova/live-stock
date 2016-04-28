@@ -6,14 +6,20 @@
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Utilities</title>
 	<link rel="stylesheet" href="gen.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+	</script>
 	<script type="text/javascript">
-// <!CDATA[
 
+	// <!CDATA[
+	$(document).ready(function(){
+		console.log("utilities!");	
+		$("#utilities").addClass('active');
+	});
+	
+	function customer_mailing_list() {
+	    window.open("mailing_list","_self");
 
-function customer_mailing_list() {
-    window.open("mailing_list","_self");
-
-}
+	}
 
 // ]]>
 	</script>
