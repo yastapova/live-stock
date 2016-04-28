@@ -90,6 +90,7 @@ DROP PROCEDURE getStockUsingKeyword;
 
 call getStockUsingType('r');
 call getStockUsingKeyword('i');
+SELECT * FROM BestSellers;
 
 DROP TABLE StockPriceHistory;
 DROP TABLE ConditionalPriceHistory;
