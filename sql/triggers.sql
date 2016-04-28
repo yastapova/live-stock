@@ -173,6 +173,26 @@ CREATE TRIGGER UpdatePortfolio
 |
 delimiter ;
 
+delimiter |
+-- Adds a new portfolio entry to account following a transaction.
+CREATE TRIGGER AddToAccount
+	BEFORE INSERT ON Transact FOR EACH ROW
+    BEGIN
+		IF(NOT EXISTS(SELECT * FROM Portfolio P, Account_ A, Order_ O
+					  WHERE NEW.OrderId = O.OrderId
+                      AND O.CusAccNum = A.AccNum
+                      AND A.AccNum = P.AccNum
+                      AND P.StockSymbol = O.StockSymbol))
+		THEN INSERT INTO Portfolio(AccNum, StockSymbol, NumShares, Stop_)
+			VALUES((SELECT O.CusAccNum, O.StockSymbol, O.NumShares, 'None'
+				   FROM Order_ O
+                   WHERE NEW.OrderId = O.OrderId
+                   LIMIT 1));
+		END IF;
+	END;
+|
+delimiter ;
+
 -- Make sure that the price type is allowed.
 CREATE TRIGGER PriceTypes2
 	BEFORE INSERT ON ConditionalPriceHistory FOR EACH ROW

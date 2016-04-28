@@ -109,6 +109,7 @@ public class OrdersServlet extends HttpServlet
         		}
         		else
         		{
+        			System.out.println("Recording");
         			try {
 	        			String sql = "CALL recordOrder(?)";
 	        			PreparedStatement pst1 = conn.prepareStatement(sql);
@@ -122,7 +123,7 @@ public class OrdersServlet extends HttpServlet
             			e.printStackTrace();
                     }
         		}
-        		
+        		System.out.println("Loading");
         		try {
                 	String sql1 = "SELECT O.OrderId, O.Timestamp_, O.CusAccNum, "
                 				+ "O.StockSymbol, O.NumShares, O.PriceType, "
