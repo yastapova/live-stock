@@ -24,32 +24,33 @@ $(document).ready(function(){
 	<jsp:include page="_cust_menu.jsp"></jsp:include>
 	<div class="body" align="center">
 		<h2>Accounts</h2>
-		<table border="5" id="accounts">		
 	        <c:forEach var="account" items="${accounts}">
+	        	<table border="5" id="accounts">
 	        	<jsp:include page="_accTableRow.jsp"></jsp:include>        	
 	   			<tr>
 	   				<td style="width: 200px"><span style="font-size: 10pt"><c:out value="${account.accId}" /></span></td>
 		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${account.accCreationDate}" /></span></td>
-		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${account.creditCardNum}" /></span></td>
-		            <table border="4" id="portfolios">
+		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${account.creditCardNum}" /></span></td>		           
+			            <c:forEach var="portfolio" items="${portfolios}">			 
+			            <c:if test="${portfolio.accNum eq account.accId}">
+			            <table border="4" id="portfolios">
 			           <tr>
 			          <th style="width: 150px"><span style="font-size: 10pt">Stock Symbol</span></th>
 			          <th style="width: 150px"><span style="font-size: 10pt">Number of Shares</span></th>
 			          <th style="width: 150px"><span style="font-size: 10pt">Stop</span></th>
 			          <th style="width: 150px"><span style="font-size: 10pt">Stop Price</span></th></tr>
-			            <c:forEach var="portfolio" items="${portfolios}">
-			            <c:if test="${portfolio.accNum eq account.accId}">
 			            <tr>
 			            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${portfolio.stockSymbol}" /></span></td>
 			            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${portfolio.numShares}" /></span></td>
 			            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${portfolio.stop}" /></span></td>
 			            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${portfolio.stopPrice}" /></span></td>
 			            </tr>
+			            </table>
 			            </c:if>			           
-						</c:forEach>
-						</table>
-	        	</tr>
-	        	<tr><br>___________________________________________<br><br></tr>
+						</c:forEach>											
+	        	</tr>	        	
+	        	</table>
+	        	<br><br>
 			</c:forEach>
 	</div>
 	

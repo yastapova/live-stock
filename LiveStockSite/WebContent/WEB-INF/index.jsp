@@ -71,7 +71,9 @@ function help_onclick() {
 		<button class="btn-default" onclick="return help_onclick()">Help</button>
 	</div>
 	
-	<!-- SOMETIMES THIS IS NEEDED or the bottom one is needed <jsp:include page="/views/_footer.jsp"></jsp:include> -->
-	<jsp:include page="_footer.jsp"></jsp:include>
+	<div class="footer">
+	<p>We herd you loud and clear. You are ready to take the stock market by the horns.</p>
+	<p>That's udderly brilliant! Don't make a misteak, trade with LiveStock&copy;!</p>
+</div>
 </body>
 </html>
