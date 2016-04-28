@@ -148,9 +148,18 @@ h3 {
 	background-color: #C8D4E0;
 }
 
-.btn-danger, .btn-danger:hover, .btn-danger:focus {
- 	color: #C8D4E0;
+.btn-danger, .btn-danger:hover, .btn-danger:focus, .btn-danger.active:hover, .btn-danger:active:focus, .btn-danger:active:hover{ 
     background-color: #C8D3E0;
     border-color: #C8D3E0;
-    on-hover:;
+}
+
+.dropdown-menu{
+	font-size: 16px;
+	color: #234467;
+	background-color: #C8D4E0;
+	min-width: 200px;
+}
+
+a:.dropdown-item{
+	text-decoration: none;
 }

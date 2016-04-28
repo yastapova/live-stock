@@ -11,8 +11,18 @@
 
 	// <!CDATA[
 	$(document).ready(function(){
-		var element = document.getElementById("customer");
-		element.scrollIntoView();
+		$('#managerBtn').click(function() {
+			var element = document.getElementById("manager");
+			element.scrollIntoView();
+		});
+		$('#cusRepBtn').click(function() {
+			var element = document.getElementById("customerRepresentative");
+			element.scrollIntoView();
+		});
+		$('#cusBtn').click(function() {
+			var element = document.getElementById("customer");
+			element.scrollIntoView();
+		});
 	});
 
 	// ]]>
@@ -30,11 +40,11 @@
 		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		    
 		  </button>
 		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="#">Manager</a>
+		    <span class="dropdown-item" href="#" id="managerBtn">Manager</span>
 		    <div class="dropdown-divider"></div>
-		    <a class="dropdown-item" href="#">Customer Representative</a>
+		    <span class="dropdown-item" href="#" id="cusRepBtn">Customer Representative</span>
 		    <div class="dropdown-divider"></div>
-		    <a class="dropdown-item" href="#">Customer</a>
+		    <span class="dropdown-item" href="#" id="cusBtn">Customer</span>
 		  </div>
 		</div>
 		<div id="manager">
@@ -56,8 +66,8 @@
 			<dt>Logout</dt>
 			<dd>Logout of this account and end the session.</dd>
 		</dl>
-		</div id="customerRepresentative">
-		<div>
+		</div>
+		<div id="customerRepresentative">
 			<h3>CUSTOMER REPRESENTATIVE</h3>
 			<dl>
 				<dt>Account Info</dt>
