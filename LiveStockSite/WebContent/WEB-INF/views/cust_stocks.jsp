@@ -30,7 +30,16 @@ function best_sellers_onclick() {
 	console.log("Best");
     window.open("best_stocks","_self");
 }
-//JUST MAKE A NEW STOCK PAGE FOR EACH BUTTON
+
+function search_type_onclick() {
+	console.log("Search Type");
+	javascript:typeForm.submit();
+}
+
+function search_keywrod_onclick() {
+	console.log("Search Keyword");
+	javascript:keywordForm.submit();
+}
 
 // ]]>
 
@@ -72,7 +81,21 @@ function best_sellers_onclick() {
   		<br>
   		<button class="btn-default" onclick="return stock_onclick()">Current Stock Listings</button>
   		<button class="btn-default" onclick="return best_sellers_onclick('Best Sellers')">Best Sellers</button>
-		<button class="btn-default" onclick="return suggested_onclick()">Suggested For You</button>
+  		<c:if test="${userType=='C'}">
+			<button class="btn-default" onclick="return suggested_onclick()">Suggested For You</button>
+		</c:if>
+		<br><br>
+		<form id="typeForm" name="myForm" action="search_stocks" method="post">
+			<span class="formlabel">Search on type:</span>
+			<input class="forminput" id="stocktype" name="stocktype" type="text" />
+			<button value="searchtype" class="btn-default" id="searchtype" onclick="return search_type_onclick()">Search Type</button>
+		</form>
+		<br>
+		<form id="keywordForm" name="myForm" action="search_stocks" method="post">
+			<span class="formlabel">Search on keyword:</span>
+			<input class="forminput" id="keyword" name="stockkeyword" type="text" />
+			<button value="searchkeyword" class="btn-default" id="searchkeyword" onclick="return search_keyword_onclick()">Search Keyword</button>
+		</form>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
