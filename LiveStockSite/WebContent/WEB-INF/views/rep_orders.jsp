@@ -9,7 +9,12 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
 	</script>
     <script type="text/javascript">
+    
 // <!CDATA[
+$(document).ready(function(){
+	console.log("orders!");	
+	$("#repOrders").addClass('active');
+});
 
 function record() {
 	console.log("Submitting records?");
@@ -27,7 +32,7 @@ function record() {
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
-	<jsp:include page="_cust_menu.jsp"></jsp:include>
+	<jsp:include page="_rep_menu.jsp"></jsp:include>
 	<div class="body" align="center">
 		<h2>Orders</h2>
 		<form name="orderRecords" id="orderRecords" action="orders" method="post">

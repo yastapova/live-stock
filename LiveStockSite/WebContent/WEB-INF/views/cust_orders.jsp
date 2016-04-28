@@ -6,6 +6,20 @@
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Orders</title>
 	<link rel="stylesheet" href="gen.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+
+// <!CDATA[
+$(document).ready(function(){
+	console.log("orders!");	
+	$("#customerOrders").addClass('active');
+});
+
+// ]]>
+
+	</script>
+	
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
