@@ -1,8 +1,7 @@
 1) manager vs customer rep help menu
 2) main help menu
 3) Portfolio
-4)
+4) Date
 
-Bugs
----------------
-1) Registed users are always logged in as customer.
+1) Finish buttons
+

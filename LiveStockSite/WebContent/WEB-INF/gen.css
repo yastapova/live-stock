@@ -141,3 +141,16 @@ h3 {
     font-family: 'Calibri', sans-serif;
     padding: 20px;
 }
+
+#help{
+	font-size: 20px;
+	color: #234467;
+	background-color: #C8D4E0;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:focus {
+ 	color: #C8D4E0;
+    background-color: #C8D3E0;
+    border-color: #C8D3E0;
+    on-hover:;
+}

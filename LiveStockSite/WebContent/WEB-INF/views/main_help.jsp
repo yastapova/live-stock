@@ -5,10 +5,15 @@
 	<title>LiveStock Trading | Main Help</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
 	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 
 	// <!CDATA[
-	
+	$(document).ready(function(){
+		var element = document.getElementById("customer");
+		element.scrollIntoView();
+	});
 
 	// ]]>
 	</script>
@@ -20,9 +25,20 @@
 		<a href="login">Login</a>		
 	</div>
 	<div class="body" align="Left">
-		<h2>Help</h2>
-		<div>
-			<h3>Manager</h3>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-danger" id="help">Help</button>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		    
+		  </button>
+		  <div class="dropdown-menu">
+		    <a class="dropdown-item" href="#">Manager</a>
+		    <div class="dropdown-divider"></div>
+		    <a class="dropdown-item" href="#">Customer Representative</a>
+		    <div class="dropdown-divider"></div>
+		    <a class="dropdown-item" href="#">Customer</a>
+		  </div>
+		</div>
+		<div id="manager">
+			<h3>MANAGER</h3>
 			<dt>Account Info</dt>
 			<dd>View and update your account information.</dd>
 			<dt>Stocks</dt>
@@ -40,7 +56,7 @@
 			<dt>Logout</dt>
 			<dd>Logout of this account and end the session.</dd>
 		</dl>
-		</div>
+		</div id="customerRepresentative">
 		<div>
 			<h3>CUSTOMER REPRESENTATIVE</h3>
 			<dl>
@@ -58,7 +74,7 @@
 				<dd>Logout of this account and end the session.</dd>
 			</dl>
 		</div>
-		<div>
+		<div id="customer">
 			<h3>CUSTOMER</h3>
 			<dl>
 				<dt>Account Info</dt>
