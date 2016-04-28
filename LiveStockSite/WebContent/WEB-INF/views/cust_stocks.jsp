@@ -18,21 +18,28 @@ $(document).ready(function(){
 
 function stock_onclick(){
 	console.log("stock!");
-	window.open("stocks", "_self");
+	window.open("current_stocks", "_self");
 }
+
+function suggested_onclick() {
+	console.log("Suggested");
+	window.open("suggested_stocks","_self");
+}
+
+function best_sellers_onclick() {
+	console.log("Best");
+    window.open("best_stocks","_self");
+}
+//JUST MAKE A NEW STOCK PAGE FOR EACH BUTTON
 
 // ]]>
 
-/*if(true) {
-	document.getElementById('include').innerHTML = "CATS";
-}*/
 
 </script>
 
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
-	<div id="include"></div>
 	<c:if test="${userType=='C'}">
 		<jsp:include page="_cust_menu.jsp"></jsp:include>
 	</c:if>
@@ -43,7 +50,7 @@ function stock_onclick(){
 		<jsp:include page="_man_menu.jsp"></jsp:include>
 	</c:if>
 	<div class="body" align="center">
-		<h2>Current Stock Listings</h2>
+		<h2><c:out value="${table}"/></h2>
 		<table border="4" id="stock" onclick="return stock_onclick()">
 	        <tr>
 	          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
@@ -62,6 +69,10 @@ function stock_onclick(){
 	        	</tr>
 			</c:forEach>
   		</table>
+  		<br>
+  		<button class="btn-default" onclick="return stock_onclick()">Current Stock Listings</button>
+  		<button class="btn-default" onclick="return best_sellers_onclick('Best Sellers')">Best Sellers</button>
+		<button class="btn-default" onclick="return suggested_onclick()">Suggested For You</button>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>

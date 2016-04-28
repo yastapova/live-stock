@@ -18,11 +18,11 @@ import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/current_stocks", "/stocks" })
-public class StockServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/suggested_stocks" })
+public class SuggestedStockServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
-    public StockServlet() {
+    public SuggestedStockServlet() {
         super();
     }
  
@@ -38,13 +38,15 @@ public class StockServlet extends HttpServlet {
         List<Stock> list = new ArrayList<Stock>();
         Connection conn = MyUtils.getStoredConnection(request);
         int id = loginedUser.getId();
-        String table = "Current Stock Listings";
+        String table = "Suggested For You";
         System.out.println(table);
-        System.out.println(id);
+        System.out.println("Userid: "+id);
+        
         try{
-        	String sql1 = "SELECT * FROM Stock";
+        	String sql1 = "CALL Suggest(?)";
         	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        	java.sql.ResultSet rs = pstm1.executeQuery();
+        	pstm1.setInt(1,id);
+        	java.sql.ResultSet rs  = pstm1.executeQuery();
             
             while (rs.next()) {
                 String sksym = rs.getString("StockSymbol");

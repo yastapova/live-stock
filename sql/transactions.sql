@@ -323,6 +323,16 @@ CREATE PROCEDURE getBestSellers()
     END
 | delimiter ;
 
+-- Get the list of best selling stocks in stock table format
+delimiter |
+CREATE PROCEDURE getBestSellers2() 
+	BEGIN
+		SELECT B.StockSymbol, B.StockName, B.StockType, B.SharePrice, B.NumAvailShares
+		FROM BestSellers2 B
+		ORDER BY TotalShares desc 
+		LIMIT 25;
+    END
+| delimiter ;
 
 -- Produce a list of stock suggestions for a given customer (based on that customer's past orders)
 delimiter |
