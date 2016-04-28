@@ -15,7 +15,7 @@ import general.EmployeeAccount;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo", "/managerAccInfo" })
+@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo", "/manAccInfo" })
 public class AccInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -48,7 +48,7 @@ public class AccInfoServlet extends HttpServlet {
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
         	System.out.println("I am a customer!");
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_acc_info.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_acc_info.jsp");
 	        dispatcher.forward(request, response);
         }
         else
@@ -56,13 +56,13 @@ public class AccInfoServlet extends HttpServlet {
         	if(((EmployeeAccount)loginedUser).isManager())
         	{
         		System.out.println("I am a manager!");
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_acc_info.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_acc_info.jsp");
     	        dispatcher.forward(request, response);
         	}
         	else
         	{
         		System.out.println("I am a customer rep!");
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_acc_info.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_acc_info.jsp");
     	        dispatcher.forward(request, response);
         	}
         }
