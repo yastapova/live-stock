@@ -72,6 +72,6 @@ function help_onclick() {
 	</div>
 	
 	<!-- SOMETIMES THIS IS NEEDED or the bottom one is needed <jsp:include page="/views/_footer.jsp"></jsp:include> -->
-	<jsp:include page="/views/_footer.jsp"></jsp:include>
+	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

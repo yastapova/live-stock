@@ -15,7 +15,7 @@ import general.EmployeeAccount;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo", "/managerAccInfo" })
+@WebServlet(urlPatterns = { "/customerAccInfo", "/repAccInfo", "/manAccInfo" })
 public class AccInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  

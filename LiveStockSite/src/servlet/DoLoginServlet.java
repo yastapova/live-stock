@@ -102,7 +102,7 @@ public class DoLoginServlet extends HttpServlet {
         		{
 	        		// Redirect to userInfo page.
         			System.out.println("I am a manager!");
-	                response.sendRedirect(request.getContextPath() + "/managerAccInfo");
+	                response.sendRedirect(request.getContextPath() + "/manAccInfo");
         		}
         		else
         		{
