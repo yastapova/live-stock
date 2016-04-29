@@ -196,7 +196,7 @@ CREATE PROCEDURE addCustomer(IN last_name VARCHAR(20), IN first_name VARCHAR(20)
     END
 | delimiter ;
 
--- Update customer in db
+-- Update customer in db - doesn't work, see update emp for reason
 delimiter |
 CREATE PROCEDURE updateCustomer(IN field VARCHAR(10), IN val VARCHAR(50), IN cus_id INT)
 	BEGIN
