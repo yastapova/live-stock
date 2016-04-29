@@ -35,6 +35,12 @@ function register_employee_onclick() {
 
 }
 
+function cancel_onclick() {
+    document.myForm.username.value = "";
+   	document.myForm.password.value = "";
+
+}
+
 function help_onclick() {
     window.open("main_help","_self");
 

@@ -39,9 +39,9 @@ function deleteEmp_onclick() {
     javascript:deleteEmployeeForm.submit();
 }
 
-function editEmp_onclick() {
-    console.log("editEmp!");
-    javascript:editEmployeeForm.submit();
+function ecYear_onclick() {
+    console.log("ecYear!");
+    window.open("ecYear","_self");
 }
 
 function sales_onclick() {
@@ -123,45 +123,11 @@ function sales_onclick() {
       <div class="utility">
         <div class="item row">
           <div class="col-xs-3">
-            <h3>Edit</h3>
+            <h3>Employee and Customer of the Year</h3>
           </div>
         </div>
-        <div class="description row">
-         	<table>          
-            <form id="editEmployee" name="editEmployeeForm" action="editEmpMan" method="post">
-            	<tr>
-            		<td>ID:</td>
-					<td><select name="empIdEdit" class="inputA">
-						    <c:forEach var="emp" items="${employees}">
-						    <option value="${emp.id}"><c:out value="${emp.id}" /></option>
-						    </c:forEach>
-						</select>
-            		</td>
-            	</tr>
-            	<tr>
-            		<td>Field:</td>
-					<td><select name="empEditField" class="inputA">						    
-						    <option value="firstname" selected="selected">First Name</option>
-						    <option value="lastname">Last Name</option>
-						    <option value="address">Address</option>
-						    <option value="city">City</option>
-						    <option value="state">State</option>
-						    <option value="zipcode">Zip Code</option>
-						    <option value="telephone">Telephone</option>
-						    <option value="startdate">Start Date</option>
-						    <option value="hourly">Hourly Rate</option>
-						    <option value="ssn">SSN</option>
-						</select>
-            		</td>
-            	</tr>
-	            <tr>   
-		  			<td>New:</td>
-		  			<td><input type="text" name="new" class="inputA"></td>
-	  			</tr>		
-			</form>  
-		</table>    
-		<br>
-		<button value="editEmp" class="btn-default" id="editEmp" onclick="return editEmp_onclick()">Confirm</button>  
+        <div class="description row">          
+		<button value="ecYear" class="btn-default" id="ecYearButton" onclick="return ecYear_onclick()">Go</button>  
         </div>
       </div>
       <!-- Utility -->
