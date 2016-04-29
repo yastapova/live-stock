@@ -56,6 +56,7 @@ public class DoLoginServlet extends HttpServlet {
                 if (user == null) {
                     hasError = true;
                     errorString = "User Name or password invalid";
+                    System.out.println(errorString);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

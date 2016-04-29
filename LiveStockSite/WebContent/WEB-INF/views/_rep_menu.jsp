@@ -3,6 +3,7 @@
 <div class="menu" align="right">
 	<a href="repAccInfo" id="repAccInfo">Account Info</a>
 	<a href="utilities" id="utilities">Utilities</a>
+	<a href="empCust" id="customers">Customers</a>
 	<a href="orders" id="repOrders">Orders</a>
 	<a href="stocks" id="stocks">Stocks</a>
 	<a href="help" id="help">Help</a>

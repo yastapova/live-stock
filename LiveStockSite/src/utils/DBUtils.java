@@ -25,13 +25,15 @@ public class DBUtils {
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {
+			System.out.println("Found someone!");
 			String usr = rs.getString("Usr");
 			String pwd = rs.getString("Pwd");
 			int accType = rs.getInt("AccType");
 			int id = rs.getInt("Id");
 
 			if(accType == CUSTOMER)
-			{
+			{	
+				System.out.println("CUSTOMER!");
 				String sql2 = "SELECT C.FirstName, C.LastName, "
 							+ "C.Address, C.City, C.State, "
 							+ "C.ZipCode, C.Telephone, C.Email, "
@@ -62,7 +64,8 @@ public class DBUtils {
 				}
 			}
 			else if(accType == REP || accType == MANAGER)
-			{
+			{	
+				System.out.println("EMPLOYEE!");
 				String sql2 = "SELECT E.SSN, E.FirstName, E.LastName, "
 						+ "E.Address, E.City, E.State, "
 						+ "E.ZipCode, E.Telephone, E.HourlyRate, "

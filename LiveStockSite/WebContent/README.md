@@ -17,7 +17,7 @@ Produce a list of most actively traded stocks
 Customer Representatives should be thought of as stock brokers and should be able to:
 
 Record an order
-Add, Edit and Delete information for a customer
+Add, Edit and Delete information for a customer [DONE]
 Produce customer mailing lists
 Produce a list of stock suggestions for a given customer (based on that customer's past orders)
 
@@ -45,9 +45,8 @@ A customer should not be allowed access to other customers' account information,
 
 5 Utilities
 ----------------------------------
-
 In addition to the transactions described above, the system should provide facilities for:
 
-Allowing the manager to add and delete users
+Allowing the manager to add and delete users (login stuff?)
 Backing up the database files
-A comprehensive Help facility, including a topic-driven pull-down Help menu
+A comprehensive Help facility, including a topic-driven pull-down Help menu [DONE]
