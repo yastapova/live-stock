@@ -120,7 +120,7 @@ function cancel_onclick() {
 				<tr>
 					<td><span class="formlabel">Start Date:</span><br />
 						<span class="formhint">yyyy-mm-dd</span></td>
-					<td><input class="forminput" id="start" name="start" type="text" /></td>
+					<td><input class="forminput" id="start" name="start" type="text" placeholder="yyyy-mm-dd"/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Hourly Rate:</span></td>

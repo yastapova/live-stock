@@ -47,6 +47,6 @@ A customer should not be allowed access to other customers' account information,
 ----------------------------------
 In addition to the transactions described above, the system should provide facilities for:
 
-Allowing the manager to add and delete users (login stuff?)
+Allowing the manager to add and delete users (login stuff?) [DONE]
 Backing up the database files
 A comprehensive Help facility, including a topic-driven pull-down Help menu [DONE]
