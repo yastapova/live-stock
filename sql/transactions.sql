@@ -26,7 +26,7 @@ CREATE PROCEDURE addEmployee(IN ssn CHAR(9), IN last_name VARCHAR(20),
 
 delimiter |
 -- Updates info for a given employee.
--- Only does the char attributes.
+-- Only does the char attributes < does not work, can't put field in set
 CREATE PROCEDURE updateEmployee(IN field CHAR(10), IN val CHAR(50), IN emp_id INT)
 	BEGIN
 		UPDATE Employee
