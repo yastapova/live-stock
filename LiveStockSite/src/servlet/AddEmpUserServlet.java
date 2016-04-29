@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,15 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/addCustEmp" })
-public class AddCustServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/addUserEmpMan" })
+public class AddEmpUserServlet extends HttpServlet {
  
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public AddCustServlet() {
+	public AddEmpUserServlet() {
         super();
     }
  
@@ -37,53 +39,55 @@ public class AddCustServlet extends HttpServlet {
         String state = request.getParameter("state");
         String zip = request.getParameter("zipcode");
         String phone = request.getParameter("telephone");
-        String email = request.getParameter("email");
-        int rating = Integer.parseInt(request.getParameter("rating"));    
+        String hourly = request.getParameter("hourly");
+        Date start = Date.valueOf(request.getParameter("startdate"));     
         String username = request.getParameter("username");
         String password  = request.getParameter("password");
-        
-        System.out.println(rating);
    
  
         Connection conn = MyUtils.getStoredConnection(request);
         
         try{
-        	String sql1 = "CALL addCustomer(?,?,?,?,?,?,?,?,?);";
+        	String sql1 = "CALL addEmployee(?,?,?,?,?,?,?,?,?,?,?);";
         	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        	pstm1.setString(1,lastName);
-        	pstm1.setString(2,firstName);
-        	pstm1.setString(3,address);
-        	pstm1.setString(4,city);
-        	pstm1.setString(5,state);
-        	pstm1.setString(6,zip);
-        	pstm1.setString(7,phone);
-        	pstm1.setString(8,email);
-        	pstm1.setInt(9,rating);
+        	pstm1.setString(1,ssn);
+        	pstm1.setString(2,lastName);
+        	pstm1.setString(3,firstName);
+        	pstm1.setString(4,address);
+        	pstm1.setString(5,city);
+        	pstm1.setString(6,state);
+        	pstm1.setString(7,zip);
+        	pstm1.setString(8,phone);
+        	pstm1.setDate(9,start);
+        	pstm1.setFloat(10,Float.parseFloat(hourly));
+        	pstm1.setString(11,"CusRep");
         	java.sql.ResultSet rs = pstm1.executeQuery();
         	
-        	String sql2 = "SELECT C.CusId FROM Customer C "
-        			+ "WHERE C.LastName = ? AND C.FirstName = ? AND "
-					+ "C.Address = ? AND C.City = ? AND C.State = ? AND "
-					+ "C.ZipCode = ? AND C.Telephone = ? AND C.Email = ? AND "
-					+ "C.Rating = ?;";
+        	String sql2 = "SELECT E.EmpId FROM Employee E "
+        			+ "WHERE E.SSN = ? AND E.LastName = ? AND E.FirstName = ? AND "
+					+ "E.Address = ? AND E.City = ? AND E.State = ? AND "
+					+ "E.ZipCode = ? AND E.Telephone = ? AND E.StartDate = ? AND "
+					+ "E.HourlyRate = ? AND E.Position_ = ?;";
         	PreparedStatement pstm2 = conn.prepareStatement(sql2);
-        	pstm2.setString(1, lastName);
-        	pstm2.setString(2, firstName);
-        	pstm2.setString(3, address);
-        	pstm2.setString(4, city);
-        	pstm2.setString(5, state);
-        	pstm2.setString(6, zip);
-        	pstm2.setString(7, phone);
-        	pstm2.setString(8, email);
-        	pstm2.setInt(9, rating);
+        	pstm2.setString(1, ssn);
+        	pstm2.setString(2, lastName);
+        	pstm2.setString(3, firstName);
+        	pstm2.setString(4, address);
+        	pstm2.setString(5, city);
+        	pstm2.setString(6, state);
+        	pstm2.setString(7, zip);
+        	pstm2.setString(8, phone);
+        	pstm2.setDate(9, start);
+        	pstm2.setInt(10, Integer.parseInt(hourly));
+        	pstm2.setString(11, "CusRep");
         	ResultSet rs2 = pstm2.executeQuery();
         	
         	int id = -1;
         	if(rs2.next())
         	{
-        		id = rs2.getInt("CusId");        		
+        		id = rs2.getInt("EmpId");        		
         	}
-        	System.out.println("Updated id " + id);
+        	System.out.println("Updated id");
         	
         	String sql = "INSERT INTO Login(Usr, Pwd, AccType, Id)"
     				+ " VALUES (?, ?, ?, ?);";
@@ -91,13 +95,13 @@ public class AddCustServlet extends HttpServlet {
     		PreparedStatement pstm = conn.prepareStatement(sql);
     		pstm.setString(1, username);
     		pstm.setString(2, password);
-    		pstm.setInt(3, 1);
+    		pstm.setInt(3, 2);    		
     		pstm.setInt(4, id);
     		pstm.executeUpdate();
         } catch (Exception e) {
 			e.printStackTrace();
 		}
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/empCust");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/users");
         dispatcher.forward(request, response);
     }
  

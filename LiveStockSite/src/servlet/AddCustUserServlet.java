@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/addCustEmp" })
-public class AddCustServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/addUserCustMan" })
+public class AddCustUserServlet extends HttpServlet {
  
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public AddCustServlet() {
+	public AddCustUserServlet() {
         super();
     }
  
@@ -83,7 +83,7 @@ public class AddCustServlet extends HttpServlet {
         	{
         		id = rs2.getInt("CusId");        		
         	}
-        	System.out.println("Updated id " + id);
+        	System.out.println("Updated id");
         	
         	String sql = "INSERT INTO Login(Usr, Pwd, AccType, Id)"
     				+ " VALUES (?, ?, ?, ?);";
@@ -97,7 +97,7 @@ public class AddCustServlet extends HttpServlet {
         } catch (Exception e) {
 			e.printStackTrace();
 		}
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/empCust");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/users");
         dispatcher.forward(request, response);
     }
  
