@@ -65,7 +65,7 @@ public class SuggestedStockServlet extends HttpServlet {
         request.setAttribute("stocks", list);
         request.setAttribute("table", table);
         request.setAttribute("userType", loginedUser.getUserType());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_stocks.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         
     }

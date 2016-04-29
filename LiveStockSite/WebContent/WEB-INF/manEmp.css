@@ -1,0 +1,50 @@
+p {
+  margin: 0;
+}
+
+.row {
+  margin: 0;
+  background-color: #234467;
+  padding-left: 2px;
+}
+
+.container{
+  background-color: #C8D4E0;
+}
+
+.utilities {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.utility {
+  background-color: #222;
+  background: rgba(255,255,255,.9);
+  border-spacing: 2px;
+  border-color: gray;
+  border-bottom: 1px #e5e5e5 solid;
+  padding: 1px;
+}
+
+.current .item {
+  background: rgba(206,220,206,.9);
+}
+
+.item {
+  cursor: pointer;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.item .source {
+  padding-left: 1px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.description {
+  display: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #C8D4E0;
+}

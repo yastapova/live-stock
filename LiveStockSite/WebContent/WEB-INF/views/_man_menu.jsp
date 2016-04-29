@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <div class="menu" align="right">
 	<a href="manAccInfo" id="manAccInfo">Account Info</a>
-	<a href="stocks" id="stock">Stocks</a>
+	<a href="stocks" id="stocks">Stocks</a>
 	<a href="manEmp" id="employees">Employees</a>
 	<a href="finances" id="finances">Finances</a>
 	<a href="orders" id="managerOrders">Orders</a>
