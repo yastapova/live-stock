@@ -41,6 +41,7 @@ public class MailingListServlet extends HttpServlet
             while (rs.next())
             {
             	CustomerAccount customer = new CustomerAccount();
+            	customer.setId(rs.getInt("CusId"));
             	customer.setFname(rs.getString("FirstName"));
             	customer.setLname(rs.getString("LastName"));
             	customer.setAddress(rs.getString("Address"));
