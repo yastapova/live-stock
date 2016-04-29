@@ -18,7 +18,7 @@ import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/suggested_stocks" })
+@WebServlet(urlPatterns = { "/rep_suggested_stocks" })
 public class DoRepSuggestStock extends HttpServlet {
     private static final long serialVersionUID = 1L;
  

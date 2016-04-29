@@ -33,6 +33,7 @@
 		<h2>Mailing List</h2>
 		<button class="btn-default" onclick="return customer_mailing_list()">Generate</button>
 	</div>
+	<div class="body" align="center">
 	<h2>Customer Stock Suggestions</h2>
 		<c:if test="${stocks != null}">
 		Success
@@ -52,6 +53,7 @@
 			</form>
 		</table>
 		<button value="suggest" class="btn-default" id="suggestStock" onclick="return suggest_onclick()">Suggest</button>
+	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>
