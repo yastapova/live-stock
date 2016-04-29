@@ -35,5 +35,4 @@ public class RegisterEmployeeServlet extends HttpServlet{
             throws ServletException, IOException {
         doGet(request, response);
     }
- 
 }

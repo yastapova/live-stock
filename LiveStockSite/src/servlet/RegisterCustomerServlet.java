@@ -35,5 +35,4 @@ public class RegisterCustomerServlet extends HttpServlet{
             throws ServletException, IOException {
         doGet(request, response);
     }
- 
 }

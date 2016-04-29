@@ -62,6 +62,7 @@ function addCust_onclick() {
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_man_menu.jsp"></jsp:include>
+	<c:set var="me" scope="session" value="${id}"/>
 	<div class="body" align="center">
 		<h2>Employees</h2>
 		<table border="5" id="accounts">
@@ -78,6 +79,7 @@ function addCust_onclick() {
 	          <th style="width: 150px"><span style="font-size: 10pt">Hourly Rate</span></th>
 	        </tr>
 			<c:forEach var="emp" items="${employees}">
+			<c:if test="${emp.id ne me}">
 				<tr>
 		            <td style="width: 50px"><span style="font-size: 10pt"><c:out value="${emp.id}" /></span></td>
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${emp.fname}" /></span></td>
@@ -90,6 +92,7 @@ function addCust_onclick() {
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${emp.start}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${emp.hourly}" /></span></td>
 	            </tr>
+	            </c:if>
 		    </c:forEach>
 	    </table>
 		<h2>Customers</h2>
@@ -187,7 +190,6 @@ function addCust_onclick() {
 		<button value="addEmp" class="btn-default" id="addEmp" onclick="return addEmp_onclick()">Confirm</button>     
         </div>
       </div>
-      
       <!-- Utility -->
       <div class="utility">
         <div class="item row">
@@ -200,7 +202,9 @@ function addCust_onclick() {
          	Employee ID:
 			<select name="empIdDelete" class="inputA">
 			    <c:forEach var="emp" items="${employees}">
+			    <c:if test="${emp.id ne me}">
 			    <option value="${emp.id}"><c:out value="${emp.id}" /></option>
+			    </c:if>
 			    </c:forEach>
 			</select>
 			<br>
