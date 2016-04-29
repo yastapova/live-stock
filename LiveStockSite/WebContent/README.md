@@ -19,6 +19,7 @@ Customer Representatives should be thought of as stock brokers and should be abl
 Record an order [DONE]
 Add, Edit and Delete information for a customer [DONE]
 Produce customer mailing lists [DONE]
+	{Yuliya: fix mailing list later with booleans}
 Produce a list of stock suggestions for a given customer (based on that customer's past orders) [DONE]
 
 3.3 Customer-Level Transactions

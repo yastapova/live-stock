@@ -163,3 +163,14 @@ h3 {
 a:.dropdown-item{
 	text-decoration: none;
 }
+.utility {
+	color: #C8D4E0;
+	font-size: 10pt;
+}
+.utility h3 {
+	font-variant: small-caps;
+	font-family: Georgia, serif;
+}
+.utility.current {
+	color: #234467;
+}

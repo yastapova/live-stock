@@ -87,9 +87,10 @@ function addCust_onclick() {
 	            </tr>
 		    </c:forEach>
 	    </table>
+	    <br />
 	</div>
 
-	<div class="utilities container">  
+	<div class="utilities container" align="left">  
       <!-- Utility -->
       <div class="utility current">
         <div class="item row">
