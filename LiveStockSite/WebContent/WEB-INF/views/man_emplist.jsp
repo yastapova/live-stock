@@ -57,6 +57,7 @@ function addEmp_onclick() {
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_man_menu.jsp"></jsp:include>
+	<c:set var="me" scope="session" value="${id}"/>
 	<div class="body" align="center">
 		<h2>Employees</h2>
 		<table border="5" id="accounts">
@@ -72,7 +73,9 @@ function addEmp_onclick() {
 	          <th style="width: 150px"><span style="font-size: 10pt">Start Date</span></th>
 	          <th style="width: 150px"><span style="font-size: 10pt">Hourly Rate</span></th>
 	        </tr>
-			<c:forEach var="emp" items="${employees}">
+	        <c:set var="me" scope="session" value="${id}"/>
+			<c:forEach var="emp" items="${employees}">			
+				 <c:if test="${emp.id ne me}">
 				<tr>
 		            <td style="width: 50px"><span style="font-size: 10pt"><c:out value="${emp.id}" /></span></td>
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${emp.fname}" /></span></td>
@@ -85,6 +88,7 @@ function addEmp_onclick() {
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${emp.start}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${emp.hourly}" /></span></td>
 	            </tr>
+	            </c:if>
 		    </c:forEach>
 	    </table>
 	</div>
@@ -211,7 +215,9 @@ function addEmp_onclick() {
          	Employee ID:
 			<select name="empIdDelete" class="inputA">
 			    <c:forEach var="emp" items="${employees}">
+			    <c:if test="${emp.id ne me}">
 			    <option value="${emp.id}"><c:out value="${emp.id}" /></option>
+			    </c:if>
 			    </c:forEach>
 			</select>
 			<br>
