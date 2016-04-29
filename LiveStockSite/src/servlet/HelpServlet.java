@@ -50,7 +50,7 @@ public class HelpServlet extends HttpServlet
         {
 	        // Logged in, forward to /WEB-INF/views/userInfoView.jsp
         	System.out.println("I am a customer!");
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_help.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_help.jsp");
 	        dispatcher.forward(request, response);
         }
         else
@@ -58,13 +58,13 @@ public class HelpServlet extends HttpServlet
         	if(((EmployeeAccount)loginedUser).isManager())
         	{	
         		System.out.println("I am a manager!");
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_help.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_help.jsp");
 		        dispatcher.forward(request, response);
         	}
         	else
         	{	
         		System.out.println("I am a customer rep!");
-	        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_help.jsp");
+	        	RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_help.jsp");
 		        dispatcher.forward(request, response);
         	}
         }

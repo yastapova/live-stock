@@ -338,7 +338,7 @@ CREATE PROCEDURE getBestSellers2()
 delimiter |
 CREATE PROCEDURE Suggest(IN cus_id INT)
 	BEGIN
-		SELECT S.StockSymbol, S.StockName, S.StockType, S.SharePrice, S.NumAvailShares
+		SELECT DISTINCT S.StockSymbol, S.StockName, S.StockType, S.SharePrice, S.NumAvailShares
 		FROM Stock S, Order_ O, Account_ A
 		WHERE (A.CusId = cus_id AND O.CusAccNum = A.AccNum AND O.StockSymbol = S.StockSymbol)
         GROUP BY S.StockSymbol;
