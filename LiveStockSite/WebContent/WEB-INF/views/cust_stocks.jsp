@@ -41,7 +41,7 @@ function search_type_onclick() {
 	javascript:typeForm.submit();
 }
 
-function search_keywrod_onclick() {
+function search_keyword_onclick() {
 	console.log("Search Keyword");
 	javascript:keywordForm.submit();
 }
