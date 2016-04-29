@@ -104,6 +104,7 @@ DROP TRIGGER DoTransact;
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
 DROP PROCEDURE getBestSellers2;
+DROP PROCEDURE Suggest;
 
 call getBestSellers2;
 call getStockUsingType('r');
