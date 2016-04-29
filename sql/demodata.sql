@@ -16,6 +16,9 @@ VALUES ('2006-10-01 00:00:00', '1234567812345678', 4);
 INSERT INTO Account_(AccCreDate, CreditCNum, CusId)
 VALUES ('2006-10-15 00:00:00', '5678123456781234', 2);
 
+INSERT INTO Account_(AccCreDate, CreditCNum, CusId)
+VALUES ('2016-10-15 00:00:00', '5432123456781234', 1);
+
 INSERT INTO Stock (StockSymbol, StockName, StockType, SharePrice, NumAvailShares)
 VALUES ('GM', 'General Motors', 'automotive', 34.23, 1000);
 
@@ -71,10 +74,16 @@ INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, Pr
 VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
+VALUES ('F', 'Buy', 200, 3, NOW(), 'Trailing Stop', 5, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('IBM', 'Buy', 100, 1, NOW(), 'Market', null, 1, 0);
+
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('IBM', 'Sell', 25, 2, NOW(), 'Market', null, 1, 0);
+
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('GM', 'Buy', 100, 1, NOW(), 'Market', null, 1, 0);
 
 
 SET SQL_SAFE_UPDATES = 0;
