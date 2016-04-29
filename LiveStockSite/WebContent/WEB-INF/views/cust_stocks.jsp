@@ -26,6 +26,11 @@ function suggested_onclick() {
 	window.open("suggested_stocks","_self");
 }
 
+function suggested_cusid_onclick() {
+	console.log("Suggested");
+	javascript:suggestForm.submit();
+}
+
 function best_sellers_onclick() {
 	console.log("Best");
     window.open("best_stocks","_self");
@@ -36,7 +41,7 @@ function search_type_onclick() {
 	javascript:typeForm.submit();
 }
 
-function search_keywrod_onclick() {
+function search_keyword_onclick() {
 	console.log("Search Keyword");
 	javascript:keywordForm.submit();
 }
@@ -67,6 +72,9 @@ function search_keywrod_onclick() {
 	          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
 	          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
 	          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
+	          <c:if test="${userType=='M'}">
+	          	<th style="width: 100px"><span style="font-size: 10pt">Set Price</span></th>
+	          </c:if>
 	        </tr>
 			<c:forEach var="stock" items="${stocks}">
 	   			<tr>
@@ -75,6 +83,14 @@ function search_keywrod_onclick() {
 		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
+		            <c:if test="${userType=='M'}">
+	          			<td style="width: 100px"><span style="font-size: 10pt">
+							<form id="priceForm" name="myForm" action="price_stocks" method="post">
+								<input class="forminput" id="price" name="stockprice" type="text" />
+								<button value="updatedprice" class="btn-default" id="sstockprice" onclick="return set_price_onclick()">Set Price</button>
+							</form>
+						</span></td>
+	          		</c:if>
 	        	</tr>
 			</c:forEach>
   		</table>
@@ -96,6 +112,14 @@ function search_keywrod_onclick() {
 			<input class="forminput" id="keyword" name="stockkeyword" type="text" />
 			<button value="searchkeyword" class="btn-default" id="searchkeyword" onclick="return search_keyword_onclick()">Search Keyword</button>
 		</form>
+		<c:if test="${userType=='R'}">
+			<br>
+			<form id="suggestForm" name="myForm" action="suggested_stocks" method="post">
+			<span class="formlabel">Get Suggested Stocks for a CustomerID:</span>
+			<input class="forminput" id="suggest" name="stocksuggest" type="text" />
+			<button value="suggest" class="btn-default" id="suggest" onclick="return suggested_cusid_onclick()">Get Stocks</button>
+		</form>
+		</c:if>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>

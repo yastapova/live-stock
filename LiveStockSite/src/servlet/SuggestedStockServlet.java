@@ -38,14 +38,26 @@ public class SuggestedStockServlet extends HttpServlet {
         List<Stock> list = new ArrayList<Stock>();
         Connection conn = MyUtils.getStoredConnection(request);
         int id = loginedUser.getId();
-        String table = "Suggested For You";
+        String table;
+        String cusId = request.getParameter("stocksuggest");
+        if (cusId!=null) {
+        	table = "Suggested for CustomerID " + cusId;
+        }
+        else {
+        	 table = "Suggested For You";
+        }
         System.out.println(table);
         System.out.println("Userid: "+id);
         
         try{
         	String sql1 = "CALL Suggest(?)";
         	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        	pstm1.setInt(1,id);
+        	if (cusId!=null) {
+        		pstm1.setInt(1,Integer.parseInt(cusId));
+        	}
+        	else {
+        		pstm1.setInt(1,id);
+        	}
         	java.sql.ResultSet rs  = pstm1.executeQuery();
             
             while (rs.next()) {

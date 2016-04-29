@@ -285,7 +285,7 @@ CREATE PROCEDURE getStockUsingType(IN stock_type CHAR(20))
 	BEGIN
 		SELECT S.*
 		FROM STOCK S
-		WHERE S.StockType LIKE CONCAT('%', stocktype, '%');
+		WHERE S.StockType LIKE CONCAT('%', stock_type, '%');
 
     END
 | delimiter ;
@@ -295,9 +295,9 @@ delimiter |
 CREATE PROCEDURE getMostRecentOrderInfo()
 	BEGIN
 		SELECT O.*
-	FROM ORDER_ O, CUSTOMER C, ACCOUNT_ A
-	WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId AND C.CusId = 4
-	AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
+		FROM ORDER_ O, CUSTOMER C, ACCOUNT_ A
+		WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId AND C.CusId = 4
+		AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
 
     END
 | delimiter ;
@@ -340,7 +340,8 @@ CREATE PROCEDURE Suggest(IN cus_id INT)
 	BEGIN
 		SELECT S.StockSymbol, S.StockName, S.StockType, S.SharePrice, S.NumAvailShares
 		FROM Stock S, Order_ O, Account_ A
-		WHERE (A.CusId = cus_id AND O.CusAccNum = A.AccNum AND O.StockSymbol = S.StockSymbol);
+		WHERE (A.CusId = cus_id AND O.CusAccNum = A.AccNum AND O.StockSymbol = S.StockSymbol)
+        GROUP BY S.StockSymbol;
 	END
 | delimiter ;
 
