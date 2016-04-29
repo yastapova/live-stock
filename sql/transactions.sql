@@ -218,7 +218,7 @@ CREATE PROCEDURE deleteCustomer(IN cus_id INT)
 delimiter |
 CREATE PROCEDURE createCustomerMailingList()
 	BEGIN
-		SELECT LastName, FirstName, Email, Address, City, State, ZipCode
+		SELECT CusId, LastName, FirstName, Email, Address, City, State, ZipCode
 		FROM Customer;
     END
 | delimiter ;
