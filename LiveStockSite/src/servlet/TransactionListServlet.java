@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import general.CustomerAccount;
 import general.Transaction;
 import general.UserAccount;
 import utils.MyUtils;
@@ -38,6 +39,9 @@ public class TransactionListServlet extends HttpServlet {
         System.out.println("Logged in user is " + loginedUser);
         
         List<Transaction> tlist = new ArrayList<Transaction>();
+        List<String> ssyms = new ArrayList<String>();
+        List<String> stypes = new ArrayList<String>();
+        List<CustomerAccount> customers = new ArrayList<CustomerAccount>();
         
         Connection conn = MyUtils.getStoredConnection(request);
         try{
@@ -63,7 +67,50 @@ public class TransactionListServlet extends HttpServlet {
 				//conn.close();
 			} catch (Exception ee) {};*/
 		}
-			
+        try {
+        	String sql = "SELECT DISTINCT S.StockSymbol FROM Stock S;";
+        	PreparedStatement pstm = conn.prepareStatement(sql);
+        	ResultSet rs = pstm.executeQuery();
+        	
+        	while(rs.next())
+        	{
+        		ssyms.add(rs.getString("StockSymbol"));
+        	}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        try {
+        	String sql = "SELECT DISTINCT S.StockType FROM Stock S;";
+        	PreparedStatement pstm = conn.prepareStatement(sql);
+        	ResultSet rs = pstm.executeQuery();
+        	
+        	while(rs.next())
+        	{
+        		stypes.add(rs.getString("StockType"));
+        	}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        try {
+        	String sql = "SELECT DISTINCT C.CusId, C.FirstName, C.LastName FROM Customer C;";
+        	PreparedStatement pstm = conn.prepareStatement(sql);
+        	ResultSet rs = pstm.executeQuery();
+        	
+        	while(rs.next())
+        	{
+        		CustomerAccount cus = new CustomerAccount();
+        		cus.setId(rs.getInt("CusId"));
+        		cus.setFname(rs.getString("FirstName"));
+        		cus.setLname(rs.getString("LastName"));
+        		customers.add(cus);
+        	}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        request.setAttribute("customers", customers);
+        request.setAttribute("types", stypes);
+        request.setAttribute("stocksyms", ssyms);
         request.setAttribute("transactions", tlist);    
         request.setAttribute("id", loginedUser.getId());
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_finances.jsp");
