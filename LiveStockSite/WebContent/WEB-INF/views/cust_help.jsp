@@ -34,6 +34,8 @@
 			<dd>View your pending and completed orders.</dd>
 			<dt>Stocks</dt>
 			<dd>Search for stocks and place orders.</dd>
+			<dt>Conditional Price History</dt>
+			<dd>View Conditonal Price History for conditional orders.</dd>
 			<dt>Help</dt>
 			<dd>Read this help page.</dd>
 			<dt>Logout</dt>
