@@ -31,11 +31,6 @@ function mostTraded_onclick() {
 	javascript:activeForm.submit();
 }
 
-function suggested_cusid_onclick() {
-	console.log("Suggested");
-	javascript:suggestForm.submit();
-}
-
 function best_sellers_onclick() {
 	console.log("Best");
     window.open("best_stocks","_self");
@@ -70,31 +65,22 @@ function search_keyword_onclick() {
 	</c:if>
 	<div class="body" align="center">
 		<h2><c:out value="${table}"/></h2>
+		<form id="priceForm" name="myForm" action="price_stocks" method="post">
 		<table border="4" id="stock" onclick="return stock_onclick()">
 	        <tr>
 	          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
 	          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
 	          <th style="width: 100px"><span style="font-size: 10pt">Number of Orders</span></th>
-	          <c:if test="${userType=='M'}">
-	          	<th style="width: 100px"><span style="font-size: 10pt">Set Price</span></th>
-	          </c:if>
 	        </tr>
 			<c:forEach var="stock" items="${stocks}">
 	   			<tr>
 		            <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
 		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
 		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.numOrders}" /></span></td>
-		            <c:if test="${userType=='M'}">
-	          			<td style="width: 100px"><span style="font-size: 10pt">
-							<form id="priceForm" name="myForm" action="price_stocks" method="post">
-								<input class="forminput" id="price" name="stockprice" type="text" />
-								<button value="updatedprice" class="btn-default" id="sstockprice" onclick="return set_price_onclick()">Set Price</button>
-							</form>
-						</span></td>
-	          		</c:if>
 	        	</tr>
 			</c:forEach>
   		</table>
+  		</form>
   		<br>
   		<button class="btn-default" onclick="return stock_onclick()">Current Stock Listings</button>
   		<button class="btn-default" onclick="return best_sellers_onclick('Best Sellers')">Best Sellers</button>
@@ -121,14 +107,6 @@ function search_keyword_onclick() {
 			<input class="forminput" id="keyword" name="stockkeyword" type="text" />
 			<button value="searchkeyword" class="btn-default" id="searchkeyword" onclick="return search_keyword_onclick()">Search Keyword</button>
 		</form>
-		<c:if test="${userType=='R'}">
-			<br>
-			<form id="suggestForm" name="myForm" action="suggested_stocks" method="post">
-			<span class="formlabel">Get Suggested Stocks for a CustomerID:</span>
-			<input class="forminput" id="suggest" name="stocksuggest" type="text" />
-			<button value="suggest" class="btn-default" id="suggest" onclick="return suggested_cusid_onclick()">Get Stocks</button>
-		</form>
-		</c:if>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>

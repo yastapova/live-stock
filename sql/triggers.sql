@@ -14,6 +14,14 @@ CREATE TRIGGER SharePriceValid
         NEW.SharePrice,
         NULL);
 
+-- Make sure share price is positive.
+CREATE TRIGGER SharePriceValid2
+	BEFORE UPDATE ON Stock FOR EACH ROW
+	SET NEW.SharePrice = IF
+		(NEW.SharePrice > 0,
+        NEW.SharePrice,
+        NULL);
+
 -- Make sure that there is not a negative number of shares available.
 CREATE TRIGGER AvailSharesValid
 	BEFORE INSERT ON Stock FOR EACH ROW
