@@ -79,8 +79,9 @@ public class EmployeeListServlet extends HttpServlet {
 			} catch (Exception ee) {};*/
 		}
 			
-        request.setAttribute("employees", emplist);       
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_emplist.jsp");
+        request.setAttribute("employees", emplist);    
+        request.setAttribute("id", loginedUser.getId());
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_emplist.jsp");
         dispatcher.forward(request, response);
         
     }

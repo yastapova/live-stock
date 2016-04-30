@@ -294,7 +294,7 @@ function addCust_onclick() {
 			</form>  
         </div>
     </div>
-      </div>
+    </div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

@@ -89,14 +89,14 @@ public class OrdersServlet extends HttpServlet
             }
     	    request.setAttribute("orders", list);
         	
-	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_orders.jsp");
+	        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_orders.jsp");
 	        dispatcher.forward(request, response);
         }
         else
         {
         	if(((EmployeeAccount)loginedUser).isManager())
         	{
-        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_help.jsp");
+        		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_orders.jsp");
 		        dispatcher.forward(request, response);
         	}
         	else
