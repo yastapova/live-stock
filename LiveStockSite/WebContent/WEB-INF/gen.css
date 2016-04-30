@@ -23,8 +23,11 @@ a {
 .formhint {
 	font-size: 10pt;
 }
-.forminput{
+.forminput {
 	width: 175px;
+}
+.formsmall {
+	width: 50px;
 }
 .accinfo {
 	font-size: 12pt;

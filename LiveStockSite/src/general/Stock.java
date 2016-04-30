@@ -8,6 +8,7 @@ public class Stock
 	private String stocktype;
 	private float shareprice;
 	private int numshares;
+	private int numOrders;
 	
 	public Stock(String stocksym, String stockname, String stocktype, float shareprice, int numshares) {
 		this.stocksym = stocksym;
@@ -15,6 +16,22 @@ public class Stock
 		this.stocktype = stocktype;
 		this.shareprice = shareprice;
 		this.numshares = numshares;
+	}
+	
+	public Stock(String stocksym, String stockname, String stocktype, float shareprice, int numshares, int numOrders) {
+		this.stocksym = stocksym;
+		this.stockname = stockname;
+		this.stocktype = stocktype;
+		this.shareprice = shareprice;
+		this.numshares = numshares;
+		this.numOrders = numOrders;
+	}
+	
+	public Stock(String stocksym, String stockname, int numOrders)
+	{
+		this.stocksym = stocksym;
+		this.stockname = stockname;
+		this.numOrders = numOrders;
 	}
 	
 	public String getStocksym() {
@@ -46,6 +63,12 @@ public class Stock
 	}
 	public void setNumshares(int numshares) {
 		this.numshares = numshares;
+	}
+	public int getNumOrders() {
+		return numOrders;
+	}
+	public void setNumOrders(int numOrders) {
+		this.numOrders = numOrders;
 	}
 	
 }

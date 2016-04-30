@@ -165,7 +165,7 @@ delimiter |
 -- Shows a list of the top n most actively traded stocks.
 CREATE PROCEDURE showMostTradedStocks(IN n INT)
 	BEGIN
-		SELECT M.StockSymbol, M.NumOrders
+		SELECT M.StockSymbol, M.StockName, M.NumOrders
 		FROM MostTraded M
 		ORDER BY NumOrders ASC
 		LIMIT n;
