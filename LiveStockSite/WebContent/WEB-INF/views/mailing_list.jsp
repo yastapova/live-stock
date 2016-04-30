@@ -61,11 +61,30 @@
 		<br />
 		<h2>Customer Stock Suggestions</h2>
 		<c:if test="${stocks != null}">
-		Success
+			<h3>Suggestions for Customer Id ${suggestCus}</h3>
+			<table border="4" id="stock" onclick="return stock_onclick()">
+		        <tr>
+		          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
+		        </tr>
+				<c:forEach var="stock" items="${stocks}">
+		   			<tr>
+			            <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
+			            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
+			            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
+			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
+			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
+		        	</tr>
+				</c:forEach>
+	  		</table>
+		<br />
 		</c:if>
 		
 		<table>          
-            <form id="suggestStock" name="suggestStockForm" action="repSuggestStock" method="post">
+            <form id="suggestStock" name="suggestStockForm" action="repSuggestStocks" method="post">
             	<tr>
             		<td>ID:</td>
 					<td><select name="cusIdEdit" class="inputA">

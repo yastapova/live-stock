@@ -19,21 +19,25 @@ Customer Representatives should be thought of as stock brokers and should be abl
 Record an order [DONE]
 Add, Edit and Delete information for a customer [DONE]
 Produce customer mailing lists [DONE]
-Produce a list of stock suggestions for a given customer (based on that customer's past orders)
+	{Yuliya: fix mailing list later with booleans}
+Produce a list of stock suggestions for a given customer (based on that customer's past orders) [DONE]
 
 3.3 Customer-Level Transactions
 ----------------------------------------------
 Customers should be thought of as online traders and should be able to easily browse your online trading system on the web and place orders to purchase or sell stocks. In particular, they should be able to place a trailing-stop or hidden-stop conditional order, and place an order to buy or sell stocks at market or close-of-market price. While they will not be permitted to access the database directly, they should be able to retrieve the following information:
 
-A customer's current stock holdings
+A customer's current stock holdings [DONE]
 The share-price and trailing-stop history for a given conditional order
 The share-price and hidden-stop history for a given conditional order
 The share-price history of a given stock over a certain period of time (e.g., past six months)
-A history of all current and past orders a customer has placed
-Stocks available of a particular type and most-recent order info
-Stocks available with a particular keyword or set of keywords in the stock name, and most-recent order info
-Best-Seller list of stocks
-Personalized stock suggestion list
+A history of all current and past orders a customer has placed [DONE]
+Stocks available of a particular type [???]
+	and most-recent order info
+Stocks available with a particular keyword or set of keywords in the stock name [DONE]
+	and most-recent order info
+{Also add search by stock symbol?}
+Best-Seller list of stocks [DONE]
+Personalized stock suggestion list [DONE]
 
 4 User Access Control
 ------------------------------------

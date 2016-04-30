@@ -87,7 +87,7 @@ public class PortfolioServlet extends HttpServlet {
 			
         request.setAttribute("accounts", alist);
         request.setAttribute("portfolios", plist);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_portfolio.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_portfolio.jsp");
         dispatcher.forward(request, response);
         
     }
