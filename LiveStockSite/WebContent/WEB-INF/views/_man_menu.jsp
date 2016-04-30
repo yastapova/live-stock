@@ -7,7 +7,7 @@
 	<a href="stocks" id="stocks">Stocks</a>
 	<a href="finances" id="finances">Finances</a>
 	<a href="orders" id="managerOrders">Orders</a>
-	<a href="Backup" id="backup">Back Up</a>
+	<a href="backup" id="backup">Back Up</a>
 	<a href="help" id="help">Help</a>
 	<a href="home">Logout</a>
 </div>

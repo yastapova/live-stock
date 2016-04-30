@@ -62,4 +62,3 @@ A comprehensive Help facility, including a topic-driven pull-down Help menu [DON
 ----------------------------------
 Passwords and usernames are not currently case sensitive
 Orders only show date, not time
->>>>>>> f0cebb4ecc729293f2beb73dc8edf481f5d1f40e
