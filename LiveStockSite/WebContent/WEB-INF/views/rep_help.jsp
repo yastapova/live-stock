@@ -29,7 +29,11 @@ $(document).ready(function(){
 			<dt>Account Info</dt>
 			<dd>View and update your account information.</dd>
 			<dt>Utilities</dt>
-			<dd>Manage customer accounts.</dd>
+			<dd>Manage customer accounts and associated tools.</dd>
+			<dt>Customers</dt>
+			<dd>Manage customer account information.</dd>
+			<dt>Colleauges</dt>
+			<dd>View Employee Directory.</dd>
 			<dt>Orders</dt>
 			<dd>View and record pending orders, or view completed orders.</dd>
 			<dt>Stocks</dt>

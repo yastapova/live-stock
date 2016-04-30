@@ -32,6 +32,8 @@
 			<dd>Search for stocks and place orders.</dd>
 			<dt>Employees</dt>
 			<dd>View and manage your employees.</dd>
+			<dt>Users</dt>
+			<dd>View and manage the users of LiveStock.</dd>
 			<dt>Finances</dt>
 			<dd>View and manage your employees.</dd>
 			<dt>Orders</dt>
