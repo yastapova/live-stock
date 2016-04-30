@@ -18,7 +18,7 @@ import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/suggested_stocks" })
+@WebServlet(urlPatterns = { "/repSuggestStocks" })
 public class DoRepSuggestStock extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -61,7 +61,8 @@ public class DoRepSuggestStock extends HttpServlet {
 			
         request.setAttribute("stocks", list);
         request.setAttribute("userType", loginedUser.getUserType());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/mailing_list.jsp");
+        request.setAttribute("suggestCus", id);
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mailing_list.jsp");
         dispatcher.forward(request, response);
         
     }

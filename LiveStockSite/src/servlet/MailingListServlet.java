@@ -63,7 +63,7 @@ public class MailingListServlet extends HttpServlet
 		}
         System.out.println("Found items: " + list.size());
         session.setAttribute("list", list);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/mailing_list.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mailing_list.jsp");
         dispatcher.forward(request, response);
         
     }

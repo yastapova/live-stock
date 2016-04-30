@@ -26,9 +26,9 @@ function suggested_onclick() {
 	window.open("suggested_stocks","_self");
 }
 
-function suggested_cusid_onclick() {
-	console.log("Suggested");
-	javascript:suggestForm.submit();
+function mostTraded_onclick() {
+	console.log("Most Actively Traded");
+	javascript:activeForm.submit();
 }
 
 function best_sellers_onclick() {
@@ -84,7 +84,7 @@ function search_keyword_onclick() {
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
 		            <c:if test="${userType=='M'}">
-	          			<td align="center" style="width: 100px"><span style="font-size: 10pt">
+	          			<td style="width: 100px"><span style="font-size: 10pt">
 							<form id="priceForm" name="myForm" action="price_stocks" method="post">
 								<input class="forminput" id="price" name="stockprice" type="text" />
 								<button value="updatedprice" class="btn-default" id="sstockprice" onclick="return set_price_onclick()">Set Price</button>
@@ -101,6 +101,14 @@ function search_keyword_onclick() {
 			<button class="btn-default" onclick="return suggested_onclick()">Suggested For You</button>
 		</c:if>
 		<br><br>
+		<c:if test="${userType=='M'}">
+		<form id="activeForm" name="myForm" action="most_actively_traded" method="post">
+			<span class="formlabel">Number to show:</span>
+			<input class="formsmall" id="numstocks" name="numstocks" type="text" />
+  			<button class="btn-default" onclick="return mostTraded_onclick()">Most Actively Traded</button>
+  		</form>
+  		</c:if>
+  		<br />
 		<form id="typeForm" name="myForm" action="search_stocks" method="post">
 			<span class="formlabel">Search on type:</span>
 			<input class="forminput" id="stocktype" name="stocktype" type="text" />
