@@ -116,8 +116,10 @@ public class OrdersServlet extends HttpServlet
 	        			System.out.println("Passed # values: " + id_param.length);
 	        			for(String s : id_param)
 	        			{
+	        				System.out.println(s);
 	        				pst1.setInt(1, Integer.parseInt(s));
 	        				pst1.executeUpdate();
+	        				System.out.println(s);
 	        			}
         			} catch (Exception e) {
             			e.printStackTrace();

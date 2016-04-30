@@ -37,6 +37,9 @@ VALUES (1, 'F', 100, 'None', NULL);
 INSERT INTO Portfolio (AccNum, StockSymbol, NumShares, Stop_, StopPrice)
 VALUES (2, 'IBM', 50, 'None', NULL);
 
+INSERT INTO Portfolio (AccNum, StockSymbol, NumShares, Stop_, StopPrice)
+VALUES (3, 'GM', 50, 'None', NULL);
+
 INSERT INTO Employee (SSN, LastName, FirstName, Address, City, State, ZipCode, Telephone, StartDate, HourlyRate, Position_)
 VALUES ('123456789', 'Smith', 'David', '123 College Road', 'Stony Brook', 'NY', '11790', '5162152345', '2005-11-01 00:00:00', 60, 'CusRep');
 
@@ -66,15 +69,21 @@ VALUES ('Boss', 'password', 3, 2);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
-	SET Recorded = 0
-	WHERE O.OrderId = 12;
+	SET Recorded = 1
+	WHERE O.OrderId = 10;
+SET SQL_SAFE_UPDATES = 1;
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Order_ O
+	SET Completed = 0
+	WHERE O.OrderId = 1;
 SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('F', 'Buy', 200, 3, NOW(), 'Trailing Stop', 5, 1, 0);
+VALUES ('F', 'Buy', 200, 3, NOW(), 'Market', null, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('IBM', 'Buy', 100, 1, NOW(), 'Market', null, 1, 0);
@@ -85,9 +94,17 @@ VALUES ('IBM', 'Sell', 25, 2, NOW(), 'Market', null, 1, 0);
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('GM', 'Buy', 100, 1, NOW(), 'Market', null, 1, 0);
 
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('GM', 'Sell', 25, 3, NOW(), 'Trailing Stop', 10, 1, 0);
+
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
+
+INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
+VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
-UPDATE Stock SET SharePrice = 10
+UPDATE Stock SET SharePrice = 6
 	WHERE StockSymbol = 'F';
 SET SQL_SAFE_UPDATES = 1;
 
@@ -100,6 +117,7 @@ DROP VIEW Suggest;
 DROP TRIGGER NumSharesValid;
 DROP TRIGGER SellOrder;
 DROP TRIGGER DoTransact;
+DROP TRIGGER UpdateHiddenStop;
 
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
@@ -123,3 +141,11 @@ DROP TABLE Stock;
 DROP TABLE Customer;
 DROP TABLE Employee;
 DROP TABLE Login;
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE STOCK
+SET SharePrice = 10
+WHERE StockSymbol = "GM";
+SET SQL_SAFE_UPDATES = 1;
+
+SHOW ERRORS;

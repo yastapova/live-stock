@@ -84,7 +84,7 @@ function search_keyword_onclick() {
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
 		            <c:if test="${userType=='M'}">
-	          			<td style="width: 100px"><span style="font-size: 10pt">
+	          			<td align="center" style="width: 100px"><span style="font-size: 10pt">
 							<form id="priceForm" name="myForm" action="price_stocks" method="post">
 								<input class="forminput" id="price" name="stockprice" type="text" />
 								<button value="updatedprice" class="btn-default" id="sstockprice" onclick="return set_price_onclick()">Set Price</button>
@@ -112,14 +112,6 @@ function search_keyword_onclick() {
 			<input class="forminput" id="keyword" name="stockkeyword" type="text" />
 			<button value="searchkeyword" class="btn-default" id="searchkeyword" onclick="return search_keyword_onclick()">Search Keyword</button>
 		</form>
-		<c:if test="${userType=='R'}">
-			<br>
-			<form id="suggestForm" name="myForm" action="suggested_stocks" method="post">
-			<span class="formlabel">Get Suggested Stocks for a CustomerID:</span>
-			<input class="forminput" id="suggest" name="stocksuggest" type="text" />
-			<button value="suggest" class="btn-default" id="suggest" onclick="return suggested_cusid_onclick()">Get Stocks</button>
-		</form>
-		</c:if>
 	</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
