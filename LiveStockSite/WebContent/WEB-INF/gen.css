@@ -66,7 +66,7 @@ h3 {
 .footer {
 	text-align: center;
 	margin-top: 50px;
-	padding: 10px;
+	padding: 10px 10px 10px 10px;
 	background-color: #234467;
 	border-style: solid;
 	border-width: 2px;

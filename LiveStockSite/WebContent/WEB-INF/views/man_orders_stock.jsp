@@ -34,14 +34,8 @@ $(document).ready(function(){
 
 });
 
-function stock_onclick() {
-    console.log("stock!");
-    javascript:stockForm.submit();
-}
-
-function cust_onclick() {
-    console.log("cust!");
-    javascript:custForm.submit();
+function back_onclick() {
+    window.open("manOrders", "_self");
 }
 
 // ]]>
@@ -62,12 +56,14 @@ function cust_onclick() {
 	          <th style="width: 150px"><span style="font-size: 10pt">Stock Symbol</span></th>
 	          <th style="width: 150px"><span style="font-size: 10pt">Order Type</span></th>
 	          <th style="width: 150px"><span style="font-size: 10pt">Num Shares</span></th>
-	          <th style="width: 150px"><span style="font-size: 10pt">Price Type</span></th>	          
+	          <th style="width: 150px"><span style="font-size: 10pt">Price Type</span></th>       
 	          <th style="width: 150px"><span style="font-size: 10pt">Share Price</span></th>
 	          <th style="width: 150px"><span style="font-size: 10pt">Time</span></th>
 	          <th style="width: 150px"><span style="font-size: 10pt">Recorded</span></th>	          
 	        </tr>	
-	          <c:forEach var="order" items="${orders}">							
+	          <c:forEach var="order" items="${orders}">	
+	          <c:forEach var="stockSym" items="${stockSyms}">
+	          <c:if test="${order.stockSymbol eq stockSym}">					
 				<tr>
 		            <td style="width: 50px"><span style="font-size: 10pt"><c:out value="${order.id}" /></span></td>
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${order.cusAccNum}" /></span></td>
@@ -79,54 +75,13 @@ function cust_onclick() {
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${order.curSharePrice}" /></span></td>
 		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${order.timestamp}" /></span></td>
 		            <td style="width: 150px"><span style="font-size: 10pt"><c:out value="${order.recorded}" /></span></td>	
-		        </tr>	            
+		        </tr>	  
+		       </c:if>    
+		       </c:forEach>      
 		    </c:forEach>
 	    </table>
-	</div>
-	<div class="utilities container">  
-      <!-- Utility -->
-      <div class="utility current">
-        <div class="item row">
-          <div class="col-xs-3">
-             <h3>Customer Name Filter</h3>
-          </div>
-        </div>
-        <div class="description row">
-        <table>          
-            <form id="custNameFilter" name="custForm" action="manOrdersCust" method="post">
-            Customer Name:
-			<select name="custId" class="inputA">
-			    <c:forEach var="cust" items="${customers}">
-			    <option value="${cust.id}"><c:out value="${cust.fname}"/> <c:out value="${cust.lname}"/></option>
-			    </c:forEach>
-			</select>
-			<br>
-			<br>
-			<button value="custGo" class="btn-default" id="custGo" onclick="return cust_onclick()">Go</button>        	
-			</form>  
-		</table>       
-        </div>
-      </div>
-      <!-- Utility -->
-      <div class="utility">
-        <div class="item row">
-          <div class="col-xs-3">
-            <h3>Stock Symbol Filter</h3>
-          </div>
-        </div>
-        <div class="description row">  
-          <form id="stockNameFilter" name="stockForm" action="manOrdersStock" method="post">
-            Stock Name:
-			<select name="stockSym" class="inputA">
-			    <c:forEach var="stock" items="${stocks}">
-			    <option value="${stock.stocksym}"><c:out value="${stock.stocksym}"/></option>
-			    </c:forEach>
-			</select>
-			<br>
-			<br>      
-		<button value="stockGo" class="btn-default" id="stockGo" onclick="return stock_onclick()">Go</button>  
-        </div>
-      </div>      
+	<br>
+	<button value="back" class="btn-default" id="back" onclick="return back_onclick()">Back</button>
     </div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>

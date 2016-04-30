@@ -36,7 +36,6 @@ $(document).ready(function(){
 
 function back_onclick() {
     window.open("finances","_self");
-
 }
 
 // ]]>
