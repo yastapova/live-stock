@@ -49,6 +49,20 @@ function sales_onclick() {
     javascript:salesReportForm.submit();
 }
 
+function stockRev_onclick() {
+    console.log("editEmp!");
+    javascript:stockRevenueForm.submit();
+}
+
+function stockTypeRev_onclick() {
+    console.log("editEmp!");
+    javascript:stockTypeRevenueForm.submit();
+}
+
+function cusRev_onclick() {
+    console.log("editEmp!");
+    javascript:customerRevenueForm.submit();
+}
 // ]]>
 
 	</script>
@@ -129,7 +143,79 @@ function sales_onclick() {
         <div class="description row">          
 		<button value="ecYear" class="btn-default" id="ecYearButton" onclick="return ecYear_onclick()">Go</button>  
         </div>
-      </div>      
+      </div>     
+      <!-- Utility -->
+      <div class="utility">
+        <div class="item row">
+          <div class="col-xs-3">
+            <h3>Summary of Revenue By Stock</h3>
+          </div>
+        </div>
+        <div class="description row">
+	        <form id="stockRevenue" name="stockRevenueForm" action="revenueStocks" method="post">
+	        <table>
+	        	<tr>
+	        		<td>Stock Symbol:</td>
+	        		<td><select name="stockEdit" class="inputA">
+						    <c:forEach var="stock" items="${stocksyms}">
+						    <option value="${stock}"><c:out value="${stock}" /></option>
+						    </c:forEach>
+						</select>
+            		</td>
+	        	</tr>
+	        </table>
+	        <button value="stockRev" class="btn-default" id="stockRevButton" onclick="return stockRev_onclick()">Go</button>
+			</form>
+        </div>
+      </div>       
+      <!-- Utility -->
+      <div class="utility">
+        <div class="item row">
+          <div class="col-xs-3">
+            <h3>Summary of Revenue By Stock Type</h3>
+          </div>
+        </div>
+        <div class="description row">          
+		<form id="stockTypeRevenue" name="stockTypeRevenueForm" action="revenueStockTypes" method="post">
+	        <table>
+	        	<tr>
+	        		<td>Stock Type:</td>
+	        		<td><select name="typeEdit" class="inputA">
+						    <c:forEach var="type" items="${types}">
+						    <option value="${type}"><c:out value="${type}" /></option>
+						    </c:forEach>
+						</select>
+            		</td>
+	        	</tr>
+	        </table>
+	        <button value="stockTypeRev" class="btn-default" id="stockTypeRevButton" onclick="return stockTypeRev_onclick()">Go</button>
+			</form>
+        </div>
+      </div>     
+      <!-- Utility -->
+      <div class="utility">
+        <div class="item row">
+          <div class="col-xs-3">
+            <h3>Summary of Revenue By Customer</h3>
+          </div>
+        </div>
+        <div class="description row">          
+		<form id="customerRevenue" name="customerRevenueForm" action="revenueCustomer" method="post">
+	        <table>
+	        	<tr>
+	        		<td>Customer:</td>
+	        		<td><select name="cusIdEdit" class="inputA">
+						    <c:forEach var="cus" items="${customers}">
+						    <option value="${cus.id}"><c:out value="${cus.id}" />: <c:out value="${cus.fname}" /> <c:out value="${cus.lname}" /></option>
+						    </c:forEach>
+						</select>
+            		</td>
+	        	</tr>
+	        </table>
+	        <button value="cusRev" class="btn-default" id="cusRevButton" onclick="return cusRev_onclick()">Go</button>
+			</form>  
+        </div>
+      </div>
     </div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>
