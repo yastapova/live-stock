@@ -30,9 +30,10 @@ GROUP BY O.EmpId;
 
 -- Produce a list of most actively traded stocks
 
-CREATE VIEW MostTraded(StockSymbol, NumOrders) AS
-SELECT O.StockSymbol, COUNT(*) AS NumOrders
-FROM Order_ O
+CREATE VIEW MostTraded(StockSymbol, StockName, NumOrders) AS
+SELECT O.StockSymbol, S.StockName, COUNT(*) AS NumOrders
+FROM Order_ O, Stock S
+WHERE O.StockSymbol = S.StockSymbol
 GROUP BY O.StockSymbol;
 
 -- Produce a list of stock suggestions for a given customer (based on that customer's past orders)

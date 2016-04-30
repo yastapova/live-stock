@@ -66,7 +66,7 @@ public class TransactionListServlet extends HttpServlet {
 			
         request.setAttribute("transactions", tlist);    
         request.setAttribute("id", loginedUser.getId());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_finances.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_finances.jsp");
         dispatcher.forward(request, response);
         
     }

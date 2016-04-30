@@ -109,10 +109,10 @@ CREATE TRIGGER DoTransact
                             AND EXISTS(SELECT *
 										FROM ConditionalPriceHistory C
                                         WHERE C.CurSharePrice <= C.StopPrice
-                                        AND C.OrderId = NEW.OrderId)
+                                        AND C.OrderId = NEW.OrderId
                                         AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
 															FROM ConditionalPriceHistory H
-															WHERE O.OrderId = H.OrderId))
+															WHERE NEW.OrderId = H.OrderId)))
 						THEN INSERT INTO Transact(OrderId)
 							VALUES(NEW.OrderId);
 						SET NEW.Completed = 1;
@@ -224,7 +224,7 @@ CREATE TRIGGER InitalAddToConditionalPriceHistoryShare
 	BEGIN
 		IF (NEW.PriceType IN ('Trailing Stop', 'Hidden Stop'))
 		THEN INSERT INTO ConditionalPriceHistory(OrderId, CurSharePrice, PriceType, StopPrice)
-			VALUES(NEW.OrderId, NEW.CurSharePrice, NEW. PriceType, NEW.StopPrice);
+			VALUES(NEW.OrderId, NEW.CurSharePrice, NEW.PriceType, NEW.StopPrice);
         END IF;
 	END;
 |

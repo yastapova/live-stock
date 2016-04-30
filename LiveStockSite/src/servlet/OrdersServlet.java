@@ -90,9 +90,8 @@ public class OrdersServlet extends HttpServlet {
 		} else {
 			if (((EmployeeAccount) loginedUser).isManager()) {
 				System.out.println("Manager!");
-					RequestDispatcher dispatcher = this.getServletContext()
-							.getRequestDispatcher("/manOrders");
-					dispatcher.forward(request, response);
+				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manOrders");
+				dispatcher.forward(request, response);
 			} else {
 				String[] id_param = request.getParameterValues("order_ids");
 
