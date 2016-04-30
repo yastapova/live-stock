@@ -64,9 +64,6 @@ VALUES ('Clark', 'adventure', 1, 4);
 INSERT INTO Login (Usr, Pwd, AccType, Id)
 VALUES ('Dsmith', '12345', 2, 1);
 
-INSERT INTO Login (Usr, Pwd, AccType, Id)
-VALUES ('Boss', 'password', 3, 2);
-
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 1
@@ -111,6 +108,11 @@ SET SQL_SAFE_UPDATES = 1;
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Stock SET SharePrice = 85
 	WHERE StockSymbol = 'IBM';
+SET SQL_SAFE_UPDATES = 1;
+
+SET SQL_SAFE_UPDATES = 0;
+INSERT INTO `live-stock`.`transact` (`Id`, `OrderId`, `TransFee`, `TimeStamp_`, `PricePerShare`) VALUES ('1', '1', '1', 'now()', '11');
+
 SET SQL_SAFE_UPDATES = 1;
 
 DROP VIEW Suggest;
