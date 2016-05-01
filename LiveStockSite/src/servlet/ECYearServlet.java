@@ -41,11 +41,12 @@ public class ECYearServlet extends HttpServlet {
         
         Connection conn = MyUtils.getStoredConnection(request);
         try{
-        	String sql1 = "CREATE VIEW CustomerRevenue(CusAccNum, TotalRevenue) AS " 
-				+ "SELECT O.CusAccNum, SUM(T.TransFee) AS TotalRevenue "
-				+ "FROM Order_ O, Transact T "
-				+ "WHERE O.Recorded = 1 AND O.OrderID = T.OrderId "
-				+ "GROUP BY O.CusAccNum;";          
+        	String sql1 = "CREATE VIEW CustomerRevenue(CusAccNum, FirstName, LastName, TotalRevenue) "
+					+ "AS SELECT O.CusAccNum, C.FirstName, C.LastName, SUM(T.TransFee) AS TotalRevenue "
+					+ "FROM Order_ O, Transact T, Customer C, Account_ A "
+					+ "WHERE O.Recorded = 1 AND O.OrderID = T.OrderId "
+					+ "AND O.CusAccNum = A.AccNum AND A.CusId = C.CusId "
+					+ "GROUP BY O.CusAccNum;";
             PreparedStatement pstm1 = conn.prepareStatement(sql1);                       
             pstm1.executeUpdate();
             

@@ -112,7 +112,7 @@ delimiter |
 -- Shows the total revenue produced by each stock.
 CREATE PROCEDURE showStockRevenue()
 	BEGIN
-		SELECT S.StockSymbol, S.TotalRevenue
+		SELECT S.StockSymbol, S.StockName, S.TotalRevenue
 		FROM StockRevenue S;
     END
 | delimiter ;
@@ -130,7 +130,7 @@ delimiter |
 -- Shows the total revenue produced by each customer.
 CREATE PROCEDURE showCustomerRevenue()
 	BEGIN
-		SELECT C.CusAccNum, S.TotalRevenue
+		SELECT C.CusAccNum, C.FirstName, C.LastName, S.TotalRevenue
 		FROM CustomerRevenue C;
     END
 | delimiter ;

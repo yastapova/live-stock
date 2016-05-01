@@ -55,6 +55,8 @@
 			<dd>Search for stocks and place orders.</dd>
 			<dt>Employees</dt>
 			<dd>View and manage your employees.</dd>
+			<dt>Users</dt>
+			<dd>View and manage the users of LiveStock.</dd>
 			<dt>Finances</dt>
 			<dd>View and manage your employees.</dd>
 			<dt>Orders</dt>
@@ -73,7 +75,11 @@
 				<dt>Account Info</dt>
 				<dd>View and update your account information.</dd>
 				<dt>Utilities</dt>
-				<dd>Manage customer accounts.</dd>
+				<dd>Manage customer accounts and associated tools.</dd>
+				<dt>Customers</dt>
+				<dd>Manage customer account information.</dd>
+				<dt>Colleauges</dt>
+				<dd>View Employee Directory.</dd>
 				<dt>Orders</dt>
 				<dd>View and record pending orders, or view completed orders.</dd>
 				<dt>Stocks</dt>
@@ -95,6 +101,8 @@
 				<dd>View your pending and completed orders.</dd>
 				<dt>Stocks</dt>
 				<dd>Search for stocks and place orders.</dd>
+				<dt>Conditional Price History</dt>
+				<dd>View Conditonal Price History for conditional orders.</dd>
 				<dt>Help</dt>
 				<dd>Read the help page of the Customer.</dd>
 				<dt>Logout</dt>
