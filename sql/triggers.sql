@@ -237,7 +237,7 @@ CREATE TRIGGER InitalAddToConditionalPriceHistoryShare
 	END;
 |
 delimiter ;
-
+/*
 delimiter |
 -- Adds entry to CondPriceHist for a hidden stop when a stock price changes.
 CREATE TRIGGER UpdateHiddenStop
@@ -285,7 +285,7 @@ CREATE TRIGGER UpdateTrailingStop
 	END;
 |
 delimiter ;
-
+*/
 -- Adds an entry to StockPriceHistory when a stock is created.
 CREATE TRIGGER InitialAddToStockPriceHistory
 	AFTER INSERT ON Stock FOR EACH ROW

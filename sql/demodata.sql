@@ -120,11 +120,15 @@ DROP TRIGGER NumSharesValid;
 DROP TRIGGER SellOrder;
 DROP TRIGGER DoTransact;
 DROP TRIGGER UpdateHiddenStop;
+DROP TRIGGER UpdateTrailingStop;
+
 
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
 DROP PROCEDURE getBestSellers2;
 DROP PROCEDURE Suggest;
+DROP PROCEDURE showMostTradedStocks;
+DROP VIEW MostTraded;
 
 call getBestSellers2;
 call getStockUsingType('r');

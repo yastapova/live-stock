@@ -41,9 +41,9 @@ public class SetStockPriceServlet extends HttpServlet {
         String table = "Prices Have Been Set";
         System.out.println(table);
         
-        String[] stockprice = request.getParameterValues("stockprice");
+        String[] stockPrice = request.getParameterValues("stockprice");
 		
-		if(stockprice == null || "".equals(stockprice))
+		if(stockPrice == null || "".equals(stockPrice))
 		{
 			System.out.println("No values.");
 		}
@@ -51,19 +51,34 @@ public class SetStockPriceServlet extends HttpServlet {
 		{
 			System.out.println("Setting Prices");
 			try {
-    			String sql = "CALL setSharePrice(?,?)";
-    			PreparedStatement pst1 = conn.prepareStatement(sql);
-    			System.out.println("Passed # values: " + stockprice.length);
-    			for(int i=0; i<stockprice.length; i=i+2)
+    			String sql1 = "CALL setSharePrice(?,?)";
+    			String sql2 = "CALL updateTrailingStop(?,?,?)";
+    			String sql3 = "CALL updateHiddenStop(?,?,?)";
+    			PreparedStatement pst1 = conn.prepareStatement(sql1);
+    			PreparedStatement pst2 = conn.prepareStatement(sql2);
+    			PreparedStatement pst3 = conn.prepareStatement(sql3);
+    			System.out.println("Passed # values: " + stockPrice.length);
+    			for(int i=0; i<stockPrice.length; i=i+3)
     			{
-    				String price = stockprice[i];
-    				if(price.equals("")){
+    				String newPrice = stockPrice[i];
+    				if(newPrice.equals("")){
     					continue;
     				}
-    				String symbol = stockprice[i+1];
+    				String oldPrice = stockPrice[i+1];
+    				String symbol = stockPrice[i+2];
     				pst1.setString(1, symbol);
-    				pst1.setFloat(2, Float.parseFloat(price));
+    				pst1.setFloat(2, Float.parseFloat(newPrice));
     				pst1.executeUpdate();
+    				
+    				pst2.setFloat(1, Float.parseFloat(newPrice));
+    				pst2.setFloat(2, Float.parseFloat(oldPrice));
+    				pst2.setString(3, symbol);
+    				pst2.executeUpdate();
+    				
+    				pst3.setFloat(1, Float.parseFloat(newPrice));
+    				pst3.setFloat(2, Float.parseFloat(oldPrice));
+    				pst3.setString(3, symbol);
+    				pst3.executeUpdate();
     			}
 			} catch (Exception e) {
     			e.printStackTrace();
