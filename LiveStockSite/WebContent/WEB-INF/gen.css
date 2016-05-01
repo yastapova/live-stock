@@ -26,6 +26,9 @@ a {
 .forminput{
 	width: 175px;
 }
+.formsmall {
+	width: 50px;
+}
 .accinfo {
 	font-size: 12pt;
 	font-family: "Times New Roman", Times, serif;
