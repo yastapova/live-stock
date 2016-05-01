@@ -5,6 +5,7 @@
 	<a href="portfolio" id="customerPortfolio">Portfolios</a>
 	<a href="orders" id="customerOrders">Orders</a>
 	<a href="stocks" id="stocks">Stocks</a>
+	<a href="condPriceHis" id="condPriceHis">Conditional Price History</a>
 	<a href="help" id="help">Help</a>
 	<a href="home" id="logout">Logout</a>
 </div>

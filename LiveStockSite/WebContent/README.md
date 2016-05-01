@@ -50,12 +50,12 @@ Customer Representatives should not be able to perform manager-level transaction
 Customer Representatives should be able to record the receipt of an order from a customer.
 A customer should not be allowed access to other customers' account information, or to any employee information. Also, trailing and hidden stops must be kept private.
 
-5 Utilities
+5 Utilities [DONE]
 ----------------------------------
 In addition to the transactions described above, the system should provide facilities for:
 
 Allowing the manager to add and delete users (login stuff?) [DONE]
-Backing up the database files
+Backing up the database files [DONE]
 A comprehensive Help facility, including a topic-driven pull-down Help menu [DONE]
 
 6 Misc

@@ -6,7 +6,7 @@
 	<a href="users" id="users">Users</a>
 	<a href="finances" id="finances">Finances</a>
 	<a href="orders" id="managerOrders">Orders</a>
-	<a href="backup" id="backup">Back Up</a>
+	<a href="manutilities" id="utilities">Utilities</a>
 	<a href="help" id="help">Help</a>
 	<a href="home">Logout</a>
 </div>
