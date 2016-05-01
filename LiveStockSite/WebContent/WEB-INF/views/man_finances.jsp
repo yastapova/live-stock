@@ -164,6 +164,7 @@ function cusRev_onclick() {
             		</td>
 	        	</tr>
 	        </table>
+	        <input type="hidden" name="selection" value="1" />
 	        <button value="stockRev" class="btn-default" id="stockRevButton" onclick="return stockRev_onclick()">Go</button>
 			</form>
         </div>
@@ -188,6 +189,7 @@ function cusRev_onclick() {
             		</td>
 	        	</tr>
 	        </table>
+	        <input type="hidden" name="selection" value="2" />
 	        <button value="stockTypeRev" class="btn-default" id="stockTypeRevButton" onclick="return stockTypeRev_onclick()">Go</button>
 			</form>
         </div>
@@ -200,7 +202,7 @@ function cusRev_onclick() {
           </div>
         </div>
         <div class="description row">          
-		<form id="customerRevenue" name="customerRevenueForm" action="revenueCustomer" method="post">
+		<form id="customerRevenue" name="customerRevenueForm" action="revenueCustomers" method="post">
 	        <table>
 	        	<tr>
 	        		<td>Customer:</td>
@@ -212,6 +214,7 @@ function cusRev_onclick() {
             		</td>
 	        	</tr>
 	        </table>
+	        <input type="hidden" name="selection" value="3" />
 	        <button value="cusRev" class="btn-default" id="cusRevButton" onclick="return cusRev_onclick()">Go</button>
 			</form>  
         </div>
