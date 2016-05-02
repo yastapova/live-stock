@@ -83,14 +83,16 @@ function back_onclick() {
 		<c:if test="${customers != null}" >
 			<table border="5" id="accounts">
 				<tr>
+		          <th style="width: 50px"><span style="font-size: 10pt">ID</span></th>
 		          <th style="width: 50px"><span style="font-size: 10pt">Account Number</span></th>
 		          <th style="width: 150px"><span style="font-size: 10pt">First Name</span></th>
 		          <th style="width: 150px"><span style="font-size: 10pt">Last Name</span></th>
 		          <th style="width: 150px"><span style="font-size: 10pt">Total Revenue</span></th>
 		        </tr>
-				<c:forEach var="customer" items="${customers}">							
+				<c:forEach var="c" items="${customers}">							
 					<tr>
 			            <td><span style="font-size: 10pt"><c:out value="${c.id}" /></span></td>
+			            <td><span style="font-size: 10pt"><c:out value="${c.acc}" /></span></td>
 			            <td><span style="font-size: 10pt"><c:out value="${c.fname}" /></span></td>
 			            <td><span style="font-size: 10pt"><c:out value="${c.lname}" /></span></td>
 			            <td><span style="font-size: 10pt"><c:out value="${c.revenue}" /></span></td>

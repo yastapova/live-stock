@@ -1,11 +1,12 @@
 package general;
 
 public class CYear {
-	private int id;	
-	private int accnum;
+	
+	private int id;
 	private double revenue;
 	private String fname;
 	private String lname;
+	private int acc;
 	
 	public CYear(){
 		
@@ -45,10 +46,10 @@ public class CYear {
 		this.lname = lname;
 	}
 	
-	public void setAccNum(int accNum) {
-		this.accnum = accNum;
+	public void setAcc(int acc) {
+		this.acc = acc;
 	}
-	public int getAccNum() {
-		return accnum;
+	public int getAcc() {
+		return acc;
 	}
 }

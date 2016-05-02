@@ -54,6 +54,10 @@ public class RevenueSummaryServlet extends HttpServlet {
         			stocklist = new ArrayList<String[]>();
         			String st = request.getParameter("stockEdit");
         			
+        			String sql01 = "DROP VIEW IF EXISTS StockRevenue;";
+        			PreparedStatement pstm01 = conn.prepareStatement(sql01);
+        			pstm01.executeUpdate();
+        			
         			String sql1 = "CREATE VIEW StockRevenue (StockSymbol, StockName, TotalRevenue) AS "
         						+ "SELECT O.StockSymbol, S.StockName, SUM(T.TransFee) AS TotalRevenue "
         						+ "FROM Order_ O, Transact T, Stock S "
@@ -89,6 +93,10 @@ public class RevenueSummaryServlet extends HttpServlet {
         			typelist = new ArrayList<String[]>();
         			String ty = request.getParameter("typeEdit");
         			
+        			String sql02 = "DROP VIEW IF EXISTS StockTypeRevenue;";
+        			PreparedStatement pstm02 = conn.prepareStatement(sql02);
+        			pstm02.executeUpdate();
+        			
         			String sql12 = "CREATE VIEW StockTypeRevenue (StockType, TotalRevenue) "
         					+ "AS SELECT S.StockType, SUM(T.TransFee) AS TotalRevenue "
         					+ "FROM Stock S, Transact T, Order_ O "
@@ -123,6 +131,10 @@ public class RevenueSummaryServlet extends HttpServlet {
         			custlist = new ArrayList<CYear>();
         			int cusid = Integer.parseInt(request.getParameter("cusIdEdit"));
         			
+        			String sql03 = "DROP VIEW IF EXISTS CustomerRevenue;";
+        			PreparedStatement pstm03 = conn.prepareStatement(sql03);
+        			pstm03.executeUpdate();
+        			
         			String sql11 = "CREATE VIEW CustomerRevenue(CusAccNum, CusId, FirstName, LastName, TotalRevenue) "
         						+ "AS SELECT O.CusAccNum, C.CusId, C.FirstName, C.LastName, SUM(T.TransFee) AS TotalRevenue "
         						+ "FROM Order_ O, Transact T, Customer C, Account_ A "
@@ -142,9 +154,9 @@ public class RevenueSummaryServlet extends HttpServlet {
     	            while(rs21.next())
     	            {
                     	int id2 = rs21.getInt("CusId");
-                    	System.out.println(id2);
                     	CYear cus = new CYear();
-                    	cus.setAccNum(rs21.getInt("CusAccNum"));
+                    	int acc = rs21.getInt("CusAccNum");
+                    	cus.setAcc(acc);
                     	cus.setId(id2);
                     	cus.setRevenue(rs21.getDouble("TotalRevenue"));
                     	cus.setFname(rs21.getString("FirstName"));
@@ -152,9 +164,9 @@ public class RevenueSummaryServlet extends HttpServlet {
                     	custlist.add(cus);
     	            }
     	            
-    	            String sqld1 = "DROP VIEW CustomerRevenue; ";        				
-    	            PreparedStatement pstmd1 = conn.prepareStatement(sqld1);           
-    	            pstmd1.executeUpdate();
+    	            String sqld3 = "DROP VIEW CustomerRevenue; ";        				
+    	            PreparedStatement pstmd3 = conn.prepareStatement(sqld3);           
+    	            pstmd3.executeUpdate();
         			break;
         			
         		default:
