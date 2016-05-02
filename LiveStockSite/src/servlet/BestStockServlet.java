@@ -43,6 +43,18 @@ public class BestStockServlet extends HttpServlet {
         System.out.println("Userid: "+id);
         
         try{
+			String sql01 = "DROP VIEW IF EXISTS BestSellers2;";
+			PreparedStatement pstm01 = conn.prepareStatement(sql01);
+			pstm01.executeUpdate();
+        	
+			sql01 = "CREATE VIEW BestSellers2(StockSymbol, StockName, StockType, SharePrice, NumAvailShares, TotalShares) AS "
+					+ "SELECT S.StockSymbol, S.StockName, S.StockType, S.SharePrice, S.NumAvailShares, SUM(O.NumShares) AS TotalShares "
+					+ "FROM Order_ O, Stock S "
+					+ "WHERE O.StockSymbol = S.StockSymbol "
+					+ "GROUP BY O.StockSymbol;";
+			pstm01 = conn.prepareStatement(sql01);
+			pstm01.executeUpdate();
+			
         	String sql1 = "CALL getBestSellers2()";
         	PreparedStatement pstm1 = conn.prepareStatement(sql1);
         	java.sql.ResultSet rs  = pstm1.executeQuery();
@@ -57,6 +69,11 @@ public class BestStockServlet extends HttpServlet {
                 list.add(data);
                 System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
             }
+            
+			sql01 = "DROP VIEW BestSellers2;";
+			pstm01 = conn.prepareStatement(sql01);
+			pstm01.executeUpdate();
+			
         } catch (Exception e) {
 			e.printStackTrace();
 		}
