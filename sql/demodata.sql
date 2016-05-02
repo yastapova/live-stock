@@ -116,18 +116,22 @@ INSERT INTO `live-stock`.`transact` (`Id`, `OrderId`, `TransFee`, `TimeStamp_`, 
 SET SQL_SAFE_UPDATES = 1;
 
 DROP VIEW Suggest;
+DROP VIEW CUSTOMERREVENUE;
+DROP VIEW STOCKTYPEREVENUE;
+DROP VIEW StockRevenue;
 DROP TRIGGER NumSharesValid;
 DROP TRIGGER SellOrder;
 DROP TRIGGER DoTransact;
-DROP TRIGGER UpdateHiddenStop;
-DROP TRIGGER UpdateTrailingStop;
-
 
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
 DROP PROCEDURE getBestSellers2;
 DROP PROCEDURE Suggest;
 DROP PROCEDURE showMostTradedStocks;
+DROP PROCEDURE UpdateHiddenStop;
+DROP PROCEDURE UpdateTrailingStop;
+
+
 DROP VIEW MostTraded;
 
 call getBestSellers2;

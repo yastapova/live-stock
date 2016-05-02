@@ -34,7 +34,7 @@ The share-price and trailing-stop history for a given conditional order
 The share-price and hidden-stop history for a given conditional order
 The share-price history of a given stock over a certain period of time (e.g., past six months)
 A history of all current and past orders a customer has placed [DONE]
-Stocks available of a particular type [???]
+Stocks available of a particular type [DONE]
 	and most-recent order info
 Stocks available with a particular keyword or set of keywords in the stock name [DONE]
 	and most-recent order info
