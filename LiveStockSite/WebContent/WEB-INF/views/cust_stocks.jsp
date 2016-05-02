@@ -125,7 +125,7 @@ function set_price_onclick() {
 		</form>
 		<br>
 		<form id="keywordForm" name="myForm" action="search_stocks" method="post">
-			<span class="formlabel">Search on keyword:</span>
+			<span class="formlabel">Search on keyword. Separate multiple terms with a comma:</span>
 			<input class="forminput" id="keyword" name="stockkeyword" type="text" />
 			<button value="searchkeyword" class="btn-default" id="searchkeyword" onclick="return search_keyword_onclick()">Search Keyword</button>
 		</form>

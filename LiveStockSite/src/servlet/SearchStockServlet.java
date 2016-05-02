@@ -45,6 +45,7 @@ public class SearchStockServlet extends HttpServlet {
         System.out.println("Type: "+stockType);
         String stockKeyword = request.getParameter("stockkeyword");
         System.out.println("Keyword: "+stockKeyword);
+    	stockKeyword = stockKeyword.replace("\\s", "");
         try{
         	
         	String sql1;
@@ -56,11 +57,31 @@ public class SearchStockServlet extends HttpServlet {
             	pstm1.setString(1,stockType);
                 rs = pstm1.executeQuery();
             }
-            else if (stockKeyword!=null) {
-            	sql1 = "CALL getStockUsingKeyword(?)";
+            else if ((stockKeyword!=null) | (stockKeyword=="")) {
+            	/*sql1 = "CALL getStockUsingKeyword(?)";
             	pstm1 = conn.prepareStatement(sql1);
             	pstm1.setString(1,stockKeyword);
-                rs = pstm1.executeQuery();
+                rs = pstm1.executeQuery();*/
+                String keyword[] = stockKeyword.split(",");
+                for (String s: keyword)
+                	System.out.println(s);
+        		sql1 = "SELECT S.* "
+        				+ "FROM STOCK S "
+        				+ "WHERE";
+            	for (int i=1; i<=keyword.length ; i++) {
+            		if (i>1)
+            			sql1 += " AND";
+            		sql1 +=  " S.StockName LIKE CONCAT('%',?,'%')";
+            	}
+            	sql1 += ";";
+            	System.out.println(sql1);
+            	pstm1 = conn.prepareStatement(sql1);
+            	for (int i=1; i<=keyword.length ; i++) {
+            		pstm1.setString(i,keyword[i-1]);
+            	}
+            	rs = pstm1.executeQuery();
+        				
+                
             }
 
             if (rs!=null) {
