@@ -345,3 +345,51 @@ CREATE PROCEDURE Suggest(IN cus_id INT)
 	END
 | delimiter ;
 
+delimiter |
+
+-- Adds entry to CondPriceHist for a hidden stop when a stock price changes.
+-- Must call after updating stock price.
+CREATE Procedure UpdateHiddenStop(IN new_stock_price FLOAT(2), IN old_stock_price FLOAT(2), IN stock_symbol CHAR(5))
+    IF (new_stock_price <> old_stock_price)
+		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+			SELECT O.OrderId, O.PriceType, O.StopPrice, new_stock_price, NOW()
+            FROM Order_ O
+            WHERE stock_symbol = O.StockSymbol
+            AND O.PriceType IN ('Hidden Stop')
+            AND O.Completed = 0;
+	END IF;
+|
+delimiter ;
+
+delimiter |
+-- Adds entry to CondPriceHist for a trailing stop when a stock price changes.
+-- Updates the current stop price if the current share goes up.
+-- Must call after updating stock price.
+CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_price FLOAT(2), IN stock_symbol CHAR(5))
+	BEGIN
+		IF (new_stock_price > old_stock_price)
+        THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
+			(SELECT O.OrderId, O.PriceType, new_stock_price - O.StopDiff, new_stock_price
+			FROM Order_ O, ConditionalPriceHistory C
+			WHERE stock_symbol = O.StockSymbol
+            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+							  FROM ConditionalPriceHistory H
+							  WHERE O.OrderId = H.OrderId)
+            AND O.PriceType = 'Trailing Stop'
+            AND O.StopDiff < new_stock_price - C.StopPrice
+            AND O.Completed = 0);
+        END IF;
+        IF (new_stock_price < old_stock_price)
+		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+			SELECT O.OrderId, O.PriceType, C.StopPrice, new_stock_price, NOW()
+            FROM Order_ O, ConditionalPriceHistory C
+            WHERE stock_symbol = O.StockSymbol
+            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+							  FROM ConditionalPriceHistory H
+							  WHERE O.OrderId = H.OrderId)
+            AND O.PriceType IN ('Trailing Stop')
+            AND O.Completed = 0;
+		END IF;
+	END;
+|
+delimiter ;
