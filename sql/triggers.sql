@@ -83,8 +83,9 @@ CREATE TRIGGER GetPrices2
 		SET NEW.PricePerShare = (SELECT S.SharePrice
 								 FROM Stock S, Order_ O
 								 WHERE S.StockSymbol = O.StockSymbol
-										AND O.OrderId = NEW.OrderId);
-		SET NEW.TransFee = NEW.PricePerShare * (SELECT O.NumShares FROM Order_ O WHERE O.OrderId = NEW.OrderId) * 0.05;
+										AND O.OrderId = NEW.OrderId
+                                        LIMIT 1);
+		SET NEW.TransFee = NEW.PricePerShare * (SELECT O.NumShares FROM Order_ O WHERE O.OrderId = NEW.OrderId LIMIT 1) * 0.05;
 	END;
 |
 delimiter ;
@@ -176,7 +177,8 @@ CREATE TRIGGER UpdatePortfolio
             FROM Account_ A, Order_ O
             WHERE NEW.OrderID = O.OrderId
 			AND O.CusAccNum = A.AccNum
-            AND O.StockSymbol = P.StockSymbol);
+            AND O.StockSymbol = P.StockSymbol
+            LIMIT 1);
 	END;
 |
 delimiter ;
@@ -191,11 +193,18 @@ CREATE TRIGGER AddToAccount
                       AND O.CusAccNum = A.AccNum
                       AND A.AccNum = P.AccNum
                       AND P.StockSymbol = O.StockSymbol))
-		THEN INSERT INTO Portfolio(AccNum, StockSymbol, NumShares, Stop_)
-			VALUES((SELECT O.CusAccNum, O.StockSymbol, O.NumShares, 'None'
-				   FROM Order_ O
-                   WHERE NEW.OrderId = O.OrderId
-                   LIMIT 1));
+		THEN INSERT INTO Portfolio(AccNum, StockSymbol, NumShares, Stop_, StopPrice)
+			VALUES((SELECT O.CusAccNum
+					   FROM Order_ O
+					   WHERE NEW.OrderId = O.OrderId),
+					(SELECT O.StockSymbol
+						FROM Order_ O
+						WHERE NEW.OrderId = O.OrderId),
+					(SELECT O.NumShares
+						FROM Order_ O
+						WHERE NEW.OrderId = O.OrderId),
+					'None',
+					Null);
 		END IF;
 	END;
 |
@@ -315,11 +324,13 @@ CREATE TRIGGER UpdateStockQuantity
 		SET S.NumAvailShares = S.NumAvailShares - 
 			(SELECT O.NumShares * POW(-1, O.OrderType = 'Sell')
 			FROM Order_ O
-			WHERE NEW.OrderId = O.OrderId)
+			WHERE NEW.OrderId = O.OrderId
+            LIMIT 1)
 		WHERE S.StockSymbol = 
 			(SELECT O.StockSymbol
 			FROM Order_ O
-			WHERE NEW.OrderId = O.OrderId);
+			WHERE NEW.OrderId = O.OrderId
+            LIMIT 1);
 	END;
 |
 delimiter ;
