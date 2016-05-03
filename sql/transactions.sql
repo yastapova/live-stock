@@ -257,6 +257,16 @@ CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
     END
 | delimiter ;
 
+-- The share-price and hidden-stop history for a given conditional order
+delimiter |
+CREATE PROCEDURE getConditonalOrderHistory(IN orderid INT)
+	BEGIN
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp
+		FROM CONDITIONALPRICEHISTORY P, ORDER_ O
+		WHERE P.OrderId = orderid AND P.StopPrice > 0;
+    END
+| delimiter ;
+
 -- The share-price history of a given stock over a certain period of time (e.g., past six months)
 delimiter |
 CREATE PROCEDURE getSharePriceHistory(IN stock_symbol VARCHAR(5), IN start_date DATE, IN end_date DATE)
