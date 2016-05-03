@@ -2,7 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class UserListServlet extends HttpServlet {
             	String ssn = rs.getString("SSN");
             	String pos = rs.getString("Position_");
             	int hourly = (int)rs.getFloat("HourlyRate");
-            	Date start = rs.getDate("StartDate");
+            	Timestamp start = rs.getTimestamp("StartDate");
             	String fname = rs.getString("FirstName");
             	String lname = rs.getString("LastName");
             	String address = rs.getString("Address");

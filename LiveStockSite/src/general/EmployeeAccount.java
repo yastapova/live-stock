@@ -3,7 +3,7 @@
  */
 package general;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Yuliya
@@ -14,7 +14,7 @@ public class EmployeeAccount extends UserAccount {
 	private String ssn;
 	private String pos;
 	private int hourly;
-	private Date start;
+	private Timestamp start;
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class EmployeeAccount extends UserAccount {
 	}
 	
 	public EmployeeAccount(String ssn, String pos,
-						   int hourly, Date start)
+						   int hourly, Timestamp start)
 	{
 		super();
 		this.ssn = ssn;
@@ -58,7 +58,7 @@ public class EmployeeAccount extends UserAccount {
 	public EmployeeAccount(int id, String fname, String lname,
 			String usrname, String pwd, String address, String city,
 			String state, String zip, String phone, String ssn,
-			String pos, int hourly, Date start)
+			String pos, int hourly, Timestamp start)
 	{
 		super(id, fname, lname, usrname, pwd, address, city, state, zip, phone);
 		this.ssn = ssn;
@@ -141,14 +141,14 @@ public class EmployeeAccount extends UserAccount {
 	/**
 	 * @return the start
 	 */
-	public Date getStart() {
+	public Timestamp getStart() {
 		return start;
 	}
 
 	/**
 	 * @param start the start to set
 	 */
-	public void setStart(Date start) {
+	public void setStart(Timestamp start) {
 		this.start = start;
 	}
 }

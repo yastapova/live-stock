@@ -2,7 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,7 +70,7 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
             hasError = true;
             errorString = "Required information missing!";
         } else {
-        	Date startDate = Date.valueOf(start);
+        	Timestamp startDate = Timestamp.valueOf(start);
         	int hourlyRate = Integer.parseInt(hourly);
         	employee = new EmployeeAccount();
         	employee.setUsername(userName);
@@ -99,7 +99,7 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
             	pstm1.setString(6, state);
             	pstm1.setString(7, zipcode);
             	pstm1.setString(8, phone);
-            	pstm1.setDate(9, startDate);
+            	pstm1.setTimestamp(9, startDate);
             	pstm1.setInt(10, hourlyRate);
             	pstm1.setString(11, positionStr);
             	pstm1.executeUpdate();
@@ -120,7 +120,7 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
             	pstm2.setString(6, state);
             	pstm2.setString(7, zipcode);
             	pstm2.setString(8, phone);
-            	pstm2.setDate(9, startDate);
+            	pstm2.setTimestamp(9, startDate);
             	pstm2.setInt(10, hourlyRate);
             	pstm2.setString(11, positionStr);
             	ResultSet rs = pstm2.executeQuery();

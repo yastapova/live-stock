@@ -68,7 +68,7 @@ public class OrdersServlet extends HttpServlet {
 					Order order = new Order();
 					order.setId(rs.getInt("OrderId"));
 					order.setOrderType(rs.getString("OrderType"));
-					order.setTimestamp(rs.getDate("Timestamp_"));
+					order.setTimestamp(rs.getTimestamp("Timestamp_"));
 					order.setCusAccNum(rs.getInt("CusAccNum"));
 					order.setStockSymbol(rs.getString("StockSymbol"));
 					order.setNumShares(rs.getInt("NumShares"));
@@ -124,7 +124,7 @@ public class OrdersServlet extends HttpServlet {
 						Order order = new Order();
 						order.setId(rs.getInt("OrderId"));
 						order.setOrderType(rs.getString("OrderType"));
-						order.setTimestamp(rs.getDate("Timestamp_"));
+						order.setTimestamp(rs.getTimestamp("Timestamp_"));
 						order.setCusAccNum(rs.getInt("CusAccNum"));
 						order.setStockSymbol(rs.getString("StockSymbol"));
 						order.setNumShares(rs.getInt("NumShares"));

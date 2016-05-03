@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,7 +40,7 @@ public class AddEmpUserServlet extends HttpServlet {
         String zip = request.getParameter("zipcode");
         String phone = request.getParameter("telephone");
         String hourly = request.getParameter("hourly");
-        Date start = Date.valueOf(request.getParameter("startdate"));     
+        Timestamp start = Timestamp.valueOf(request.getParameter("startdate"));     
         String username = request.getParameter("username");
         String password  = request.getParameter("password");
    
@@ -58,7 +58,7 @@ public class AddEmpUserServlet extends HttpServlet {
         	pstm1.setString(6,state);
         	pstm1.setString(7,zip);
         	pstm1.setString(8,phone);
-        	pstm1.setDate(9,start);
+        	pstm1.setTimestamp(9,start);
         	pstm1.setFloat(10,Float.parseFloat(hourly));
         	pstm1.setString(11,"CusRep");
         	java.sql.ResultSet rs = pstm1.executeQuery();
@@ -77,7 +77,7 @@ public class AddEmpUserServlet extends HttpServlet {
         	pstm2.setString(6, state);
         	pstm2.setString(7, zip);
         	pstm2.setString(8, phone);
-        	pstm2.setDate(9, start);
+        	pstm2.setTimestamp(9, start);
         	pstm2.setInt(10, Integer.parseInt(hourly));
         	pstm2.setString(11, "CusRep");
         	ResultSet rs2 = pstm2.executeQuery();

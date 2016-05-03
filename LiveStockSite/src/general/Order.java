@@ -1,6 +1,6 @@
 package general;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Order
 {
@@ -9,7 +9,7 @@ public class Order
 	private String orderType;
 	private int numShares;
 	private int cusAccNum;
-	private Date timestamp;
+	private Timestamp timestamp;
 	private String priceType;
 	private float stopPrice;
 	private float stopDiff;
@@ -25,7 +25,7 @@ public class Order
 
 	
 	public Order(int id, String stockSymbol, String orderType, 
-			int numShares, int cusAccNum, Date timestamp,
+			int numShares, int cusAccNum, Timestamp timestamp,
 			String priceType, float stopPrice, float stopDiff, 
 			float curSharePrice, int empId, boolean recorded,
 			boolean completed)
@@ -120,14 +120,14 @@ public class Order
 	/**
 	 * @return the timestamp
 	 */
-	public Date getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
 	/**
 	 * @param timestamp the timestamp to set
 	 */
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
