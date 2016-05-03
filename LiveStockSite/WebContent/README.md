@@ -49,7 +49,7 @@ Place an order
 Your database system should provide controlled access to the data by distinguishing between the different types of users: manager, customer representatives, and customers.
 
 Customer Representatives should not be able to perform manager-level transactions; however, they should be able to read employee information, except for the hourly rate. [DONE]
-Customer Representatives should be able to record the receipt of an order from a customer.
+Customer Representatives should be able to record the receipt of an order from a customer. [DONE]
 A customer should not be allowed access to other customers' account information, or to any employee information. Also, trailing and hidden stops must be kept private.
 
 5 Utilities [DONE]
@@ -63,4 +63,4 @@ A comprehensive Help facility, including a topic-driven pull-down Help menu [DON
 6 Misc
 ----------------------------------
 Passwords and usernames are not currently case sensitive [DONE]
-Orders only show date, not time
+Orders only show date, not time [DONE]

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import general.CustomerAccount;
+import general.EmployeeAccount;
 import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
@@ -42,20 +44,43 @@ public class StockServlet extends HttpServlet {
         System.out.println(table);
         System.out.println(id);
         try{
-        	String sql1 = "SELECT * FROM Stock";
-        	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        	java.sql.ResultSet rs = pstm1.executeQuery();
-            
-            while (rs.next()) {
-                String sksym = rs.getString("StockSymbol");
-                String sknm = rs.getString("StockName");
-                String sktp = rs.getString("StockType");
-                float shpr = rs.getFloat("SharePrice");
-                int numsh = rs.getInt("NumAvailShares");
-                Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
-                list.add(data);
-                System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
-            }
+	        if(loginedUser instanceof CustomerAccount ||
+	           !(((EmployeeAccount)loginedUser).isManager()))
+	        {
+	        	String sql1 = "SELECT * FROM Stock";
+	        	PreparedStatement pstm1 = conn.prepareStatement(sql1);
+	        	java.sql.ResultSet rs = pstm1.executeQuery();
+	            
+	            while (rs.next()) {
+	                String sksym = rs.getString("StockSymbol");
+	                String sknm = rs.getString("StockName");
+	                String sktp = rs.getString("StockType");
+	                float shpr = rs.getFloat("SharePrice");
+	                int numsh = rs.getInt("NumAvailShares");
+	                Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
+	                list.add(data);
+	                System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
+	            }
+	        }
+	        else
+	        {
+	        	String sql1 = "CALL listAllStocks();";
+	        	PreparedStatement pstm1 = conn.prepareStatement(sql1);
+	        	java.sql.ResultSet rs = pstm1.executeQuery();
+	            
+	            while (rs.next()) {
+	                String sksym = rs.getString("StockSymbol");
+	                String sknm = rs.getString("StockName");
+	                String sktp = rs.getString("StockType");
+	                float shpr = rs.getFloat("SharePrice");
+	                int numsh = rs.getInt("NumAvailShares");
+	                int numorders = rs.getInt("OrdersPlaced");
+	                Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
+	                data.setNumOrders(numorders);
+	                list.add(data);
+	                System.out.println("Obtained Data: "+sksym+" "+sknm+" "+sktp+" "+shpr+" "+numsh);
+	            }
+	        }
         } catch (Exception e) {
 			e.printStackTrace();
 		}
