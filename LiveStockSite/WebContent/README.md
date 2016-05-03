@@ -62,5 +62,5 @@ A comprehensive Help facility, including a topic-driven pull-down Help menu [DON
 
 6 Misc
 ----------------------------------
-Passwords and usernames are not currently case sensitive
+Passwords and usernames are not currently case sensitive [DONE]
 Orders only show date, not time

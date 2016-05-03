@@ -17,7 +17,7 @@ public class DBUtils {
 	public static UserAccount findUser(Connection conn, String userName, String password) throws SQLException {
 		System.out.println("Loooking for user: " + userName);
 		String sql = "SELECT L.Usr, L.Pwd, L.AccType, L.Id FROM Login L "
-				+ " WHERE L.Usr = ? AND L.Pwd = ?";
+				+ " WHERE BINARY L.Usr = ? AND BINARY L.Pwd = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, userName);

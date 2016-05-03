@@ -64,6 +64,9 @@ VALUES ('Clark', 'adventure', 1, 4);
 INSERT INTO Login (Usr, Pwd, AccType, Id)
 VALUES ('Dsmith', '12345', 2, 1);
 
+INSERT INTO Login (Usr, Pwd, AccType, Id)
+VALUES ('Boss', 'password', 3, 2);
+
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 1
