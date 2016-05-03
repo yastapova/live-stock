@@ -45,7 +45,9 @@ public class SearchStockServlet extends HttpServlet {
         System.out.println("Type: "+stockType);
         String stockKeyword = request.getParameter("stockkeyword");
         System.out.println("Keyword: "+stockKeyword);
-    	stockKeyword = stockKeyword.replace("\\s", "");
+        if (stockKeyword!=null) {
+        	stockKeyword = stockKeyword.replaceAll("\\s", "");
+        }
         try{
         	
         	String sql1;
@@ -57,7 +59,7 @@ public class SearchStockServlet extends HttpServlet {
             	pstm1.setString(1,stockType);
                 rs = pstm1.executeQuery();
             }
-            else if ((stockKeyword!=null) | (stockKeyword=="")) {
+            else if ((stockKeyword!=null) & (stockKeyword!="")) {
             	/*sql1 = "CALL getStockUsingKeyword(?)";
             	pstm1 = conn.prepareStatement(sql1);
             	pstm1.setString(1,stockKeyword);
