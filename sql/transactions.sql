@@ -82,7 +82,7 @@ delimiter |
 -- placed for each one.
 CREATE PROCEDURE listAllStocks()
 	BEGIN
-		SELECT S.*, COUNT (O.StockSymbol) AS OrdersPlaced
+		SELECT S.*, COUNT(O.StockSymbol) AS OrdersPlaced
 		FROM Stock S, Order_ O
 		WHERE S.StockSymbol = O.StockSymbol
 		GROUP BY S.StockSymbol;

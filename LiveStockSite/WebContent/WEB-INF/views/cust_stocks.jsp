@@ -79,6 +79,7 @@ function set_price_onclick() {
 	          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
 	          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
 	          <c:if test="${userType=='M'}">
+	          	<th style="width: 50px"><span style="font-size: 10pt">Number of Orders</span></th>
 	          	<th style="width: 25px"><span style="font-size: 10pt">Set Price</span></th>
 	          </c:if>
 	        </tr>
@@ -90,6 +91,7 @@ function set_price_onclick() {
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
 		            <c:if test="${userType=='M'}">
+		            	<td style="width: 25px"><span style="font-size: 10pt"><c:out value="${stock.numOrders}" /></span></td>
 	          			<td style="width: 25px"><span style="font-size: 10pt">
 								<input class="forminput" id="new_price" name="stockprice" type="text" value="" />
 								<input type ="hidden" class="forminput" id="old_price" name="stockprice" value="<c:out value="${stock.shareprice}" />" />
