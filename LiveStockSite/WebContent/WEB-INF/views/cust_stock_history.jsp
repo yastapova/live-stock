@@ -78,50 +78,24 @@ function get_history_onclick() {
 		<form id="priceForm" name="myForm" action="price_stocks" method="post">
 		<table border="4" id="stock" >
 	        <tr>
-	          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
-	          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
-	          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
 	          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
-	          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
-	          <c:if test="${userType=='M'}">
-	          	<th style="width: 25px"><span style="font-size: 10pt">Set Price</span></th>
-	          </c:if>
+	          <th style="width: 100px"><span style="font-size: 10pt"></span>TimeStamp</th>
 	        </tr>
 			<c:forEach var="stock" items="${stocks}">
 	   			<tr>
-		            <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
-		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
-		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
 		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
-		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
-		            <c:if test="${userType=='M'}">
-	          			<td style="width: 25px"><span style="font-size: 10pt">
-								<input class="forminput" id="new_price" name="stockprice" type="text" value="" />
-								<input type ="hidden" class="forminput" id="old_price" name="stockprice" value="<c:out value="${stock.shareprice}" />" />
-								<input type ="hidden" class="forminput" id="symbol" name="stockprice" value="<c:out value="${stock.stocksym}" />" />
-						</span></td>
-	          		</c:if>
+		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.datetime}" /></span></td>
 	        	</tr>
 			</c:forEach>
   		</table>
   		</form>
   		<br>
-  		<c:if test="${userType=='M'}">
-  			<button class="btn-default" onclick="return set_price_onclick()">Set Price</button>
-  		</c:if>
   		<button class="btn-default" onclick="return stock_onclick()">Current Stock Listings</button>
   		<button class="btn-default" onclick="return best_sellers_onclick('Best Sellers')">Best Sellers</button>
   		<c:if test="${userType=='C'}">
 			<button class="btn-default" onclick="return suggested_onclick()">Suggested For You</button>
 		</c:if>
 		<br><br>
-		<c:if test="${userType=='M'}">
-		<form id="activeForm" name="myForm" action="most_actively_traded" method="post">
-			<span class="formlabel">Number to show:</span>
-			<input class="formsmall" id="numstocks" name="numstocks" type="text" />
-  			<button class="btn-default" onclick="return mostTraded_onclick()">Most Actively Traded</button>
-  		</form>
-  		</c:if>
   		<br />
 		<form id="typeForm" name="myForm" action="search_stocks" method="post">
 			<span class="formlabel">Search on type:</span>
@@ -153,7 +127,8 @@ function get_history_onclick() {
 						<td>End Date:</td>
 						<td><input class="forminput" id="history" name="enddate" type="text" placeholder="yyyy-mm-dd"/></td>
 					</tr>
-						<td><button align="center" value="gethistory" class="btn-default" id="gethistory" onclick="return get_history_onclick()">Get History</button><td>
+					<tr>
+						<td><button value="gethistory" class="btn-default" id="gethistory" onclick="return get_history_onclick()">Get History</button><td>
 					</tr>
 				</form>
 			</table>

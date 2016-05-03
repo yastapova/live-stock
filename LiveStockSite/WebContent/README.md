@@ -33,7 +33,7 @@ Customers should be thought of as online traders and should be able to easily br
 A customer's current stock holdings [DONE]
 The share-price and trailing-stop history for a given conditional order
 The share-price and hidden-stop history for a given conditional order
-The share-price history of a given stock over a certain period of time (e.g., past six months)
+The share-price history of a given stock over a certain period of time (e.g., past six months) [DONE]
 A history of all current and past orders a customer has placed [DONE]
 Stocks available of a particular type [DONE]
 	and most-recent order info
