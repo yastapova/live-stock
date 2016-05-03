@@ -50,39 +50,66 @@ public class OrdersServlet extends HttpServlet {
 		List<CustomerAccount> custlist = new ArrayList<CustomerAccount>();
 		List<Stock> stocklist = new ArrayList<Stock>();
 		Connection conn = MyUtils.getStoredConnection(request);
+		boolean history = false;
 
 		if (loginedUser instanceof CustomerAccount) {
 			int id = loginedUser.getId();
+			String id_param = request.getParameter("order_id");
+			if (id_param == null || "".equals(id_param)) {
+				System.out.println("No values.");
+				
+				try {
+					String sql1 = "SELECT O.OrderId, O.Timestamp_, O.CusAccNum, "
+							+ "O.StockSymbol, O.NumShares, O.PriceType, "
+							+ "O.StopPrice, O.OrderType, O.Recorded, O.Completed " + "FROM Order_ O, Account_ A "
+							+ "WHERE O.CusAccNum = A.AccNum " + "AND A.CusId = ?";
+					PreparedStatement pstm1 = conn.prepareStatement(sql1);
+					pstm1.setInt(1, id);
+					java.sql.ResultSet rs;
+					rs = pstm1.executeQuery();
 
-			try {
-				String sql1 = "SELECT O.OrderId, O.Timestamp_, O.CusAccNum, "
-						+ "O.StockSymbol, O.NumShares, O.PriceType, "
-						+ "O.StopPrice, O.OrderType, O.Recorded, O.Completed " + "FROM Order_ O, Account_ A "
-						+ "WHERE O.CusAccNum = A.AccNum " + "AND A.CusId = ?";
-				PreparedStatement pstm1 = conn.prepareStatement(sql1);
-				pstm1.setInt(1, id);
-				java.sql.ResultSet rs;
-				rs = pstm1.executeQuery();
-
-				while (rs.next()) {
-					Order order = new Order();
-					order.setId(rs.getInt("OrderId"));
-					order.setOrderType(rs.getString("OrderType"));
-					order.setTimestamp(rs.getTimestamp("Timestamp_"));
-					order.setCusAccNum(rs.getInt("CusAccNum"));
-					order.setStockSymbol(rs.getString("StockSymbol"));
-					order.setNumShares(rs.getInt("NumShares"));
-					order.setPriceType(rs.getString("PriceType"));
-					order.setStopPrice(rs.getFloat("StopPrice"));
-					order.setRecorded(rs.getBoolean("Recorded"));
-					order.setCompleted(rs.getBoolean("Completed"));
-					list.add(order);
+					while (rs.next()) {
+						Order order = new Order();
+						order.setId(rs.getInt("OrderId"));
+						order.setOrderType(rs.getString("OrderType"));
+						order.setTimestamp(rs.getTimestamp("Timestamp_"));
+						order.setCusAccNum(rs.getInt("CusAccNum"));
+						order.setStockSymbol(rs.getString("StockSymbol"));
+						order.setNumShares(rs.getInt("NumShares"));
+						order.setPriceType(rs.getString("PriceType"));
+						order.setStopPrice(rs.getFloat("StopPrice"));
+						order.setRecorded(rs.getBoolean("Recorded"));
+						order.setCompleted(rs.getBoolean("Completed"));
+						list.add(order);
+					}
+					System.out.println("Found items: " + list.size());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				System.out.println("Found items: " + list.size());
-			} catch (Exception e) {
-				e.printStackTrace();
+			} else {
+				try {
+					String sql1 = "CALL getConditonalOrderHistory(?)";
+					PreparedStatement pstm1 = conn.prepareStatement(sql1);
+					pstm1.setInt(1, Integer.parseInt(id_param));
+					java.sql.ResultSet rs;
+					rs = pstm1.executeQuery();
+					
+					while (rs.next()) {
+						Order order = new Order();
+						order.setId(Integer.parseInt(id_param));
+						order.setCurSharePrice(rs.getFloat("CurSharePrice"));
+						order.setTimestamp(rs.getTimestamp("Timestamp_"));
+						order.setStopPrice(rs.getFloat("StopPrice"));
+						list.add(order);
+					}
+					history = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+			
 			request.setAttribute("orders", list);
+			request.setAttribute("isHistory", history);
 
 			RequestDispatcher dispatcher = this.getServletContext()
 					.getRequestDispatcher("/WEB-INF/views/cust_orders.jsp");
