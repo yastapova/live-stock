@@ -257,14 +257,14 @@ CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
     END
 | delimiter ;
 
--- The share-price history of a given stock over a certain period of time (e.g., past six months
+-- The share-price history of a given stock over a certain period of time (e.g., past six months)
 delimiter |
-CREATE PROCEDURE getSharePriceHistory(IN month_past INT)
+CREATE PROCEDURE getSharePriceHistory(IN stock_symbol VARCHAR(5), IN start_date DATE, IN end_date DATE)
 	BEGIN
-		SELECT P.SharePrice, P.TimeStamp
+		SELECT P.SharePrice, P.Timestamp_
 		FROM STOCKPRICEHISTORY P
 		WHERE P.StockSymbol = stock_symbol 
-		AND MONTH(TIMEDIFF(NOW(), P.TimeStamp)) < month_past;
+		AND DATE(P.Timestamp_) BETWEEN start_date AND end_date;
     END
 | delimiter ;
 

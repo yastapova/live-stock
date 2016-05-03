@@ -1,4 +1,5 @@
 package general;
+import java.sql.Timestamp;
 
 public class Stock
 {
@@ -9,7 +10,8 @@ public class Stock
 	private float shareprice;
 	private int numshares;
 	private int numOrders;
-	
+	private Timestamp datetime;
+
 	public Stock(String stocksym, String stockname, String stocktype, float shareprice, int numshares) {
 		this.stocksym = stocksym;
 		this.stockname = stockname;
@@ -32,6 +34,12 @@ public class Stock
 		this.stocksym = stocksym;
 		this.stockname = stockname;
 		this.numOrders = numOrders;
+	}
+	
+	public Stock(String stocksym, float shareprice, Timestamp datetime) {
+		this.stocksym = stocksym;
+		this.shareprice = shareprice;
+		this.datetime = datetime;
 	}
 	
 	public String getStocksym() {
@@ -71,4 +79,11 @@ public class Stock
 		this.numOrders = numOrders;
 	}
 	
+	public Timestamp getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(Timestamp datetime) {
+		this.datetime = datetime;
+	}
 }
