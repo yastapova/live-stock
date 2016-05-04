@@ -114,7 +114,7 @@ public class OrderStockServlet extends HttpServlet {
         }
         
         request.setAttribute("stocksym", stocksym);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/order_stock.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/order_stock.jsp");
         dispatcher.forward(request, response);
 	}
 	

@@ -69,7 +69,7 @@ public class DoImportServlet extends HttpServlet {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/manutilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/manutilities.jsp");
 		dispatcher.forward(request, response);
 	}
 
