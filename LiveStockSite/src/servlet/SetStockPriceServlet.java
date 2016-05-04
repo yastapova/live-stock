@@ -107,7 +107,7 @@ public class SetStockPriceServlet extends HttpServlet {
         request.setAttribute("stocks", list);
         request.setAttribute("table", table);
         request.setAttribute("userType", loginedUser.getUserType());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_stocks.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/stocks");
         dispatcher.forward(request, response);
         
     }
