@@ -173,7 +173,7 @@ public class DoRegisterEmployeeServlet extends HttpServlet {
        
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-            = this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp");
+            = this.getServletContext().getRequestDispatcher("index.jsp");
  
             dispatcher.forward(request, response);
         }

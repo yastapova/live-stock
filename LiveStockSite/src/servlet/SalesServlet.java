@@ -114,7 +114,7 @@ public class SalesServlet extends HttpServlet {
         request.setAttribute("id", loginedUser.getId());
         request.setAttribute("month", month);
         request.setAttribute("year", year);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_finances_sales.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_finances_sales.jsp");
         dispatcher.forward(request, response);
         
     }

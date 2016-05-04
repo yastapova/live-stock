@@ -95,6 +95,7 @@ public class OrdersServlet extends HttpServlet {
 					rs = pstm1.executeQuery();
 					
 					while (rs.next()) {
+						System.out.println("Found Conditional Price Histories!");
 						Order order = new Order();
 						order.setId(Integer.parseInt(id_param));
 						order.setCurSharePrice(rs.getFloat("CurSharePrice"));
@@ -112,7 +113,7 @@ public class OrdersServlet extends HttpServlet {
 			request.setAttribute("isHistory", history);
 
 			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/cust_orders.jsp");
+					.getRequestDispatcher("/views/cust_orders.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			if (((EmployeeAccount) loginedUser).isManager()) {
@@ -167,7 +168,7 @@ public class OrdersServlet extends HttpServlet {
 				}
 				request.setAttribute("orders", list);
 				RequestDispatcher dispatcher = this.getServletContext()
-						.getRequestDispatcher("/WEB-INF/views/rep_orders.jsp");
+						.getRequestDispatcher("/views/rep_orders.jsp");
 				dispatcher.forward(request, response);
 			}
 		}

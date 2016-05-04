@@ -123,7 +123,7 @@ public class ManOrderStockServlet extends HttpServlet {
 			request.setAttribute("stockSyms", stringlist);
 			
 			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/man_orders_stock.jsp");
+					.getRequestDispatcher("/views/man_orders_stock.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

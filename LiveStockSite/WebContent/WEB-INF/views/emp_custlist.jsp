@@ -103,47 +103,47 @@ function addCust_onclick() {
             <form id="addCustomer" name="addCustomerForm" action="addCustEmp" method="post">
             	<tr>  
 		            <td>Username:</td>   
-		  			<td><input type="text" name="username" class="inputA" ></td>
+		  			<td><input type="text" name="username" class="inputA" required></td>
 	  			</tr>
 	  			<tr>  
 		            <td>Password:</td>   
-		  			<td><input type="password" name="password" class="inputA" ></td>
+		  			<td><input type="password" name="password" class="inputA" required></td>
 	  			</tr>
 	            <tr>  
 		            <td>First name:</td>   
-		  			<td><input type="text" name="firstname" class="inputA" ></td>
+		  			<td><input type="text" name="firstname" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Last name: </td>  
-		  			<td><input type="text" name="lastname" class="inputA"></td>
+		  			<td><input type="text" name="lastname" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Address:   </td>
-		  			<td><input type="text" name="address" class="inputA"></td>
+		  			<td><input type="text" name="address" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>City:</td>   
-		  			<td><input type="text" name="city" class="inputA"></td>
+		  			<td><input type="text" name="city" class="inputA" required></td>
 	  			</td>
 	  			<tr>
 		  			<td>State:</td>   
-		  			<td><input type="text" name="state" class="inputA"></td>
+		  			<td><input type="text" name="state" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Zip Code: </td>  
-		  			<td><input type="text" name="zipcode" class="inputA"></td>
+		  			<td><input type="text" name="zipcode" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Telephone: </td>  
-		  			<td><input type="text" name="telephone" class="inputA"></td>
+		  			<td><input type="text" name="telephone" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Email: </td>
-		  			<td><input type="text" name="email" class="inputA"></td>
+		  			<td><input type="text" name="email" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Rating: </td>  
-		  			<td><input type="text" name="rating" class="inputA"></td>
+		  			<td><input type="text" name="rating" class="inputA" required></td>
 	  			</tr>	  				
 			</form>  
 		</table>    

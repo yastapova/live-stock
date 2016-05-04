@@ -123,7 +123,7 @@ public class ManOrderCustomerServlet extends HttpServlet {
 			request.setAttribute("accNums", intlist);
 			
 			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/man_orders_cust.jsp");
+					.getRequestDispatcher("/views/man_orders_cust.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -29,7 +29,7 @@ public class MainHelpServlet extends HttpServlet
             throws ServletException, IOException {
 		
 		// Forward to main help
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEF-INF/views/main_help.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/main_help.jsp");
         dispatcher.forward(request, response);
     }
  

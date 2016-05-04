@@ -112,7 +112,7 @@ public class UserListServlet extends HttpServlet {
         request.setAttribute("employees", emplist);       
         request.setAttribute("customers", custlist);       
         request.setAttribute("id", loginedUser.getId());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_userlist.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_userlist.jsp");
         dispatcher.forward(request, response);
         
     }

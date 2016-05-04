@@ -64,3 +64,14 @@ A comprehensive Help facility, including a topic-driven pull-down Help menu [DON
 ----------------------------------
 Passwords and usernames are not currently case sensitive [DONE]
 Orders only show date, not time [DONE]
+
+7 Documentation
+----------------------------------
+You will be required to supplement your completed database implementation with a design document that contains information concerning your design criteria and decisions. The following is a list of some of the information you should include:
+
+Entity-Relationship (E-R) Diagram of the complete database scheme
+Lucid description of the relational database scheme for yoru online stock trading system, including a discussion of the reasoning behind your design decisions. Make clear how your design supports efficient query processing.
+
+A list of all functional dependencies in the relational database scheme
+Description of integrity constraints including referential integrity
+You will also be required to submit a Users Guide that carefully explains how to use all aspects of the system. It should be understandable by non-computer experts. Be sure that the user interface (screen design, menu structure, etc.) is clearly explained.

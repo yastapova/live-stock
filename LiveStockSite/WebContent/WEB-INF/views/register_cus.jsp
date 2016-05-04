@@ -71,43 +71,43 @@ function cancel_onclick() {
 			<table>
 				<tr>
 					<td><span class="formlabel">Username:</span></td>
-					<td><input class="forminput" id="usrn" name="username" type="text" /></td>
+					<td><input class="forminput" id="usrn" name="username" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Password:</span></td>
-					<td><input class="forminput" id="pw" name="password" type="password" /></td>
+					<td><input class="forminput" id="pw" name="password" type="password" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">First Name:</span></td>
-					<td><input class="forminput" id="fname" name="first_name" type="text" /></td>
+					<td><input class="forminput" id="fname" name="first_name" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Last Name:</span></td>
-					<td><input class="forminput" id="lname" name="last_name" type="text" /></td>
+					<td><input class="forminput" id="lname" name="last_name" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Address:</span></td>
-					<td><input class="forminput" id="addr" name="address" type="text" /></td>
+					<td><input class="forminput" id="addr" name="address" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">City:</span></td>
-					<td><input class="forminput" id="city" name="city" type="text" /></td>
+					<td><input class="forminput" id="city" name="city" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">State:</span></td>
-					<td><input class="forminput" id="state" name="state" type="text" /></td>
+					<td><input class="forminput" id="state" name="state" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">ZipCode:</span></td>
-					<td><input class="forminput" id="zip" name="zipcode" type="text" /></td>
+					<td><input class="forminput" id="zip" name="zipcode" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Telephone:</span></td>
-					<td><input class="forminput" id="phone" name="phone" type="text" /></td>
+					<td><input class="forminput" id="phone" name="phone" type="text" required/></td>
 				</tr>
 				<tr>
 					<td><span class="formlabel">Email:</span></td>
-					<td><input class="forminput" id="email" name="email" type="text" /></td>
+					<td><input class="forminput" id="email" name="email" type="text" required/></td>
 				</tr>
 			</table>
 		</form>

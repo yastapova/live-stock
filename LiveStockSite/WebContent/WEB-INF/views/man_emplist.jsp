@@ -106,51 +106,51 @@ function addEmp_onclick() {
             <form id="addEmployee" name="addEmployeeForm" action="addEmpMan" method="post">
             	<tr>  
 		            <td>Username:</td>   
-		  			<td><input type="text" name="username" class="inputA" ></td>
+		  			<td><input type="text" name="username" class="inputA" required></td>
 	  			</tr>
 	  			<tr>  
 		            <td>Password:</td>   
-		  			<td><input type="password" name="password" class="inputA" ></td>
+		  			<td><input type="password" name="password" class="inputA" required></td>
 	  			</tr>
 	            <tr>  
 		            <td>First name:</td>   
-		  			<td><input type="text" name="firstname" class="inputA" ></td>
+		  			<td><input type="text" name="firstname" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Last name: </td>  
-		  			<td><input type="text" name="lastname" class="inputA"></td>
+		  			<td><input type="text" name="lastname" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Address:   </td>
-		  			<td><input type="text" name="address" class="inputA"></td>
+		  			<td><input type="text" name="address" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>City:</td>   
-		  			<td><input type="text" name="city" class="inputA"></td>
+		  			<td><input type="text" name="city" class="inputA" required></td>
 	  			</td>
 	  			<tr>
 		  			<td>State:</td>   
-		  			<td><input type="text" name="state" class="inputA"></td>
+		  			<td><input type="text" name="state" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Zip Code: </td>  
-		  			<td><input type="text" name="zipcode" class="inputA"></td>
+		  			<td><input type="text" name="zipcode" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Telephone: </td>  
-		  			<td><input type="text" name="telephone" class="inputA"></td>
+		  			<td><input type="text" name="telephone" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Start Date: </td>
-		  			<td><input type="text" name="startdate" class="inputA" placeholder="yyyy-mm-dd"></td>
+		  			<td><input type="text" name="startdate" class="inputA" placeholder="yyyy-mm-dd" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>Hourly Rate: </td>  
-		  			<td><input type="text" name="hourly" class="inputA"></td>
+		  			<td><input type="text" name="hourly" class="inputA" required></td>
 	  			</tr>
 	  			<tr>
 		  			<td>SSN:  </td> 
-		  			<td><input type="text" name="ssn" class="inputA"></td>
+		  			<td><input type="text" name="ssn" class="inputA" required></td>
 	  			</tr>		
 			</form>  
 		</table>    

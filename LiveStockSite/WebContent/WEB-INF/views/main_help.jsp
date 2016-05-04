@@ -50,7 +50,7 @@
 		<div id="manager">
 			<h3>MANAGER</h3>
 			<dt>Account Info</dt>
-			<dd>View and update your account information.</dd>
+			<dd>View your account information.</dd>
 			<dt>Stocks</dt>
 			<dd>Search for stocks and place orders.</dd>
 			<dt>Employees</dt>
@@ -73,7 +73,7 @@
 			<h3>CUSTOMER REPRESENTATIVE</h3>
 			<dl>
 				<dt>Account Info</dt>
-				<dd>View and update your account information.</dd>
+				<dd>View your account information.</dd>
 				<dt>Utilities</dt>
 				<dd>Manage customer accounts and associated tools.</dd>
 				<dt>Customers</dt>
@@ -94,7 +94,7 @@
 			<h3>CUSTOMER</h3>
 			<dl>
 				<dt>Account Info</dt>
-				<dd>View and update your account information.</dd>
+				<dd>View your account information.</dd>
 				<dt>Portfolio</dt>
 				<dd>View information about the stocks that you currently own.</dd>
 				<dt>Orders</dt>

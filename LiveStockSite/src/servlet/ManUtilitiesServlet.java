@@ -38,7 +38,7 @@ public class ManUtilitiesServlet extends HttpServlet {
 			return;
 		}
 		
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/manutilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/manutilities.jsp");
 		dispatcher.forward(request, response);
 	}
 
