@@ -302,12 +302,13 @@ CREATE PROCEDURE getStockUsingType(IN stock_type CHAR(20))
 
 -- Most-recent order info of a customer
 delimiter |
-CREATE PROCEDURE getMostRecentOrderInfo()
+CREATE PROCEDURE getMostRecentOrderInfo(IN cus_id INTEGER, IN stock_sym VARCHAR(5))
 	BEGIN
 		SELECT O.*
 		FROM ORDER_ O, CUSTOMER C, ACCOUNT_ A
-		WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId AND C.CusId = 4
-		AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
+		WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId 
+			AND C.CusId = cus_id AND O.StockSymbol = stock_sym
+			AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
 
     END
 | delimiter ;

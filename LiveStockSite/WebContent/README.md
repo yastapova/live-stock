@@ -50,7 +50,7 @@ Your database system should provide controlled access to the data by distinguish
 
 Customer Representatives should not be able to perform manager-level transactions; however, they should be able to read employee information, except for the hourly rate. [DONE]
 Customer Representatives should be able to record the receipt of an order from a customer. [DONE]
-A customer should not be allowed access to other customers' account information, or to any employee information. Also, trailing and hidden stops must be kept private.
+A customer should not be allowed access to other customers' account information, or to any employee information. Also, trailing and hidden stops must be kept private. [DONE]
 
 5 Utilities [DONE]
 ----------------------------------
