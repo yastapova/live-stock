@@ -112,8 +112,7 @@ public class OrdersServlet extends HttpServlet {
 			request.setAttribute("orders", list);
 			request.setAttribute("isHistory", history);
 
-			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/views/cust_orders.jsp");
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_orders.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			if (((EmployeeAccount) loginedUser).isManager()) {
@@ -167,8 +166,7 @@ public class OrdersServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				request.setAttribute("orders", list);
-				RequestDispatcher dispatcher = this.getServletContext()
-						.getRequestDispatcher("/views/rep_orders.jsp");
+				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_orders.jsp");
 				dispatcher.forward(request, response);
 			}
 		}

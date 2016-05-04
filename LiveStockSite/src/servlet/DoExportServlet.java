@@ -52,10 +52,10 @@ public class DoExportServlet extends HttpServlet {
 			File f = new File(".");;
 			System.out.println(f.getAbsolutePath());
 			// Change this accordingly
-			String path = "..\\Documents\\CSE305\\live-stock\\LiveStockSite\\dumps\\";
+			String path = "..\\Documents\\programming\\cse305dumps\\";
 			Runtime runtime = Runtime.getRuntime();
 			p = runtime
-					.exec("mysqldump -uroot -ptoor --add-drop-database -B live-stock -r " + path + "dump" + ".sql");
+					.exec("..\\..\\..\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -uroot -ptoor --add-drop-database -B live-stock -r " + path + "dump" + ".sql");
 			// change the dbpass and dbname with your dbpass and dbname
 			int processComplete = p.waitFor();
 
@@ -70,7 +70,7 @@ public class DoExportServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/manutilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/manutilities.jsp");
 		dispatcher.forward(request, response);
 	}
 

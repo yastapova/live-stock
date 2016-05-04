@@ -50,9 +50,9 @@ public class DoImportServlet extends HttpServlet {
 		File f = new File(".");;
 		System.out.println(f.getAbsolutePath());
 		// Change this accordingly
-		String path = "..\\Documents\\CSE305\\live-stock\\LiveStockSite\\dumps\\";
+		String path = "..\\Documents\\programming\\cse305dumps\\";
 		
-		String[] restoreCmd = new String[] { "mysql ", "--user=" + "root", "--password=" + "toor", "-e",
+		String[] restoreCmd = new String[] { "..\\..\\..\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql ", "--user=" + "root", "--password=" + "toor", "-e",
 				"source " + path + "dump.sql" };
 
 		Process runtimeProcess;
@@ -69,7 +69,7 @@ public class DoImportServlet extends HttpServlet {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/manutilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/manutilities.jsp");
 		dispatcher.forward(request, response);
 	}
 
