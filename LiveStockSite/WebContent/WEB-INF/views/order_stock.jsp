@@ -78,7 +78,8 @@ function submit_order_onclick() {
 			<table>
 				<tr>
 					<td>Stock:</td>
-					<td><input class="forminput" id="stocksym" name="stocksym" type="text" value="${stocksym}" placeholder="${stocksym}" disabled /></td>
+					<td><input class="forminput" id="stockdisplay" name="stockdisplay" type="text" value="${stocksym}" placeholder="${stocksym}" disabled />
+					<input type="hidden" name="stocksym" id="stocksym" value="${stocksym}" /></td>
 				</tr>
 				<tr>
 					<td>Order Type:</td>
@@ -93,7 +94,7 @@ function submit_order_onclick() {
 					<td>Customer Account:</td>
 					<td><select name="cusAccount" class="inputA">
 						    <c:forEach var="cus" items="${customers}">
-						    <option value="${cus.id}">Acc <c:out value="${cus.accnum}" />: <c:out value="${cus.fname}" /> <c:out value="${cus.lname}" /></option>
+						    <option value="${cus.accnum}">Acc <c:out value="${cus.accnum}" />: <c:out value="${cus.fname}" /> <c:out value="${cus.lname}" /></option>
 						    </c:forEach>
 						</select>
 					</td>

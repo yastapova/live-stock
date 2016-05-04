@@ -24,7 +24,7 @@ Add, Edit and Delete information for a customer [DONE]
 Produce customer mailing lists [DONE]
 	{Yuliya: fix mailing list later with booleans}
 Produce a list of stock suggestions for a given customer (based on that customer's past orders) [DONE]
-Place an order
+Place an order [DONE]
 
 3.3 Customer-Level Transactions
 ----------------------------------------------
@@ -42,7 +42,7 @@ Stocks available with a particular keyword or set of keywords in the stock name 
 {Also add search by stock symbol?}
 Best-Seller list of stocks [DONE]
 Personalized stock suggestion list [DONE]
-Place an order
+Place an order [DONE]
 
 4 User Access Control
 ------------------------------------
