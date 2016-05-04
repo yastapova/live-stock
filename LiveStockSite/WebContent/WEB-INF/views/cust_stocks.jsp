@@ -51,6 +51,19 @@ function set_price_onclick() {
 	javascript:priceForm.submit();
 }
 
+function isStockSelected() {
+    return ($('input[type=radio]:checked').size() > 0);
+}
+
+function order_stock_onclick() {
+	console.log("Order Stock");
+	if(!isStockSelected()) {
+		alert("Please select a stock.");
+		return;
+	}
+	javascript:orderForm.submit();
+}
+
 function get_history_onclick() {
 	console.log("Get History");
 	javascript:historyform.submit();
@@ -75,42 +88,66 @@ function get_history_onclick() {
 	</c:if>
 	<div class="body" align="center">
 		<h2><c:out value="${table}"/></h2>
-		<form id="priceForm" name="myForm" action="price_stocks" method="post">
-		<table border="4" id="stock" >
-	        <tr>
-	          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
-	          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
-	          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
-	          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
-	          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
-	          <c:if test="${userType=='M'}">
-	          	<th style="width: 50px"><span style="font-size: 10pt">Number of Orders</span></th>
-	          	<th style="width: 25px"><span style="font-size: 10pt">Set Price</span></th>
-	          </c:if>
-	        </tr>
-			<c:forEach var="stock" items="${stocks}">
-	   			<tr>
-		            <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
-		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
-		            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
-		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
-		            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
-		            <c:if test="${userType=='M'}">
+		<c:if test="${userType=='C' or userType=='R'}">
+			<form id="orderForm" name="myForm" action="order_stock" method="post">
+				<table border="4" id="stock" >
+		        <tr>
+		          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
+		          <th style="width: 50px"><span style="font-size: 10pt">Place Order</span></th>
+		        </tr>
+				<c:forEach var="stock" items="${stocks}">
+		   			<tr>
+			            <td><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
+			            <td><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
+			            <td><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
+			            <td><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
+			            <td><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
+			            <td align="center"><span style="font-size: 10pt"><input type="radio" name="stockOrder" value="${stock.stocksym}" /></span></td>
+		        	</tr>
+				</c:forEach>
+	  		</table>
+	  		</form>
+	  		<br>
+	  		<button class="btn-default" onclick="return order_stock_onclick()">Order Stock</button>
+		</c:if>
+		
+		<c:if test="${userType=='M'}">
+			<form id="priceForm" name="myForm" action="price_stocks" method="post">
+				<table border="4" id="stock" >
+		        <tr>
+		          <th style="width: 10px"><span style="font-size: 10pt">Stock Symbol</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Name</span></th>
+		          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
+		          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
+		          <th style="width: 50px"><span style="font-size: 10pt">Number of Orders</span></th>
+		          <th style="width: 25px"><span style="font-size: 10pt">Set Price</span></th>
+		        </tr>
+				<c:forEach var="stock" items="${stocks}">
+		   			<tr>
+			            <td style="width: 10px"><span style="font-size: 10pt"><c:out value="${stock.stocksym}" /></span></td>
+			            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stockname}" /></span></td>
+			            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
+			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
+			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
 		            	<td style="width: 25px"><span style="font-size: 10pt"><c:out value="${stock.numOrders}" /></span></td>
 	          			<td style="width: 25px"><span style="font-size: 10pt">
 								<input class="forminput" id="new_price" name="stockprice" type="text" value="" />
 								<input type ="hidden" class="forminput" id="old_price" name="stockprice" value="<c:out value="${stock.shareprice}" />" />
 								<input type ="hidden" class="forminput" id="symbol" name="stockprice" value="<c:out value="${stock.stocksym}" />" />
 						</span></td>
-	          		</c:if>
-	        	</tr>
-			</c:forEach>
-  		</table>
-  		</form>
-  		<br>
-  		<c:if test="${userType=='M'}">
-  			<button class="btn-default" onclick="return set_price_onclick()">Set Price</button>
-  		</c:if>
+		        	</tr>
+				</c:forEach>
+	  		</table>
+	  		</form>
+	  		<br>
+	  		<button class="btn-default" onclick="return set_price_onclick()">Set Price</button>
+		</c:if>
+		
   		<button class="btn-default" onclick="return stock_onclick()">Current Stock Listings</button>
   		<button class="btn-default" onclick="return best_sellers_onclick('Best Sellers')">Best Sellers</button>
   		<c:if test="${userType=='C'}">

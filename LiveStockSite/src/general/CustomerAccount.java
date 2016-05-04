@@ -11,6 +11,7 @@ public class CustomerAccount extends UserAccount {
 
 	private String email;
 	private int rating;
+	private int accnum;
 	
 	public CustomerAccount()
 	{
@@ -72,4 +73,19 @@ public class CustomerAccount extends UserAccount {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+
+	/**
+	 * @return the accnum
+	 */
+	public int getAccnum() {
+		return accnum;
+	}
+
+	/**
+	 * @param accnum the accnum to set
+	 */
+	public void setAccnum(int accnum) {
+		this.accnum = accnum;
+	}
+	
 }

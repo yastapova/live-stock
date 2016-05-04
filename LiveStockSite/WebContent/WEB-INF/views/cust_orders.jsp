@@ -52,7 +52,7 @@ function default_onclick() {
 			</table>
 			<button value="Orders" class="btn-default" id="orders" onclick="return default_onclick()">Go Back</button>
 		</c:if>
-		<c:if test="${isHistory==false}">
+		<c:if test="${isHistory == null or isHistory == false}">
 			<h2>Orders</h2>
 			<form name="orderRecords" id="orderRecords" action="orders" method="post">
 			<table border="4">
