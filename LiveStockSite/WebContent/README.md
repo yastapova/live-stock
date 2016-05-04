@@ -31,8 +31,8 @@ Place an order [DONE]
 Customers should be thought of as online traders and should be able to easily browse your online trading system on the web and place orders to purchase or sell stocks. In particular, they should be able to place a trailing-stop or hidden-stop conditional order, and place an order to buy or sell stocks at market or close-of-market price. While they will not be permitted to access the database directly, they should be able to retrieve the following information:
 
 A customer's current stock holdings [DONE]
-The share-price and trailing-stop history for a given conditional order
-The share-price and hidden-stop history for a given conditional order
+The share-price and trailing-stop history for a given conditional order [DONE]
+The share-price and hidden-stop history for a given conditional order [DONE]
 The share-price history of a given stock over a certain period of time (e.g., past six months) [DONE]
 A history of all current and past orders a customer has placed [DONE]
 Stocks available of a particular type [DONE]

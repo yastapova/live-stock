@@ -241,8 +241,8 @@ CREATE PROCEDURE getCustomerStockHoldings(IN customer_id INT)
 delimiter |
 CREATE PROCEDURE getConditonalOrderTrailingStop(IN orderid INT)
 	BEGIN
-		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp
-		FROM CONDITIONALPRICEHISTORY P, ORDER_ O
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp_
+		FROM CONDITIONALPRICEHISTORY P
 		WHERE P.OrderId = orderid  AND P.PriceType = 'Trailing Stop' AND P.StopPrice > 0;
     END
 | delimiter ;
@@ -251,9 +251,19 @@ CREATE PROCEDURE getConditonalOrderTrailingStop(IN orderid INT)
 delimiter |
 CREATE PROCEDURE getConditonalOrderHiddenStop(IN orderid INT)
 	BEGIN
-		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp
-		FROM CONDITIONALPRICEHISTORY P, ORDER_ O
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp_
+		FROM CONDITIONALPRICEHISTORY P
 		WHERE P.OrderId = orderid  AND P.PriceType = 'Hidden Stop' AND P.StopPrice > 0;
+    END
+| delimiter ;
+
+-- The share-price and hidden-stop history for a given conditional order
+delimiter |
+CREATE PROCEDURE getConditonalOrderHistory(IN orderid INT)
+	BEGIN
+		SELECT P.CurSharePrice, P.StopPrice, P.TimeStamp_
+		FROM CONDITIONALPRICEHISTORY P
+		WHERE P.OrderId = orderid AND P.StopPrice > 0;
     END
 | delimiter ;
 
