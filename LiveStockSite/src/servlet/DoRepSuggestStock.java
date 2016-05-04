@@ -62,7 +62,7 @@ public class DoRepSuggestStock extends HttpServlet {
         request.setAttribute("stocks", list);
         request.setAttribute("userType", loginedUser.getUserType());
         request.setAttribute("suggestCus", id);
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mailing_list.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/mailing_list.jsp");
         dispatcher.forward(request, response);
         
     }

@@ -33,7 +33,6 @@ public class DoExportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String stockSym = request.getParameter("stockSym");
 
 		// Check User has logged on
 		UserAccount loginedUser = MyUtils.getLoginedUser(session);
@@ -71,7 +70,7 @@ public class DoExportServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/manutilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/manutilities.jsp");
 		dispatcher.forward(request, response);
 	}
 
