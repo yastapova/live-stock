@@ -83,8 +83,7 @@ CREATE TRIGGER GetPrices2
 		SET NEW.PricePerShare = (SELECT S.SharePrice
 								 FROM Stock S, Order_ O
 								 WHERE S.StockSymbol = O.StockSymbol
-										AND O.OrderId = NEW.OrderId
-                                        LIMIT 1);
+										AND O.OrderId = NEW.OrderId);
 		SET NEW.TransFee = NEW.PricePerShare * (SELECT O.NumShares FROM Order_ O WHERE O.OrderId = NEW.OrderId LIMIT 1) * 0.05;
 	END;
 |
@@ -226,7 +225,15 @@ CREATE TRIGGER SellOrder
 		IF (NEW.CurSharePrice <= NEW.StopPrice 
 			AND 1 = (SELECT O.Recorded
 					FROM ORDER_ O
-					WHERE NEW.OrderId = O.OrderId))
+					WHERE NEW.OrderId = O.OrderId)
+			AND (SELECT O.NumShares
+				 FROM Order_ O
+                 WHERE O.OrderId = NEW.OrderId) <= 
+                 (SELECT P.NumShares
+                  FROM Portfolio P, Order_ O
+                  WHERE P.StockSymbol = O.StockSymbol
+                  AND O.OrderId = NEW.OrderId
+                  AND O.CusAccNum = P.AccNum))
 		THEN INSERT INTO Transact (OrderId, PricePerShare)
 			VALUES (NEW.OrderId, NEW.CurSharePrice);
 		END IF;
@@ -345,10 +352,10 @@ CREATE TRIGGER UpdateRating
 	BEFORE INSERT ON Order_ FOR EACH ROW
     BEGIN
 		UPDATE Customer C
-        SET C.Rating = MAX(C.Rating+1, 10)
+        SET C.Rating = LEAST(C.Rating+1, 10)
 		WHERE C.CusId = (SELECT A.CusId
-						FROM Account A
-                        WHERE NEW.CusAccNum=A.AccNum)
+						FROM Account_ A
+                        WHERE NEW.CusAccNum=A.AccNum);
     END;
-
+|
 delimiter ;

@@ -101,7 +101,7 @@ INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, Pr
 VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
-VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
+VALUES ('GM', 'Sell', 25, 1, NOW(), 'Trailing Stop', 10, 1, 0);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Stock SET SharePrice = 6
@@ -124,7 +124,7 @@ DROP VIEW STOCKTYPEREVENUE;
 DROP VIEW StockRevenue;
 DROP TRIGGER AddToStockPriceHistory;
 DROP TRIGGER AddToAccount;
-DROP TRIGGER Stops;
+DROP TRIGGER SellOrder;
 
 DROP PROCEDURE getStockUsingType;
 DROP PROCEDURE getStockUsingKeyword;
