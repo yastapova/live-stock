@@ -220,7 +220,7 @@ CREATE TRIGGER PriceTypes2
 delimiter |
 -- Execute a transact for an order with a stop price.
 CREATE TRIGGER SellOrder
-	AFTER INSERT ON ConditionalPriceHistory FOR EACH ROW
+	BEFORE INSERT ON ConditionalPriceHistory FOR EACH ROW
     BEGIN
 		IF (NEW.CurSharePrice <= NEW.StopPrice 
 			AND 1 = (SELECT O.Recorded
@@ -253,55 +253,7 @@ CREATE TRIGGER InitalAddToConditionalPriceHistoryShare
 	END;
 |
 delimiter ;
-/*
-delimiter |
--- Adds entry to CondPriceHist for a hidden stop when a stock price changes.
-CREATE TRIGGER UpdateHiddenStop
-	AFTER UPDATE ON Stock FOR EACH ROW
-    IF (NEW.SharePrice <> OLD.SharePrice)
-		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
-			SELECT O.OrderId, O.PriceType, O.StopPrice, NEW.SharePrice, NOW()
-            FROM Order_ O
-            WHERE NEW.StockSymbol = O.StockSymbol
-            AND O.PriceType IN ('Hidden Stop')
-            AND O.Completed = 0;
-	END IF;
-|
-delimiter ;
 
-delimiter |
--- Adds entry to CondPriceHist for a trailing stop when a stock price changes.
--- Updates the current stop price if the current share goes up.
-CREATE TRIGGER UpdateTrailingStop
-	AFTER UPDATE ON Stock FOR EACH ROW
-	BEGIN
-		IF (NEW.SharePrice > OLD.SharePrice)
-        THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
-			(SELECT O.OrderId, O.PriceType, NEW.SharePrice - O.StopDiff, NEW.SharePrice
-			FROM Order_ O, ConditionalPriceHistory C
-			WHERE NEW.StockSymbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
-							  FROM ConditionalPriceHistory H
-							  WHERE O.OrderId = H.OrderId)
-            AND O.PriceType = 'Trailing Stop'
-            AND O.StopDiff < NEW.SharePrice - C.StopPrice
-            AND O.Completed = 0);
-        END IF;
-        IF (NEW.SharePrice < OLD.SharePrice)
-		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
-			SELECT O.OrderId, O.PriceType, C.StopPrice, NEW.SharePrice, NOW()
-            FROM Order_ O, ConditionalPriceHistory C
-            WHERE NEW.StockSymbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
-							  FROM ConditionalPriceHistory H
-							  WHERE O.OrderId = H.OrderId)
-            AND O.PriceType IN ('Trailing Stop')
-            AND O.Completed = 0;
-		END IF;
-	END;
-|
-delimiter ;
-*/
 -- Adds an entry to StockPriceHistory when a stock is created.
 CREATE TRIGGER InitialAddToStockPriceHistory
 	AFTER INSERT ON Stock FOR EACH ROW

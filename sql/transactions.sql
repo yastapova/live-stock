@@ -363,7 +363,7 @@ delimiter |
 CREATE Procedure UpdateHiddenStop(IN new_stock_price FLOAT(2), IN old_stock_price FLOAT(2), IN stock_symbol CHAR(5))
 	BEGIN
 		IF (new_stock_price <> old_stock_price)
-			THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+			THEN INSERT IGNORE INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
 				SELECT DISTINCT O.OrderId, O.PriceType, O.StopPrice, new_stock_price, NOW()
 				FROM Order_ O
 				WHERE stock_symbol = O.StockSymbol
@@ -388,7 +388,7 @@ delimiter |
 CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_price FLOAT(2), IN stock_symbol CHAR(5))
 	BEGIN
 		IF (new_stock_price > old_stock_price)
-        THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
+        THEN INSERT IGNORE INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
 			SELECT DISTINCT O.OrderId, O.PriceType, new_stock_price - O.StopDiff, new_stock_price
 			FROM Order_ O, ConditionalPriceHistory C
 			WHERE stock_symbol = O.StockSymbol
@@ -411,7 +411,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
             AND O.Completed = 0;
         END IF;
         IF (new_stock_price < old_stock_price)
-		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
+		THEN INSERT IGNORE INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
 			SELECT DISTINCT O.OrderId, O.PriceType, C.StopPrice, new_stock_price, NOW()
             FROM Order_ O, ConditionalPriceHistory C
             WHERE stock_symbol = O.StockSymbol
@@ -458,3 +458,4 @@ CREATE PROCEDURE MarkComplete(IN order_id INT, IN cur_share_price FLOAT(2), IN s
 	END;
 |
 delimiter ;
+
