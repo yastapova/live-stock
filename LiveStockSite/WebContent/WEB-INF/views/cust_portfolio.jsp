@@ -87,7 +87,7 @@ function addAcc_onclick() {
             <form id="addAccount" name="addAccountForm" action="addAcc" method="post">
             	<tr>  
 		            <td>Credit Card Number</td>   
-		  			<td><input type="text" name="cardNum" class="inputA" required></td>
+		  			<td><input type="text" name="cardNum" class="inputA" placeholder="16 digits" required></td>
 	  			</tr>  				
 			</form>  
 		</table>    
