@@ -5,6 +5,7 @@
 	<meta charset="ISO-8859-1">
 	<title>LiveStock Trading | Portfolio</title>
 	<link rel="stylesheet" href="gen.css" />
+	<link rel="stylesheet" href="manEmp.css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
 	</script>
 	<script type="text/javascript">
@@ -13,7 +14,28 @@
 $(document).ready(function(){
 	console.log("portfolio!");	
 	$("#customerPortfolio").addClass('active');
+
+	$('.inputA').click(function(event) {
+  	event.stopPropagation();
+	});
+
+	// Show the first utility as selected
+  $('.current').children('.description').show();
+
+  // Close the current tab on click 
+  $('.utility').click(function() {
+    $('.utility').removeClass('current');
+    $('.description').hide();
+  // Open the new current tab
+    $(this).addClass('current');
+    $(this).children('.description').show();
+   });
 });
+
+function addAcc_onclick() {
+    console.log("addCust!");
+    javascript:addAccountForm.submit();
+}
 
 // ]]>
 </script>
@@ -52,6 +74,28 @@ $(document).ready(function(){
 	        	</table>
 	        	<br><br>
 			</c:forEach>
+		<div class="utilities container" align="left">  
+      <!-- Utility -->
+      <div class="utility current">
+        <div class="item row">
+          <div class="col-xs-3">
+             <h3>Add Account </h3>
+          </div>
+        </div>
+        <div class="description row">
+        <table>          
+            <form id="addAccount" name="addAccountForm" action="addAcc" method="post">
+            	<tr>  
+		            <td>Credit Card Number</td>   
+		  			<td><input type="text" name="cardNum" class="inputA" required></td>
+	  			</tr>  				
+			</form>  
+		</table>    
+		<br>
+		<button value="Acc" class="btn-default" id="addAcc" onclick="return addAcc_onclick()">Confirm</button>     
+        </div>
+      </div>
+	</div>
 	</div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>

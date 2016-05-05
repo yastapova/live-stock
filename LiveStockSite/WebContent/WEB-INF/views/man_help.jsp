@@ -27,21 +27,24 @@
 		you can do on this account:</p>
 		<dl>
 			<dt>Account Info</dt>
-			<dd>View and update your account information.</dd>
-			<dt>Stocks</dt>
-			<dd>Search for stocks and place orders.</dd>
+			<dd>View your account information.</dd>
 			<dt>Employees</dt>
-			<dd>View and manage your employees.</dd>
+			<dd>View, add, edit, and delete employees.</dd>
 			<dt>Users</dt>
-			<dd>View and manage the users of LiveStock.</dd>
+			<dd>View, add, and delete all the users of LiveStock.</dd>
 			<dt>Finances</dt>
-			<dd>View and manage your employees.</dd>
+			<dd>View information about all completed transactions.<br />
+				Generate sales reports by month. View customer and employee of the year (based on revenue).
+			<br />View a summary of revenue by stock, stock type, or customer.</dd>
 			<dt>Orders</dt>
-			<dd>View and sort orders based on stock symbols or by customer name.</dd>
-			<dt>Back Up</dt>
-			<dd>Back up the database.</dd>
+			<dd>View information about orders and filter it by stock symbol or customer name.</dd>
+			<dt>Stocks</dt>
+			<dd>View current listing of stocks or bestseller list. Set prices of stocks.<br />
+				Show the most actively traded stocks. Search by stock type or keywords.</dd>
+			<dt>Utilities</dt>
+			<dd>Back up and restore the database.</dd>
 			<dt>Help</dt>
-			<dd>Read the help page of the Manager.</dd>
+			<dd>Read this Manager help page.</dd>
 			<dt>Logout</dt>
 			<dd>Logout of this account and end the session.</dd>
 		</dl>

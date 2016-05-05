@@ -27,15 +27,14 @@
 		you can do on this account:</p>
 		<dl>
 			<dt>Account Info</dt>
-			<dd>View and update your account information.</dd>
+			<dd>View your account information.</dd>
 			<dt>Portfolio</dt>
-			<dd>View information about the stocks that you currently own.</dd>
+			<dd>View information about your accounts and the stocks that you currently own.</dd>
 			<dt>Orders</dt>
-			<dd>View your pending and completed orders.</dd>
+			<dd>View your pending and completed orders. View the conditional price history for each order.</dd>
 			<dt>Stocks</dt>
-			<dd>Search for stocks and place orders.</dd>
-			<dt>Conditional Price History</dt>
-			<dd>View Conditonal Price History for conditional orders.</dd>
+			<dd>View current stock listings, a list of bestsellers, and a personalized suggestion list.<br />
+				Also search for stocks by type or keyword, and view their stock price history.</dd>
 			<dt>Help</dt>
 			<dd>Read this help page.</dd>
 			<dt>Logout</dt>

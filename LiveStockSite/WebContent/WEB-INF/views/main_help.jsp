@@ -49,25 +49,29 @@
 		</div>
 		<div id="manager">
 			<h3>MANAGER</h3>
-			<dt>Account Info</dt>
-			<dd>View your account information.</dd>
-			<dt>Stocks</dt>
-			<dd>Search for stocks and place orders.</dd>
-			<dt>Employees</dt>
-			<dd>View and manage your employees.</dd>
-			<dt>Users</dt>
-			<dd>View and manage the users of LiveStock.</dd>
-			<dt>Finances</dt>
-			<dd>View and manage your employees.</dd>
-			<dt>Orders</dt>
-			<dd>View and sort orders based on stock symbols or by customer name.</dd>
-			<dt>Back Up</dt>
-			<dd>Back up the database.</dd>
-			<dt>Help</dt>
-			<dd>Read the help page of the Manager.</dd>
-			<dt>Logout</dt>
-			<dd>Logout of this account and end the session.</dd>
-		</dl>
+			<dl>
+				<dt>Account Info</dt>
+				<dd>View your account information.</dd>
+				<dt>Employees</dt>
+				<dd>View, add, edit, and delete employees.</dd>
+				<dt>Users</dt>
+				<dd>View, add, and delete all the users of LiveStock.</dd>
+				<dt>Finances</dt>
+				<dd>View information about all completed transactions.<br />
+					Generate sales reports by month. View customer and employee of the year (based on revenue).
+				<br />View a summary of revenue by stock, stock type, or customer.</dd>
+				<dt>Orders</dt>
+				<dd>View information about orders and filter it by stock symbol or customer name.</dd>
+				<dt>Stocks</dt>
+				<dd>View current listing of stocks or bestseller list. Set prices of stocks.<br />
+					Show the most actively traded stocks. Search by stock type or keywords.</dd>
+				<dt>Utilities</dt>
+				<dd>Back up and restore the database.</dd>
+				<dt>Help</dt>
+				<dd>Read the Manager help page.</dd>
+				<dt>Logout</dt>
+				<dd>Logout of this account and end the session.</dd>
+			</dl>
 		</div>
 		<div id="customerRepresentative">
 			<h3>CUSTOMER REPRESENTATIVE</h3>
@@ -75,17 +79,18 @@
 				<dt>Account Info</dt>
 				<dd>View your account information.</dd>
 				<dt>Utilities</dt>
-				<dd>Manage customer accounts and associated tools.</dd>
+				<dd>Create a mailing list of customers and create stock suggestion lists for them.</dd>
 				<dt>Customers</dt>
-				<dd>Manage customer account information.</dd>
-				<dt>Colleauges</dt>
+				<dd>View customer account information. Add, edit, and delete customers.</dd>
+				<dt>Colleagues</dt>
 				<dd>View Employee Directory.</dd>
 				<dt>Orders</dt>
-				<dd>View and record pending orders, or view completed orders.</dd>
+				<dd>View order information and record pending orders.</dd>
 				<dt>Stocks</dt>
-				<dd>Search for stocks and place orders.</dd>
+				<dd>View current listing of stocks and bestseller list. Place orders on behalf of a customer.<br />
+				Also search for a stock by type or keyword.</dd>
 				<dt>Help</dt>
-				<dd>Read the help page of the manager.</dd>
+				<dd>Read the Customer Representative help page.</dd>
 				<dt>Logout</dt>
 				<dd>Logout of this account and end the session.</dd>
 			</dl>
@@ -96,15 +101,14 @@
 				<dt>Account Info</dt>
 				<dd>View your account information.</dd>
 				<dt>Portfolio</dt>
-				<dd>View information about the stocks that you currently own.</dd>
+				<dd>View information about your accounts and the stocks that you currently own.</dd>
 				<dt>Orders</dt>
-				<dd>View your pending and completed orders.</dd>
+				<dd>View your pending and completed orders. View the conditional price history for each order.</dd>
 				<dt>Stocks</dt>
-				<dd>Search for stocks and place orders.</dd>
-				<dt>Conditional Price History</dt>
-				<dd>View Conditonal Price History for conditional orders.</dd>
+				<dd>View current stock listings, a list of bestsellers, and a personalized suggestion list.<br />
+					Also search for stocks by type or keyword, and view their stock price history.</dd>
 				<dt>Help</dt>
-				<dd>Read the help page of the Customer.</dd>
+				<dd>Read the Customer help page.</dd>
 				<dt>Logout</dt>
 				<dd>Logout of this account and end the session.</dd>
 			</dl>
