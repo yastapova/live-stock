@@ -316,7 +316,7 @@ CREATE TRIGGER AddToStockPriceHistory
 		IF (NEW.SharePrice <> OLD.SharePrice)
 			THEN IF(NOT EXISTS(SELECT * FROM StockPriceHistory S
 							   WHERE S.StockSymbol = NEW.StockSymbol
-                               AND S.Timestamp_ = NOW()))
+                               AND TIMESTAMPDIFF(SECOND, S.Timestamp_,NOW()) <= 2))
 				THEN INSERT INTO StockPriceHistory(StockSymbol, SharePrice)
 					VALUES(NEW.StockSymbol, NEW.SharePrice);
 			END IF;

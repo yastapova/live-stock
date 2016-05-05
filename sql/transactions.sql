@@ -364,7 +364,7 @@ CREATE Procedure UpdateHiddenStop(IN new_stock_price FLOAT(2), IN old_stock_pric
 	BEGIN
 		IF (new_stock_price <> old_stock_price)
 			THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
-				SELECT O.OrderId, O.PriceType, O.StopPrice, new_stock_price, NOW()
+				SELECT DISTINCT O.OrderId, O.PriceType, O.StopPrice, new_stock_price, NOW()
 				FROM Order_ O
 				WHERE stock_symbol = O.StockSymbol
 				AND O.PriceType IN ('Hidden Stop')
@@ -382,7 +382,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 	BEGIN
 		IF (new_stock_price > old_stock_price)
         THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice)
-			SELECT O.OrderId, O.PriceType, new_stock_price - O.StopDiff, new_stock_price
+			SELECT DISTINCT O.OrderId, O.PriceType, new_stock_price - O.StopDiff, new_stock_price
 			FROM Order_ O, ConditionalPriceHistory C
 			WHERE stock_symbol = O.StockSymbol
             AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
@@ -394,7 +394,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
         END IF;
         IF (new_stock_price < old_stock_price)
 		THEN INSERT INTO ConditionalPriceHistory(OrderId, PriceType, StopPrice, CurSharePrice, Timestamp_)
-			SELECT O.OrderId, O.PriceType, C.StopPrice, new_stock_price, NOW()
+			SELECT DISTINCT O.OrderId, O.PriceType, C.StopPrice, new_stock_price, NOW()
             FROM Order_ O, ConditionalPriceHistory C
             WHERE stock_symbol = O.StockSymbol
             AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
@@ -402,6 +402,32 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 							  WHERE O.OrderId = H.OrderId)
             AND O.PriceType IN ('Trailing Stop')
             AND O.Completed = 0;
+		END IF;
+	END;
+|
+delimiter ;
+
+delimiter |
+
+CREATE PROCEDURE MarkComplete(IN order_id INT, IN cur_share_price FLOAT(2), IN stop_price FLOAT(2)) 
+	BEGIN
+		IF (cur_share_price <= stop_price
+			AND 1 = (SELECT O.Recorded
+					FROM ORDER_ O
+					WHERE order_id = O.OrderId)
+			AND (SELECT O.NumShares
+				 FROM Order_ O
+                 WHERE O.OrderId = order_id) <= 
+                 (SELECT P.NumShares
+                  FROM Portfolio P, Order_ O
+                  WHERE P.StockSymbol = O.StockSymbol
+                  AND O.OrderId = order_id
+                  AND O.CusAccNum = P.AccNum))
+		THEN INSERT INTO Transact (OrderId, PricePerShare)
+			VALUES (order_id, cur_share_price);
+            UPDATE Order_ O
+			SET O.Completed = 1
+			WHERE O.OrderId = order_id;
 		END IF;
 	END;
 |
