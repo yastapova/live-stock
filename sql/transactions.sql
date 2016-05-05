@@ -392,7 +392,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 			SELECT DISTINCT O.OrderId, O.PriceType, new_stock_price - O.StopDiff, new_stock_price
 			FROM Order_ O, ConditionalPriceHistory C
 			WHERE stock_symbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+            AND C.Timestamp_= (SELECT DISTINCT MAX(H.Timestamp_)
 							  FROM ConditionalPriceHistory H
 							  WHERE O.OrderId = H.OrderId)
             AND O.PriceType = 'Trailing Stop'
@@ -403,7 +403,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 			THEN SELECT DISTINCT O.OrderId, new_stock_price, C.StopPrice
 			FROM Order_ O, ConditionalPriceHistory C
 			WHERE stock_symbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+            AND C.Timestamp_= (SELECT DISTINCT MAX(H.Timestamp_)
 							  FROM ConditionalPriceHistory H
 							  WHERE O.OrderId = H.OrderId)
             AND O.PriceType = 'Trailing Stop'
@@ -415,7 +415,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 			SELECT DISTINCT O.OrderId, O.PriceType, C.StopPrice, new_stock_price, NOW()
             FROM Order_ O, ConditionalPriceHistory C
             WHERE stock_symbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+            AND C.Timestamp_= (SELECT DISTINCT MAX(H.Timestamp_)
 							  FROM ConditionalPriceHistory H
 							  WHERE O.OrderId = H.OrderId)
             AND O.PriceType IN ('Trailing Stop')
@@ -425,7 +425,7 @@ CREATE PROCEDURE UpdateTrailingStop(IN new_stock_price FLOAT(2), IN old_stock_pr
 			THEN SELECT DISTINCT O.OrderId, new_stock_price, C.StopPrice
             FROM Order_ O, ConditionalPriceHistory C
             WHERE stock_symbol = O.StockSymbol
-            AND C.Timestamp_= (SELECT MAX(H.Timestamp_)
+            AND C.Timestamp_= (SELECT DISTINCT MAX(H.Timestamp_)
 							  FROM ConditionalPriceHistory H
 							  WHERE O.OrderId = H.OrderId)
             AND O.PriceType IN ('Trailing Stop')
