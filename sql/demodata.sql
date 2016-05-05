@@ -67,17 +67,6 @@ VALUES ('Dsmith', '12345', 2, 1);
 INSERT INTO Login (Usr, Pwd, AccType, Id)
 VALUES ('Boss', 'password', 3, 2);
 
-SET SQL_SAFE_UPDATES = 0;
-UPDATE Order_ O
-	SET Recorded = 1
-	WHERE O.OrderId = 10;
-SET SQL_SAFE_UPDATES = 1;
-
-SET SQL_SAFE_UPDATES = 0;
-UPDATE Order_ O
-	SET Completed = 0
-	WHERE O.OrderId = 1;
-SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('F', 'Sell', 200, 1, NOW(), 'Trailing Stop', 5, 1, 0);
@@ -102,6 +91,18 @@ VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
 
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('GM', 'Sell', 25, 1, NOW(), 'Trailing Stop', 10, 1, 0);
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Order_ O
+	SET Recorded = 0
+	WHERE O.OrderId = 10;
+SET SQL_SAFE_UPDATES = 1;
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Order_ O
+	SET Completed = 0
+	WHERE O.OrderId = 1;
+SET SQL_SAFE_UPDATES = 1;
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Stock SET SharePrice = 6

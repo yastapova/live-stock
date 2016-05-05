@@ -57,6 +57,7 @@ public class SetStockPriceServlet extends HttpServlet {
     			PreparedStatement pst1 = conn.prepareStatement(sql1);
     			PreparedStatement pst2 = conn.prepareStatement(sql2);
     			PreparedStatement pst3 = conn.prepareStatement(sql3);
+    			
     			System.out.println("Passed # values: " + stockPrice.length);
     			for(int i=0; i<stockPrice.length; i=i+3)
     			{
@@ -69,16 +70,45 @@ public class SetStockPriceServlet extends HttpServlet {
     				pst1.setString(1, symbol);
     				pst1.setFloat(2, Float.parseFloat(newPrice));
     				pst1.executeUpdate();
-    				
+    				System.out.println(pst1);
     				pst2.setFloat(1, Float.parseFloat(newPrice));
     				pst2.setFloat(2, Float.parseFloat(oldPrice));
     				pst2.setString(3, symbol);
-    				pst2.executeUpdate();
+    				java.sql.ResultSet rs = pst2.executeQuery();
+    				System.out.println(pst2);
+    			
+    				while(rs.next()) {
+    					String sql4 = "CALL MarkComplete(?,?,?)";
+    		        	PreparedStatement pst4 = conn.prepareStatement(sql4);
+    		        	int order_id = rs.getInt("OrderId");
+    		        	float cur_price = rs.getFloat("new_stock_price");
+    		        	float stop_price = rs.getFloat("StopPrice");
+    		        	pst4.setInt(1, order_id);
+    		        	pst4.setFloat(2, cur_price);
+    		        	pst4.setFloat(3, stop_price);
+    		        	pst4.executeUpdate();
+    		        	System.out.println(pst4);
+    				}
     				
     				pst3.setFloat(1, Float.parseFloat(newPrice));
     				pst3.setFloat(2, Float.parseFloat(oldPrice));
     				pst3.setString(3, symbol);
-    				pst3.executeUpdate();
+    				rs = pst3.executeQuery();
+    				System.out.println(pst3);
+    				
+    				while(rs.next()) {
+    					String sql4 = "CALL MarkComplete(?,?,?)";
+    		        	PreparedStatement pst4 = conn.prepareStatement(sql4);
+    		        	int order_id = rs.getInt("OrderId");
+    		        	float cur_price = rs.getFloat("new_stock_price");
+    		        	float stop_price = rs.getFloat("StopPrice");
+    		        	pst4.setInt(1, order_id);
+    		        	pst4.setFloat(2, cur_price);
+    		        	pst4.setFloat(3, stop_price);
+    		        	pst4.executeUpdate();
+    		        	System.out.println(pst4);
+    				}
+
     			}
 			} catch (Exception e) {
     			e.printStackTrace();
