@@ -92,6 +92,11 @@ VALUES ('GM', 'Sell', 25, 1, NOW(), 'Hidden Stop', 10, 1, 0);
 INSERT INTO Order_ (StockSymbol, OrderType, NumShares, CusAccNum, Timestamp_, PriceType, StopPrice, EmpId, Recorded)
 VALUES ('GM', 'Sell', 25, 1, NOW(), 'Trailing Stop', 10, 1, 0);
 
+UPDATE Portfolio P
+	SET P.NumShares = 200
+    WHERE P.AccNum = 1
+    AND P.StockSymbol = 'F';
+
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Order_ O
 	SET Recorded = 0
@@ -136,6 +141,8 @@ DROP PROCEDURE UpdateHiddenStop;
 DROP PROCEDURE UpdateTrailingStop;
 DROP PROCEDURE getMostRecentOrderInfo;
 
+DROP TRIGGER UpdateHiddenStop;
+DROP TRIGGER UpdateTrailingStop;
 
 DROP VIEW MostTraded;
 
