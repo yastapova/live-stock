@@ -27,17 +27,18 @@ $(document).ready(function(){
 		you can do on this account:</p>
 		<dl>
 			<dt>Account Info</dt>
-			<dd>View and update your account information.</dd>
+			<dd>View your account information.</dd>
 			<dt>Utilities</dt>
-			<dd>Manage customer accounts and associated tools.</dd>
+			<dd>Create a mailing list of customers and create stock suggestion lists for them.</dd>
 			<dt>Customers</dt>
-			<dd>Manage customer account information.</dd>
-			<dt>Colleauges</dt>
+			<dd>View customer account information. Add, edit, and delete customers.</dd>
+			<dt>Colleagues</dt>
 			<dd>View Employee Directory.</dd>
 			<dt>Orders</dt>
-			<dd>View and record pending orders, or view completed orders.</dd>
+			<dd>View order information and record pending orders.</dd>
 			<dt>Stocks</dt>
-			<dd>Search for stocks and place orders.</dd>
+			<dd>View current listing of stocks and bestseller list. Place orders on behalf of a customer.<br />
+			Also search for a stock by type or keyword.</dd>
 			<dt>Help</dt>
 			<dd>Read this help page.</dd>
 			<dt>Logout</dt>
