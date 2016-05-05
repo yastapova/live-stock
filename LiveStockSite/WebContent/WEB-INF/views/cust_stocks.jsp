@@ -114,6 +114,41 @@ function get_history_onclick() {
 	  		<br>
 	  		<button class="btn-default" onclick="return order_stock_onclick()">Order Stock</button>
 		</c:if>
+		<br>
+		<c:if test="${userType=='C' and table=='Search Results'}">
+			<h2>Recent Order Info for Stocks in Search Results</h2>
+			<form id="orderForm" name="myForm" method="post">
+				<table border="4" id="order" >
+		        <tr>
+					<th width="100px"><span style="font-size: 10pt">Time</span></th>
+	        		<th width="80px"><span style="font-size: 10pt">Order Type</span></th>
+	        		<th width="80px"><span style="font-size: 10pt">Account</span></th>
+					<th width="80px"><span style="font-size: 10pt">Stock</span></th>
+					<th width="100px"><span style="font-size: 10pt">NumShares</span></th>
+					<th width="80px"><span style="font-size: 10pt">Price Type</span></th>
+					<th width="80px"><span style="font-size: 10pt">Stop Price</span></th>
+					<th width="80px"><span style="font-size: 10pt">Recorded</span></th>
+					<th width="80px"><span style="font-size: 10pt">Completed</span></th>
+		        </tr>
+				<c:forEach var="order" items="${orders}">
+		   			<tr>
+						<td><span style="font-size: 10pt"><c:out value="${order.timestamp}" /></span></td>
+						<td><span style="font-size: 10pt"><c:out value="${order.orderType}" /></span></td>
+						<td><span style="font-size: 10pt"><c:out value="${order.cusAccNum}" /></span></td>
+						<td><span style="font-size: 10pt"><c:out value="${order.stockSymbol}" /></span></td>
+						<td><span style="font-size: 10pt"><c:out value="${order.numShares}" /></span></td>
+						<td><span style="font-size: 10pt"><c:out value="${order.priceType}" /></span></td>
+						<td><span style="font-size: 10pt">$<c:out value="${order.stopPrice}" /></span></td>
+						<td><span style="font-size: 10pt"><c:if test="${order.recorded==true}">Yes</c:if>
+														  <c:if test="${order.recorded==false}">No</c:if></span></td>
+						<td><span style="font-size: 10pt"><c:if test="${order.completed==true}">Yes</c:if>
+														  <c:if test="${order.completed==false}">No</c:if></span></td>
+		        	</tr>
+				</c:forEach>
+	  		</table>
+	  		</form>
+	  		<br>
+		</c:if>
 		
 		<c:if test="${userType=='M'}">
 			<form id="priceForm" name="myForm" action="price_stocks" method="post">

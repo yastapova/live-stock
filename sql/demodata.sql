@@ -133,6 +133,7 @@ DROP PROCEDURE Suggest;
 DROP PROCEDURE showMostTradedStocks;
 DROP PROCEDURE UpdateHiddenStop;
 DROP PROCEDURE UpdateTrailingStop;
+DROP PROCEDURE getMostRecentOrderInfo;
 
 
 DROP VIEW MostTraded;

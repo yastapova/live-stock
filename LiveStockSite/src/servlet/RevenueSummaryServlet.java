@@ -181,7 +181,7 @@ public class RevenueSummaryServlet extends HttpServlet {
         request.setAttribute("stocks", stocklist);       
         request.setAttribute("customers", custlist);       
         request.setAttribute("id", loginedUser.getId());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_revenue_summary.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_revenue_summary.jsp");
         dispatcher.forward(request, response);
         
     }

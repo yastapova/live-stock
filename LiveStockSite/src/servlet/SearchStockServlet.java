@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import general.Order;
 import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
@@ -45,6 +46,8 @@ public class SearchStockServlet extends HttpServlet {
         System.out.println("Type: "+stockType);
         String stockKeyword = request.getParameter("stockkeyword");
         System.out.println("Keyword: "+stockKeyword);
+        List<String> stockSymbol = new ArrayList<String>();
+        List<Order> order_list = new ArrayList<Order>();
         if (stockKeyword!=null) {
         	stockKeyword = stockKeyword.replaceAll("\\s", "");
         }
@@ -60,10 +63,6 @@ public class SearchStockServlet extends HttpServlet {
                 rs = pstm1.executeQuery();
             }
             else if ((stockKeyword!=null) & (stockKeyword!="")) {
-            	/*sql1 = "CALL getStockUsingKeyword(?)";
-            	pstm1 = conn.prepareStatement(sql1);
-            	pstm1.setString(1,stockKeyword);
-                rs = pstm1.executeQuery();*/
                 String keyword[] = stockKeyword.split(",");
                 for (String s: keyword)
                 	System.out.println(s);
@@ -83,12 +82,12 @@ public class SearchStockServlet extends HttpServlet {
             	}
             	rs = pstm1.executeQuery();
         				
-                
             }
 
             if (rs!=null) {
                 while (rs.next()) {
                     String sksym = rs.getString("StockSymbol");
+                    stockSymbol.add(sksym);
                     String sknm = rs.getString("StockName");
                     String sktp = rs.getString("StockType");
                     float shpr = rs.getFloat("SharePrice");
@@ -103,8 +102,39 @@ public class SearchStockServlet extends HttpServlet {
         } catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+        try {
 			
+			for (String s: stockSymbol) {
+				String sql1 = "CALL getMostRecentOrderInfo(?,?)";
+				PreparedStatement pstm1 = conn.prepareStatement(sql1);
+				pstm1.setInt(1, id);
+				pstm1.setString(2, s);
+				java.sql.ResultSet rs;
+				rs = pstm1.executeQuery();
+
+				while (rs.next()) {
+					Order order = new Order();
+					order.setId(rs.getInt("OrderId"));
+					order.setOrderType(rs.getString("OrderType"));
+					order.setTimestamp(rs.getTimestamp("Timestamp_"));
+					order.setCusAccNum(rs.getInt("CusAccNum"));
+					order.setStockSymbol(rs.getString("StockSymbol"));
+					order.setNumShares(rs.getInt("NumShares"));
+					order.setPriceType(rs.getString("PriceType"));
+					order.setStopPrice(rs.getFloat("StopPrice"));
+					order.setRecorded(rs.getBoolean("Recorded"));
+					order.setCompleted(rs.getBoolean("Completed"));
+					order_list.add(order);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         request.setAttribute("stocks", list);
+        request.setAttribute("orders", order_list);
         request.setAttribute("table", table);
         request.setAttribute("userType", loginedUser.getUserType());
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");

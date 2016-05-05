@@ -24,7 +24,7 @@ public class CusRepUtilitiesServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		// (Users can not access directly into JSP pages placed in WEB-INF)
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/rep_utilities.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/rep_utilities.jsp");
 
 		dispatcher.forward(request, response);
 

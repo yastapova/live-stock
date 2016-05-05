@@ -282,7 +282,7 @@ CREATE PROCEDURE getSharePriceHistory(IN stock_symbol VARCHAR(5), IN start_date 
 delimiter |
 CREATE PROCEDURE getCustomerOrdersHistory(IN customer_id INT)
 	BEGIN
-		SELECT O.Timestamp, O.CusAccNum, O.OrderType, O.StockSymbol, O.NumShares, O.CurSharePrice, 	O.PriceType
+		SELECT O.Timestamp_, O.CusAccNum, O.OrderType, O.StockSymbol, O.NumShares, O.CurSharePrice, 	O.PriceType
 		FROM Order_ O, Customer C, Account A
 		WHERE O.CusAccNum = A.AccNum
 		AND A.CusId = C.CusId AND C.CusId = customer_id;
@@ -308,7 +308,7 @@ CREATE PROCEDURE getMostRecentOrderInfo(IN cus_id INTEGER, IN stock_sym VARCHAR(
 		FROM ORDER_ O, CUSTOMER C, ACCOUNT_ A
 		WHERE O.CusAccNum = A.AccNum AND A.CusId = C.CusId 
 			AND C.CusId = cus_id AND O.StockSymbol = stock_sym
-			AND MONTH(TIMEDIFF(NOW(), O.Timestamp)) <= 3;
+			AND TIMESTAMPDIFF(MONTH, NOW(), O.Timestamp_) <= 3;
 
     END
 | delimiter ;
