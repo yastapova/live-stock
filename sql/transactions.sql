@@ -90,6 +90,18 @@ CREATE PROCEDURE listAllStocks()
 | delimiter ;
 
 delimiter |
+-- Produces a list of all stocks and how many orders are
+-- placed for each one.
+CREATE PROCEDURE getNumOrders(IN stock_symbol VARCHAR(5))
+	BEGIN
+		SELECT COUNT(O.StockSymbol) AS OrdersPlaced
+		FROM Order_ O
+		WHERE stock_symbol = O.StockSymbol
+		GROUP BY O.StockSymbol;
+	END
+| delimiter ;
+
+delimiter |
 -- Creates a list of orders that are ordered by stock symbol
 -- or customer name.
 CREATE PROCEDURE listOrdersBy(IN field CHAR(5))

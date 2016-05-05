@@ -64,17 +64,26 @@ public class StockServlet extends HttpServlet {
 	        }
 	        else
 	        {
-	        	String sql1 = "CALL listAllStocks();";
-	        	PreparedStatement pstm1 = conn.prepareStatement(sql1);
-	        	java.sql.ResultSet rs = pstm1.executeQuery();
 	            
+	        	String sql2 = "SELECT * FROM Stock";
+	        	PreparedStatement pstm2 = conn.prepareStatement(sql2);
+	        	java.sql.ResultSet rs = pstm2.executeQuery();
+	        	
 	            while (rs.next()) {
 	                String sksym = rs.getString("StockSymbol");
 	                String sknm = rs.getString("StockName");
 	                String sktp = rs.getString("StockType");
 	                float shpr = rs.getFloat("SharePrice");
 	                int numsh = rs.getInt("NumAvailShares");
-	                int numorders = rs.getInt("OrdersPlaced");
+	                
+		        	String sql3 = "CALL getNumOrders(?)";
+		        	PreparedStatement pstm3 = conn.prepareStatement(sql3);
+		        	pstm3.setString(1, sksym);
+		        	java.sql.ResultSet rs2 = pstm3.executeQuery();
+		        	int numorders = 0;
+	                if(rs2.next()) {
+	                	numorders = rs2.getInt("OrdersPlaced");;
+	                }
 	                Stock data = new Stock(sksym, sknm, sktp, shpr, numsh);
 	                data.setNumOrders(numorders);
 	                list.add(data);

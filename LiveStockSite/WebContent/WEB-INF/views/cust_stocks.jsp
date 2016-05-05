@@ -159,7 +159,10 @@ function get_history_onclick() {
 		          <th style="width: 200px"><span style="font-size: 10pt">Stock Type</span></th>
 		          <th style="width: 100px"><span style="font-size: 10pt">Share Price</span></th>
 		          <th style="width: 100px"><span style="font-size: 10pt">Number of Available Shares</span></th>
-		          <th style="width: 50px"><span style="font-size: 10pt">Number of Orders</span></th>
+		          <c:if test="${table=='Current Stock Listings'}">
+		          		<th style="width: 50px"><span style="font-size: 10pt">Number of Orders</span></th>
+		          </c:if>
+		          
 		          <th style="width: 25px"><span style="font-size: 10pt">Set Price</span></th>
 		        </tr>
 				<c:forEach var="stock" items="${stocks}">
@@ -169,7 +172,9 @@ function get_history_onclick() {
 			            <td style="width: 200px"><span style="font-size: 10pt"><c:out value="${stock.stocktype}" /></span></td>
 			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.shareprice}" /></span></td>
 			            <td style="width: 100px"><span style="font-size: 10pt"><c:out value="${stock.numshares}" /></span></td>
-		            	<td style="width: 25px"><span style="font-size: 10pt"><c:out value="${stock.numOrders}" /></span></td>
+			            <c:if test="${table=='Current Stock Listings'}">
+		            		<td style="width: 25px"><span style="font-size: 10pt"><c:out value="${stock.numOrders}" /></span></td>
+		            	</c:if>
 	          			<td style="width: 25px"><span style="font-size: 10pt">
 								<input class="forminput" id="new_price" name="stockprice" type="text" value="" />
 								<input type ="hidden" class="forminput" id="old_price" name="stockprice" value="<c:out value="${stock.shareprice}" />" />
