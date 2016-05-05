@@ -101,7 +101,7 @@ public class ECYearServlet extends HttpServlet {
         request.setAttribute("employees", emplist);       
         request.setAttribute("customers", custlist);       
         request.setAttribute("id", loginedUser.getId());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/man_finances_ecyear.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/man_finances_ecyear.jsp");
         dispatcher.forward(request, response);
         
     }

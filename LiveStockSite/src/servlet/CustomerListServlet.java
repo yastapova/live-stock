@@ -78,7 +78,7 @@ public class CustomerListServlet extends HttpServlet {
 		}
 			
         request.setAttribute("customers", custlist);       
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/emp_custlist.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/emp_custlist.jsp");
         dispatcher.forward(request, response);
         
     }

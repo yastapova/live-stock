@@ -81,7 +81,7 @@ public class ColleagueListServlet extends HttpServlet {
 			
         request.setAttribute("employees", emplist);    
         request.setAttribute("id", loginedUser.getId());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/emp_colist.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/emp_colist.jsp");
         dispatcher.forward(request, response);
         
     }

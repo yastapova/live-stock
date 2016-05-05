@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import general.Order;
 import general.Stock;
 import general.UserAccount;
 import utils.MyUtils;
@@ -40,6 +41,7 @@ public class SuggestedStockServlet extends HttpServlet {
         int id = loginedUser.getId();
         String table;
         String cusId = request.getParameter("stocksuggest");
+
         if (cusId!=null) {
         	table = "Suggested for CustomerID " + cusId;
         }
@@ -73,11 +75,12 @@ public class SuggestedStockServlet extends HttpServlet {
         } catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+
+        
         request.setAttribute("stocks", list);
         request.setAttribute("table", table);
         request.setAttribute("userType", loginedUser.getUserType());
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/views/cust_stocks.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/cust_stocks.jsp");
         dispatcher.forward(request, response);
         
     }
